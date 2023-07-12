@@ -59,53 +59,166 @@
 
 function ship(name, length) { 
     let hitCounter = 0;
-    let shipName = name;
     let isSunk = false;
-    let shipLength = length;
-     function hits() { 
-        this.hitCounter += 1
-        return this.hitCounter;
+     function hitIncrementor() { 
+        hitCounter++
     } 
+
+    function getHitIncrementor() { 
+        return hitCounter;
+    }
      function sunkOrNot() { 
-        if (this.hitCounter >= this.shipLength) { 
-            this.isSunk = true;
-            return this.isSunk;
+        if (hitCounter >= length) { 
+            isSunk = true; // return isSunk in another function, 
+            return isSunk;
         }
     } 
     
     return { 
-        shipName,
-        hitCounter, 
+        shipName: name,
         isSunk, 
-        shipLength, 
-        hits,
+        shipLength: length,
+        hitIncrementor,
+        getHitIncrementor,
         sunkOrNot
     }
 } 
 
 let ship1 = ship('battleship', 4);
-let ship2 = ship('destroyer', 3);
-console.log(ship1);
-console.log(ship1.hits());
-console.log(ship1);
-console.log(ship1.hits());
-console.log(ship1);
-console.log(ship1.hits());
-console.log(ship1);
-console.log(ship1.hits());
-console.log(ship1); 
-console.log(ship1.sunkOrNot())
-console.log(ship1); 
 
-console.log(ship2);
-console.log(ship2.hits()); 
-console.log(ship2);
-console.log(ship2.hits()); 
-console.log(ship2);
-console.log(ship2.hits()); 
-console.log(ship2);
-console.log(ship2.hits()); 
-console.log(ship2);
-console.log(ship2.sunkOrNot())
-console.log(ship2); 
+console.log(ship1);
+console.log(ship1.hitIncrementor());
+console.log(ship1.hitIncrementor());
+console.log(ship1.hitIncrementor());
+console.log(ship1.hitIncrementor());
+console.log(ship1.getHitIncrementor());
+console.log(ship1);
+console.log(ship1.sunkOrNot());
+console.log(ship1);
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+// console.log(ship1.hits());
+// console.log(ship1);
+// console.log(ship1.hits());
+// console.log(ship1);
+// console.log(ship1.hits());
+// console.log(ship1); 
+// console.log(ship1.sunkOrNot())
+// console.log(ship1); 
+
+// console.log(ship2);
+// console.log(ship2.hits()); 
+// console.log(ship2);
+// console.log(ship2.hits()); 
+// console.log(ship2);
+// console.log(ship2.hits()); 
+// console.log(ship2);
+// console.log(ship2.hits()); 
+// console.log(ship2);
+// console.log(ship2.sunkOrNot())
+// console.log(ship2);  
+
+// example noget
+
+// function counter1() {
+//     let count = 0;
+
+//     function increment() {
+//         count += 1;
+//     }
+
+//     function getCount() {
+//         return count
+//     }
+
+//     return {
+//         getCount,
+//         increment,
+//     };
+// }
+
+// const foo = counter1();
+
+// console.log(JSON.stringify(foo));
+
+// // Increment the count variable
+// foo.increment();
+
+// Logs 1, the function returns the variable's value
+// console.log(foo.getCount()); 
+
+
+
+
+// example get
+
+// function counter2() {
+//     let count = 0;
+
+//     function increment() {
+//         count += 1;
+//     }
+
+//     return {
+//         get count() {
+//             return count;
+//         },
+//         increment,
+//     };
+// }
+
+// const x = counter2();
+
+// console.log(JSON.stringify(x));
+
+// // Increment the count variable
+// x.increment();
+
+// Logs 1, the function returns the variable's value
+// console.log(x.count);
+
+
+
+
+
+
+// refactored 
+
+function counter() {
+    let count = 0;
+
+    function increment() {
+        count += 1;
+    }
+
+    function getCount() {
+        return count;
+    }
+
+    function toJSON() {
+        return { count };
+    }
+
+    return {
+        toJSON,
+        getCount,
+        increment,
+    };
+}
+const foo = counter();
+
+foo.increment();
+
+// console.log(JSON.stringify(foo));
