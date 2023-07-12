@@ -67,12 +67,16 @@ function ship(name, length) {
     function getHitIncrementor() { 
         return hitCounter;
     }
-     function sunkOrNot() { 
+     function isSunkConditional() { 
         if (hitCounter >= length) { 
             isSunk = true; // return isSunk in another function, 
-            return isSunk;
+            // return isSunk;
         }
     } 
+
+    function getShipStatus() { 
+        return isSunk;
+    }
     
     return { 
         shipName: name,
@@ -80,9 +84,11 @@ function ship(name, length) {
         shipLength: length,
         hitIncrementor,
         getHitIncrementor,
-        sunkOrNot
+        isSunkConditional,
+        getShipStatus
     }
 } 
+
 
 let ship1 = ship('battleship', 4);
 
@@ -92,10 +98,10 @@ console.log(ship1.hitIncrementor());
 console.log(ship1.hitIncrementor());
 console.log(ship1.hitIncrementor());
 console.log(ship1.getHitIncrementor());
+console.log(ship1.getShipStatus());
+console.log(ship1.isSunkConditional());
+console.log(ship1.getShipStatus());
 console.log(ship1);
-console.log(ship1.sunkOrNot());
-console.log(ship1);
-
 
 
 
