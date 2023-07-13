@@ -1,6 +1,7 @@
 // import './shipFactory.js';
 import './shipFactory.js';
 
+import './gameboardFactory.js';
 
 // function ship(length, hits, sunk) {
 //     this.length = length;

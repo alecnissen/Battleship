@@ -41,4 +41,6 @@ export default function ship(name, length) {
   console.log(patrolBoat);
   console.log(patrolBoat);
 
-  module.exports = ship;
+  // export default ship;
+
+module.exports = ship;
