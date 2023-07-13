@@ -1,4 +1,4 @@
-const ship = require('./shipFactory');
+import ship from './shipFactory';
 
 // test the methods within the function, 
 
