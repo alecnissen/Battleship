@@ -30,15 +30,15 @@ export default function ship(name, length) {
     };
   }
   
-  let patrolBoat = ship('patrol-boat', 2);
+  // let patrolBoat = ship('patrol-boat', 2);
   
-  console.log(patrolBoat);
-  console.log(patrolBoat.hitIncrementor());
-  console.log(patrolBoat.hitIncrementor());
-  console.log(patrolBoat.getHitIncrementor());
-  console.log(patrolBoat.isSunkConditional());
-  console.log(patrolBoat.getShipStatus());
-  console.log(patrolBoat);
-  console.log(patrolBoat);
+  // console.log(patrolBoat);
+  // console.log(patrolBoat.hitIncrementor());
+  // console.log(patrolBoat.hitIncrementor());
+  // console.log(patrolBoat.getHitIncrementor());
+  // console.log(patrolBoat.isSunkConditional());
+  // console.log(patrolBoat.getShipStatus());
+  // console.log(patrolBoat);
+  // console.log(patrolBoat);
 
   // export default ship;
