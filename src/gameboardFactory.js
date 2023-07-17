@@ -41,6 +41,7 @@ export default function gameboardFactory() {
     let rows = 10;
     let columns = 10;
     const board = createBoard();
+    let selectedShip
     // used before it was defined, 
 
     function createBoard() { 
@@ -53,11 +54,14 @@ export default function gameboardFactory() {
         }
         return board;
     } 
-    function placeShip(x, y, ship) { 
+    // Gameboards should be able to place ships at specific coordinates by calling the ship factory function.
+    function placeShip(x, y, shipObj, shipDirection) { 
         // takes coordinates and a ship obj
+        //  selectedShip = ship('destroyer', 4);
+        //  console.log(selectedShip);
     }
     return { 
-        // createBoard, // if I don't make it public, error, not afunction, myGameboard.createBoard 
+        createBoard, // if I don't make it public, error, not afunction, myGameboard.createBoard 
         placeShip
     }
 } 
@@ -66,6 +70,8 @@ export default function gameboardFactory() {
 let myGameboard = gameboardFactory(); 
 
 console.log(myGameboard);
+
+// console.log(myGameboard.placeShip(2, 2, selectedShip, 'vertical'));
 
 // console.log(myGameboard.createBoard());
 

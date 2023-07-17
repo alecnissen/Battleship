@@ -1,4 +1,4 @@
-export default function ship(name, length) {
+export default function ship(name, length, number, position) {
     let hitCounter = 0;
     let isSunk = false;
     function hitIncrementor() {
@@ -23,6 +23,8 @@ export default function ship(name, length) {
       shipName: name,
       isSunk,
       shipLength: length,
+      shipNumber: number,
+      shipPosition: position,
       hitIncrementor,
       getHitIncrementor,
       isSunkConditional,
