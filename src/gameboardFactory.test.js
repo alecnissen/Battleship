@@ -1,6 +1,55 @@
 import gameboardFactory from "./gameboardFactory"; 
 import ship from "./shipFactory";
 
+test('testing to see if ship was placed at specific coordinates', () => { 
+    let battleShip = ship('Battleship', 4, 'vertical'); 
+    let gameboardFactoryCall = gameboardFactory();
+    let placeShipMethod = gameboardFactoryCall.placeShip(battleShip, 0, 0);
+    let updatedGameboard = gameboardFactoryCall.getGameboard();
+    expect(updatedGameboard[0][0]).toBe(battleShip);
+    // expect(gameboardFactoryCall.getGameboard([0]).toBe(battleShip))
+}); 
+
+// test('testing to see if ship was placed at specific coordinates', () => { 
+//     let battleShip = ship('Battleship', 4, 'vertical'); 
+//     let gameboardFactoryCall = gameboardFactory();
+//     let placeShipMethod = gameboardFactoryCall.placeShip(battleShip, 0, 0);
+//     expect(gameboardFactoryCall.getGameboard([0]).toBe(battleShip))
+//     expect(gameboardFactoryCall.getGameboard([0]).toBe(battleShip))
+// }); 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // first test if a ship object has been properly created 
 // tests are passing..place the ship next and see if it's been placed 
 
@@ -12,26 +61,26 @@ import ship from "./shipFactory";
 
 // I now want to check that the board state has changed, meaning the board has had a ship placed on it. 
 
-test('testing to see if ship is correctly placed at specified coordinates', () => { 
-    let destroyer = ship('destroyer', 4, 1, 'vertical'); 
-    // expect(destroyer.shipName).toBe("destroyer");
-    // expect(destroyer.shipLength).toBe(4);
-    // push the object into the board, placeShip method 
-    // how can I use the placeShip method to push the obj into the board???
+// test('testing to see if ship is correctly placed at specified coordinates', () => { 
+//     let destroyer = ship('destroyer', 4, 1, 'vertical'); 
+//     // expect(destroyer.shipName).toBe("destroyer");
+//     // expect(destroyer.shipLength).toBe(4);
+//     // push the object into the board, placeShip method 
+//     // how can I use the placeShip method to push the obj into the board???
     
-    let gameboard = gameboardFactory().createBoard();
+//     let gameboard = gameboardFactory().createBoard();
     
-     gameboard[0][0] = destroyer.shipNumber;
-     gameboard[0][1] = destroyer.shipNumber;
-     gameboard[0][2] = destroyer.shipNumber;
-     gameboard[0][3] = destroyer.shipNumber;
+//      gameboard[0][0] = destroyer.shipNumber;
+//      gameboard[0][1] = destroyer.shipNumber;
+//      gameboard[0][2] = destroyer.shipNumber;
+//      gameboard[0][3] = destroyer.shipNumber;
 
-     expect(gameboard[0][0]).toBe(1)
-     expect(gameboard[0][1]).toBe(1)
-     expect(gameboard[0][2]).toBe(1)
-     expect(gameboard[0][3]).toBe(1)
+//      expect(gameboard[0][0]).toBe(1)
+//      expect(gameboard[0][1]).toBe(1)
+//      expect(gameboard[0][2]).toBe(1)
+//      expect(gameboard[0][3]).toBe(1)
 
-}) 
+// }) 
 
 // test('test to see if another ship is placed at the correct coordinates', () => { 
 //     let battleship = ship('destroyer', 4, 1, 'vertical'); 
