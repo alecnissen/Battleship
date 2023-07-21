@@ -4,12 +4,42 @@ import ship from "./shipFactory";
 test('testing to see if ship was placed at specific coordinates', () => { 
     let battleShip = ship('Battleship', 4, 'vertical'); 
     let gameboardFactoryCall = gameboardFactory();
-    let placeShipMethod = gameboardFactoryCall.placeShip(battleShip, 0, 0);
+    let placeShipMethod = gameboardFactoryCall.placeShip(battleShip, 0, 0, 4, 'vertical');
     let updatedGameboard = gameboardFactoryCall.getGameboard();
-    expect(updatedGameboard[0][0]).toBe(battleShip);
-    // expect(gameboardFactoryCall.getGameboard([0]).toBe(battleShip))
+    if (battleShip.shipPosition === 'vertical' && battleShip.shipLength === 4) { 
+        expect(battleShip.shipPosition).toBe('vertical');
+        expect(battleShip.shipLength).toBe(4);
+        expect(updatedGameboard[0][0]).toBe(battleShip);  
+        expect(updatedGameboard[1][0]).toBe(battleShip); 
+        expect(updatedGameboard[2][0]).toBe(battleShip); 
+        expect(updatedGameboard[3][0]).toBe(battleShip); 
+    }
 }); 
 
+// I think I need a conditional to check the length and the position, 
+// if length >= 2 and position vertical, add approprate spots 
+// if length <= 4 and position horizontal, fill in appropriate spots 
+
+// I have to calculate ship length and starting coordinates, HOW???? 
+
+// add length to starting coordinates, 
+
+// [0 + {shipLength}]
+
+// we have length and starting coordinates, add length to starting coordinates, HOW???? 
+
+
+// how to add the length to the ship coordinate so it expands it's full length, 
+
+// I want the ship to expand it's length and check if its still in the correct coordinates 
+
+// you need to check the position, if vertical, loop thru length of ship, and add the index to the FIRST coordinate 
+
+// test it's direction too 
+
+// I want to test to see if the ship expands it's full length, 
+
+// old test to see if ship was placed at correct coordinates, 
 // test('testing to see if ship was placed at specific coordinates', () => { 
 //     let battleShip = ship('Battleship', 4, 'vertical'); 
 //     let gameboardFactoryCall = gameboardFactory();

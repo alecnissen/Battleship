@@ -22,9 +22,8 @@ export default function gameboardFactory() {
     return gameboard;
   } 
 
-  function placeShip(shipObj, x, y) { 
-    getGameboard();
-    // let board = gameboardFactory().getGameboard();
+  function placeShip(shipObj, x, y, length, position) { 
+    getGameboard(); 
     gameboard[x][y] = shipObj;
     return gameboard;
   } 
@@ -36,10 +35,39 @@ export default function gameboardFactory() {
 } 
 
 let battleShip = ship('Battleship', 4, 'vertical'); 
-console.log(gameboardFactory().getGameboard());
-console.log(gameboardFactory().placeShip(battleShip, 0, 0));
+let destroyer = ship('Destroyer', 4, 'horizontal' );
+let patrolBoat = ship('Patrol-boat', 2, 'vertical');
+let gameboardFactoryCall = gameboardFactory();
+let getBoard = gameboardFactoryCall.getGameboard();
+// console.log(gameboardFactory().getGameboard());
+console.log(gameboardFactoryCall.placeShip(battleShip, 6, 8));
+// console.log(gameboardFactory().getGameboard());
+console.log(gameboardFactoryCall.placeShip(destroyer, 5, 5));
+console.log(gameboardFactoryCall.placeShip(patrolBoat, 1, 1));
+console.log(getBoard);
 
 
+
+// let patrolBoatLength = patrolBoat.shipLength;
+// let patrolBoatCoordinates = 
+// console.log(patrolBoatCoordinates);
+
+// experiment
+// console.log(gameboardFactoryCall.placeShip(patrolBoat, (1 + patrolBoatLength), (1  + patrolBoatLength)));
+// console.log(getBoard);
+
+// how can the ship expand it's full length? 
+
+// can I place multiple ships on the board? 
+// can the ship span it's full length? 
+// is another ship already in it's spot? 
+
+
+
+// continue to work on placeShip function and it's test, 
+// right now it works for one location, can it work for another? 
+// can we properly place ships at location or is another ship already there blocking it? 
+// horizontal and vertical? 
 
 
 //   function getGameboard() { 
