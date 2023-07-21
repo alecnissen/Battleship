@@ -4,17 +4,22 @@ import ship from "./shipFactory";
 test('testing to see if ship was placed at specific coordinates', () => { 
     let battleShip = ship('Battleship', 4, 'vertical'); 
     let gameboardFactoryCall = gameboardFactory();
-    let placeShipMethod = gameboardFactoryCall.placeShip(battleShip, 0, 0, 4, 'vertical');
+    let placeShipMethod = gameboardFactoryCall.placeShip(battleShip, 3, 3, 4, 'vertical');
     let updatedGameboard = gameboardFactoryCall.getGameboard();
-    if (battleShip.shipPosition === 'vertical' && battleShip.shipLength === 4) { 
-        expect(battleShip.shipPosition).toBe('vertical');
-        expect(battleShip.shipLength).toBe(4);
-        expect(updatedGameboard[0][0]).toBe(battleShip);  
-        expect(updatedGameboard[1][0]).toBe(battleShip); 
-        expect(updatedGameboard[2][0]).toBe(battleShip); 
-        expect(updatedGameboard[3][0]).toBe(battleShip); 
-    }
+    expect(updatedGameboard[3][3]).toBe(battleShip);
 }); 
+
+test("testing to see if ships span it's full length", () => { 
+    let carrier = ship('Carrier', 5, 'horizontal');
+    let gameboardFactoryCall = gameboardFactory();
+    let placeShipMethod = gameboardFactoryCall.placeShip(carrier, 0, 0, 5, 'horizontal');
+    let updatedGameboard = gameboardFactoryCall.getGameboard();
+    expect(updatedGameboard[0][0]).toBe(carrier);
+    expect(updatedGameboard[0][1]).toBe(carrier);
+    expect(updatedGameboard[0][2]).toBe(carrier);
+    expect(updatedGameboard[0][3]).toBe(carrier);
+    expect(updatedGameboard[0][4]).toBe(carrier);
+})
 
 // I think I need a conditional to check the length and the position, 
 // if length >= 2 and position vertical, add approprate spots 
