@@ -19,7 +19,36 @@ test("testing to see if ships span it's full length", () => {
     expect(updatedGameboard[0][2]).toBe(carrier);
     expect(updatedGameboard[0][3]).toBe(carrier);
     expect(updatedGameboard[0][4]).toBe(carrier);
-})
+}) 
+
+// we will now implement the next step, 
+// a receiveAttack function, takes a pair of coordinates 
+// did the attack hit a ship? 
+// if so increase hitCounter to the correct ship 
+// the test will come first, so let's take in some coordinates first 
+// receive attack function, coordinates, 
+
+test("testing to see if an attack hit a ship", () => { 
+    let gameBoardFunctionCall = gameboardFactory();
+    let gameBoard = gameBoardFunctionCall.getGameboard();
+    let receiveAttackFunction = gameBoardFunctionCall.receiveAttack(3, 3);
+    // let attack = gameboardFactoryCall.receiveAttack();
+    // let getGameboard = gameboardFactoryCall.getGameboard();
+    // expect(attack(3, 3)).toBe(typeof Object);
+    // let coordinates = gameBoard[x][y];
+
+    // if (typeof coordinates === 'object') { 
+    //     console.log('you hit a ship!');
+    // } else { 
+    //     console.log('you missed!');
+    // }
+    expect(receiveAttackFunction).toBe(typeof 'object');
+    // expect(getGameboard[3, 3]).toBe(typeof Object);
+    // let hitOrMiss = getGameboard[attack];
+    // console.log(hitOrMiss);
+}) 
+
+// trying to get receive attack function to work, 
 
 // I think I need a conditional to check the length and the position, 
 // if length >= 2 and position vertical, add approprate spots 

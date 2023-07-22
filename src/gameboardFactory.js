@@ -38,10 +38,21 @@ export default function gameboardFactory() {
     }
     return gameboard;
   } 
+  
+  function receiveAttack(x, y) { 
+    let hitOrMiss = gameboard[x][y];
+    
+    if (typeof hitOrMiss === 'object') { 
+      console.log('you hit a ship!');
+    } else { 
+      console.log('you missed!');
+    }
+  }
 
   return { 
     getGameboard,
     placeShip,
+    receiveAttack,
   }
 } 
 
@@ -63,6 +74,23 @@ console.log(gameboardFactoryCall.placeShip(patrolBoat, 4, 7, 2, 'horizontal'));
 console.log(gameboardFactoryCall.placeShip(carrierBoat, 6, 1, 5, 'horizontal'));
 console.log(gameboardFactoryCall.placeShip(submarine, 7, 2, 3, 'vertical'));
 console.log(getBoard);
+console.log(gameboardFactoryCall.receiveAttack(3, 4));
+
+
+// receive attack function 
+
+// function receiveAttack(x, y) { 
+  // get the board, in order to know if ship is hit, look at board 
+ //  let checkGameboard = getGameboard()
+  // if (checkGameboard[x][y] === shipObj) { 
+      // if the coordinates given, match a ship obj
+      // hitCounter increases on the that ship
+  // } else { 
+      // coordinates do not match, log the missed coordinates, and save as a miss hit, 
+  // }
+// }
+
+
 
 
 
