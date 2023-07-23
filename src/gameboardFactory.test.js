@@ -30,22 +30,13 @@ test("testing to see if ships span it's full length", () => {
 
 test("testing to see if an attack hit a ship", () => { 
     let gameBoardFunctionCall = gameboardFactory();
-    let gameBoard = gameBoardFunctionCall.getGameboard();
-    let receiveAttackFunction = gameBoardFunctionCall.receiveAttack(3, 3);
-    // let attack = gameboardFactoryCall.receiveAttack();
-    // let getGameboard = gameboardFactoryCall.getGameboard();
-    // expect(attack(3, 3)).toBe(typeof Object);
-    // let coordinates = gameBoard[x][y];
-
-    // if (typeof coordinates === 'object') { 
-    //     console.log('you hit a ship!');
-    // } else { 
-    //     console.log('you missed!');
-    // }
-    expect(receiveAttackFunction).toBe(typeof 'object');
-    // expect(getGameboard[3, 3]).toBe(typeof Object);
-    // let hitOrMiss = getGameboard[attack];
-    // console.log(hitOrMiss);
+    let battleShip = ship('Battleship', 4, 'vertical'); 
+    // let gameboardFactoryCall = gameboardFactory();
+    let placeShipMethod = gameBoardFunctionCall.placeShip(battleShip, 3, 3, 4, 'vertical');
+    // let updatedGameboard = gameboardFactoryCall.getGameboard();
+    // let callCoordinates = gameBoardFunctionCall.receiveAttack(3, 3);
+    expect(typeof gameBoardFunctionCall.receiveAttack(3, 3)).toBe('object');
+    // expect(callCoordinates).toBe(typeof 'object');
 }) 
 
 // trying to get receive attack function to work, 

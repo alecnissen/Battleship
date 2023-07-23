@@ -40,13 +40,14 @@ export default function gameboardFactory() {
   } 
   
   function receiveAttack(x, y) { 
-    let hitOrMiss = gameboard[x][y];
+    let coordinates = gameboard[x][y];
     
-    if (typeof hitOrMiss === 'object') { 
+    if (typeof coordinates === 'object') { 
       console.log('you hit a ship!');
     } else { 
       console.log('you missed!');
     }
+    return coordinates;
   }
 
   return { 
@@ -67,14 +68,13 @@ let carrierBoat = ship('Carrier', 5, 'horizontal');
 let submarine = ship('Submarine', 3, 'vertical');
 let gameboardFactoryCall = gameboardFactory();
 let getBoard = gameboardFactoryCall.getGameboard();
-// console.log(gameboardFactory().getGameboard());
 console.log(gameboardFactoryCall.placeShip(battleShip, 1, 2, 4, 'vertical'));
 console.log(gameboardFactoryCall.placeShip(destroyer, 3, 4, 4, 'horizontal'));
 console.log(gameboardFactoryCall.placeShip(patrolBoat, 4, 7, 2, 'horizontal'));
 console.log(gameboardFactoryCall.placeShip(carrierBoat, 6, 1, 5, 'horizontal'));
 console.log(gameboardFactoryCall.placeShip(submarine, 7, 2, 3, 'vertical'));
 console.log(getBoard);
-console.log(gameboardFactoryCall.receiveAttack(3, 4));
+console.log(gameboardFactoryCall.receiveAttack(1, 2));
 
 
 // receive attack function 
