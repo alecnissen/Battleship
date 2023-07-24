@@ -9,6 +9,36 @@ test('testing to see if ship was placed at specific coordinates', () => {
     expect(updatedGameboard[3][3]).toBe(battleShip);
 }); 
 
+// I would like to write a test and also add a feature within placeShip function, 
+// I want to prevent the user from placing a ship if another ship is already there, 
+// I want to prevent the overlapping of ships 
+// write a test, can we simply place a ship, then see if another is already there, 
+// you need to access the gameboard, and get a pair of coordinates
+// determine if those coordinates already contain a ship, if so return or prevent the function 
+// from placing it's ship.
+// how could you write a test that would prevent a user from overlapping ships 
+// how you you write a test that would prevent users from placing ships on top of eachother. 
+// try to write a test similar to the specific coordinates, in that the gameboard contains coordinates 
+// that is an obj, and if it is obj, throw error in main function 
+// how could I write a test to prevent overlapping of ships. 
+// if the coordinates contain an object, prevent user from placing ship, 
+
+// place a couple of ships, try to place another ship at the current location, then just throw an error? 
+// error will state cannot place because ship is already there. 
+
+test('testing to see if ship is already taken in that spot, prevent overlapping', () => {
+    let battleShip = ship('Battleship', 4, 'vertical'); 
+    let destroyer = ship('Destroyer', 4, 'vertical');
+    let gameboardFactoryCall = gameboardFactory();
+    let placeBattleship = gameboardFactoryCall.placeShip(battleShip, 3, 3, 4, 'vertical');
+    let placeDestroyer = gameboardFactoryCall.placeShip(destroyer, 3, 3, 4, 'vertical');
+    let updatedGameboard = gameboardFactoryCall.getGameboard();
+    expect(typeof updatedGameboard[3][3]).toBe('object');
+})
+
+
+
+
 test("testing to see if ships span it's full length", () => { 
     let carrier = ship('Carrier', 5, 'horizontal');
     let gameboardFactoryCall = gameboardFactory();
@@ -36,7 +66,6 @@ test("testing to see if an attack hit a ship", () => {
     // let updatedGameboard = gameboardFactoryCall.getGameboard();
     // let callCoordinates = gameBoardFunctionCall.receiveAttack(3, 3);
     expect(typeof gameBoardFunctionCall.receiveAttack(3, 3)).toBe('object');
-    // expect(callCoordinates).toBe(typeof 'object');
 }) 
 
 // trying to get receive attack function to work, 
