@@ -22,21 +22,28 @@ export default function gameboardFactory() {
     return gameboard;
   } 
 
+  function checkForShip(x, y, length, position) { 
+    let isShipThere
+
+    console.log(gameboard);
+    if (gameboard[x][y] === 'object') { 
+      console.log('ship is already there');
+      shipThere = true;
+      throw new Error('ship is already there') // or use alert 
+    } else if (gameboard[x][y] !== 'object') { 
+      isShipThere = false; 
+      // call placeShip and let it place the ship 
+    }
+    return isShipThere;
+  }
+
    
   function placeShip(shipObj, x, y, length, position) {  
+    // checkForShip() // pass in parameters, 
     gameboard[x][y] = shipObj;
 
     if (position === 'vertical') { 
       for (let i = 1; i <= length - 1; i++) { 
-        try { 
-        if (typeof gameboard[x + i][y] === 'object') { 
-          throw new Error('Overlap');
-          // console.log('ship is there');
-          // how to display error, wrap entire function in try block? 
-        } 
-      } catch (Error) { 
-        console.log(Error);
-      }
         gameboard[x + i][y] = shipObj;
       } 
     } 
@@ -64,6 +71,7 @@ export default function gameboardFactory() {
     getGameboard,
     placeShip,
     receiveAttack,
+    checkForShip,
   }
 } 
 
@@ -86,6 +94,8 @@ console.log(gameboardFactoryCall.placeShip(carrierBoat, 6, 1, 5, 'horizontal'));
 console.log(gameboardFactoryCall.placeShip(submarine, 7, 2, 3, 'vertical'));
 console.log(getBoard);
 console.log(gameboardFactoryCall.receiveAttack(1, 2));
+
+console.log(gameboardFactoryCall.checkForShip(7, 2, 3, 'vertical'));
 
 // try { 
 //   let gameboardFactoryCall = gameboardFactory();

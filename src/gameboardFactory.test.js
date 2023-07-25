@@ -26,15 +26,24 @@ test('testing to see if ship was placed at specific coordinates', () => {
 // place a couple of ships, try to place another ship at the current location, then just throw an error? 
 // error will state cannot place because ship is already there. 
 
-test('testing to see if ship is already taken in that spot, prevent overlapping', () => {
+// using nested if statements guard clauses 
+// check if the ship, is an obj, 
+// and does the obj match the ship obj? 
+// 
+
+test('testing to see if ship is already taken in that spot and if ships intersect or overlap', () => {
     let battleShip = ship('Battleship', 4, 'vertical'); 
     let destroyer = ship('Destroyer', 4, 'vertical');
     let gameboardFactoryCall = gameboardFactory();
     let placeBattleship = gameboardFactoryCall.placeShip(battleShip, 3, 3, 4, 'vertical');
     let placeDestroyer = gameboardFactoryCall.placeShip(destroyer, 3, 3, 4, 'vertical');
     let updatedGameboard = gameboardFactoryCall.getGameboard();
-    expect(typeof updatedGameboard[3][3]).toBe('object');
-})
+    // expect(typeof updatedGameboard[3][3]).toEqual('object');
+    expect(gameboardFactoryCall.checkForShip(3, 3, 4, 'vertical')).toThrow('Ship is already placed there');
+}) 
+
+
+// testing to see if something is already there, 
 
 
 
