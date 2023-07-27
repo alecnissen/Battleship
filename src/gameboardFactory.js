@@ -22,47 +22,14 @@ export default function gameboardFactory() {
     return gameboard;
   } 
 
-  // i am checking if the ship placement is valid before placing anything 
-  // but what am I passing to check ship the same parameters???, if object is not there, do I just pass the same obj and coordinates 
-  // back to place ship? 
-
-  // what am I passing to checkForShip, once the if block fails, do I just call placeShip again 
-  // passing the same parameters 
-
-  // I feel like I need a guard clause to check if the ship placement is valid, 
-  // do I pass the same parameters to checkForShip? 
-  // once the if block fails, and ship placement is valid, do I pass the same parameters back to placeShip 
-  // that seems like it would cause an infinete loop and that I'm hard coding my values 
-
-// should work just like placeSHip, 
-// input coordinates, position, 
-// if the coordinates in the gameboard and the position is x, return true or false, 
-// pass the same coordinates, no need for variables, because when you call placeShip the parameters 
-// are already filled in. 
-// asfdasd
-
   function checkForShip(shipObj, x, y, length, position) { 
     let xCoordinate = x; 
     let yCoordinate = y;
     let lengthOfShip = length;
     let shipPosition = position;
-    // console.log(xCoordinate);
-    // console.log(yCoordinate);
-    // console.log(lengthOfShip);
-    // console.log(shipPosition);
-
-
-  //   if (typeof gameboard[x][y] === 'object') { 
-  //     console.log('ship is already there');
-  //     return true;
-  //   } 
-  //  return false; 
 
   console.log(x);
   console.log(y);
-
-  // coordinates are getting passed in, why is it still placing ships, when I am placing a ship 
-  // at the same location, it should stop placing ships
 
   if (position === 'vertical') { 
     for (let i = 1; i <= length - 1; i++) { 
@@ -80,13 +47,12 @@ export default function gameboardFactory() {
     }
   }
   return true;
-}
+} 
 
 function placeShip(shipObj, x, y, length, position) {  
     console.log(typeof checkForShip);
     if (!checkForShip(shipObj, x, y, length, position)) { 
       throw new Error('ship is already there');
-      // return;
    }  
    gameboard[x][y] = shipObj; 
 
