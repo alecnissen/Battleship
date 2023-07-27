@@ -22,37 +22,85 @@ export default function gameboardFactory() {
     return gameboard;
   } 
 
-  function checkForShip(x, y, length, position) { 
-    let isShipThere
+  // i am checking if the ship placement is valid before placing anything 
+  // but what am I passing to check ship the same parameters???, if object is not there, do I just pass the same obj and coordinates 
+  // back to place ship? 
 
-    console.log(gameboard);
-    if (gameboard[x][y] === 'object') { 
-      console.log('ship is already there');
-      shipThere = true;
-      throw new Error('ship is already there') // or use alert 
-    } else if (gameboard[x][y] !== 'object') { 
-      isShipThere = false; 
-      // call placeShip and let it place the ship 
-    }
-    return isShipThere;
-  }
+  // what am I passing to checkForShip, once the if block fails, do I just call placeShip again 
+  // passing the same parameters 
 
-   
-  function placeShip(shipObj, x, y, length, position) {  
-    // checkForShip() // pass in parameters, 
-    gameboard[x][y] = shipObj;
+  // I feel like I need a guard clause to check if the ship placement is valid, 
+  // do I pass the same parameters to checkForShip? 
+  // once the if block fails, and ship placement is valid, do I pass the same parameters back to placeShip 
+  // that seems like it would cause an infinete loop and that I'm hard coding my values 
 
-    if (position === 'vertical') { 
-      for (let i = 1; i <= length - 1; i++) { 
-        gameboard[x + i][y] = shipObj;
-      } 
+// should work just like placeSHip, 
+// input coordinates, position, 
+// if the coordinates in the gameboard and the position is x, return true or false, 
+// pass the same coordinates, no need for variables, because when you call placeShip the parameters 
+// are already filled in. 
+// asfdasd
+
+  function checkForShip(shipObj, x, y, length, position) { 
+    let xCoordinate = x; 
+    let yCoordinate = y;
+    let lengthOfShip = length;
+    let shipPosition = position;
+    // console.log(xCoordinate);
+    // console.log(yCoordinate);
+    // console.log(lengthOfShip);
+    // console.log(shipPosition);
+
+
+  //   if (typeof gameboard[x][y] === 'object') { 
+  //     console.log('ship is already there');
+  //     return true;
+  //   } 
+  //  return false; 
+
+  console.log(x);
+  console.log(y);
+
+  // coordinates are getting passed in, why is it still placing ships, when I am placing a ship 
+  // at the same location, it should stop placing ships
+
+  if (position === 'vertical') { 
+    for (let i = 1; i <= length - 1; i++) { 
+      if (typeof gameboard[x + i][y] === 'object') { 
+      return false
+      }
     } 
-
-    if (position === 'horizontal') { 
-      for (let i = 1; i <= length - 1; i++) { 
-        gameboard[x][y + i] = shipObj;
+    
+  } 
+  if (position === 'horizontal') { 
+    for (let i = 1; i <= length - 1; i++) { 
+      if (typeof gameboard[x][y + i] === 'object') { 
+      return false
       } 
     }
+  }
+  return true;
+}
+
+function placeShip(shipObj, x, y, length, position) {  
+    console.log(typeof checkForShip);
+    if (!checkForShip(shipObj, x, y, length, position)) { 
+      throw new Error('ship is already there');
+      // return;
+   }  
+   gameboard[x][y] = shipObj; 
+
+   if (position === 'vertical') { 
+     for (let i = 1; i <= length - 1; i++) { 
+       gameboard[x + i][y] = shipObj;
+     } 
+   } 
+
+   if (position === 'horizontal') { 
+     for (let i = 1; i <= length - 1; i++) { 
+       gameboard[x][y + i] = shipObj;
+     } 
+   } 
     return gameboard;
   } 
   
@@ -75,10 +123,6 @@ export default function gameboardFactory() {
   }
 } 
 
-// conditional '
-
-// loop lenvth
-
 let battleShip = ship('Battleship', 4, 'vertical'); 
 let destroyer = ship('Destroyer', 4, 'horizontal' );
 let patrolBoat = ship('Patrol-boat', 2, 'vertical');
@@ -87,15 +131,62 @@ let submarine = ship('Submarine', 3, 'vertical');
 let gameboardFactoryCall = gameboardFactory();
 let getBoard = gameboardFactoryCall.getGameboard();
 console.log(gameboardFactoryCall.placeShip(battleShip, 1, 2, 4, 'vertical'));
-// console.log(gameboardFactoryCall.placeShip(carrierBoat, 7, 2, 3, 'vertical'));
+// console.log(gameboardFactoryCall.placeShip(carrierBoat, 1, 2, 4, 'vertical'));
 console.log(gameboardFactoryCall.placeShip(destroyer, 3, 4, 4, 'horizontal'));
+// console.log(gameboardFactoryCall.placeShip(destroyer, 3, 4, 4, 'horizontal'));
 console.log(gameboardFactoryCall.placeShip(patrolBoat, 4, 7, 2, 'horizontal'));
+// console.log(gameboardFactoryCall.placeShip(patrolBoat, 4, 7, 2, 'horizontal'));
 console.log(gameboardFactoryCall.placeShip(carrierBoat, 6, 1, 5, 'horizontal'));
+// console.log(gameboardFactoryCall.placeShip(carrierBoat, 6, 1, 5, 'horizontal'));
 console.log(gameboardFactoryCall.placeShip(submarine, 7, 2, 3, 'vertical'));
+// console.log(gameboardFactoryCall.placeShip(submarine, 7, 5, 3, 'vertical'));
+// console.log(gameboardFactoryCall.placeShip(battleShip, 0, 0, 4, 'horizontal'));
 console.log(getBoard);
-console.log(gameboardFactoryCall.receiveAttack(1, 2));
+console.log(gameboardFactoryCall.receiveAttack(1, 2)); 
 
-console.log(gameboardFactoryCall.checkForShip(7, 2, 3, 'vertical'));
+
+
+
+// pasted in ending here
+    // if (checkForShip) { // flipping the value WON'T WORK!!!!!! 
+    //   // all the code that prints a ship in here, 
+    //   gameboard[x][y] = shipObj;
+
+
+    //   if (position === 'vertical') { 
+    //     for (let i = 1; i <= length - 1; i++) { 
+    //       gameboard[x + i][y] = shipObj;
+    //     } 
+    //   } 
+  
+    //   if (position === 'horizontal') { 
+    //     for (let i = 1; i <= length - 1; i++) { 
+    //       gameboard[x][y + i] = shipObj;
+    //     } 
+    //   }
+    // } else { 
+    //   return;
+    // }
+
+    // gameboard[x][y] = shipObj;
+
+
+    // if (position === 'vertical') { 
+    //   for (let i = 1; i <= length - 1; i++) { 
+    //     gameboard[x + i][y] = shipObj;
+    //   } 
+    // } 
+
+    // if (position === 'horizontal') { 
+    //   for (let i = 1; i <= length - 1; i++) { 
+    //     gameboard[x][y + i] = shipObj;
+    //   } 
+    // }
+
+
+
+
+// console.log(gameboardFactoryCall.checkForShip(7, 2, 3, 'vertical'));
 
 // try { 
 //   let gameboardFactoryCall = gameboardFactory();

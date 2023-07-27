@@ -37,9 +37,12 @@ test('testing to see if ship is already taken in that spot and if ships intersec
     let gameboardFactoryCall = gameboardFactory();
     let placeBattleship = gameboardFactoryCall.placeShip(battleShip, 3, 3, 4, 'vertical');
     let placeDestroyer = gameboardFactoryCall.placeShip(destroyer, 3, 3, 4, 'vertical');
-    let updatedGameboard = gameboardFactoryCall.getGameboard();
+   //  expect(gameboardFactoryCall.placeShip(destroyer, 3, 3, 4, 'vertical')).toThrow('Error Ship is there'); 
+    expect(gameboardFactoryCall.placeShip(destroyer, 3, 3, 4, 'vertical')).rejects.toThrow('ship is already there');
+   
+   // let updatedGameboard = gameboardFactoryCall.getGameboard();
     // expect(typeof updatedGameboard[3][3]).toEqual('object');
-    expect(gameboardFactoryCall.checkForShip(3, 3, 4, 'vertical')).toThrow('Ship is already placed there');
+    // expect(gameboardFactoryCall.checkForShip()).toBe(false);
 }) 
 
 
