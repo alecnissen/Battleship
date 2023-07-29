@@ -13,7 +13,7 @@ test('testing to see if ship is already taken in that spot and if ships intersec
     let battleShip = ship('Battleship', 4, 'vertical'); 
     let destroyer = ship('Destroyer', 4, 'vertical');
     let gameboardFactoryCall = gameboardFactory();
-    let placeBattleship = gameboardFactoryCall.placeShip(battleShip, 3, 3, 4, 'vertical');
+    let placeBattleship = gameboardFactoryCall.placeShip(battleShip, 1, 3, 4, 'vertical');
     // let placeDestroyer = gameboardFactoryCall.placeShip(destroyer, 3, 3, 4, 'vertical');
     // expect(gameboardFactoryCall.placeShip(destroyer, 3, 3, 4, 'vertical')).toThrow('ship is already there'); 
     // expect(gameboardFactoryCall.placeShip(destroyer, 3, 3, 4, 'vertical')).toBe('ship is already there')
@@ -22,7 +22,7 @@ test('testing to see if ship is already taken in that spot and if ships intersec
     // expect(typeof updatedGameboard[3][3]).toEqual('object');
     // expect(gameboardFactoryCall.checkForShip()).toBe(false);
     expect(() => { 
-        (gameboardFactoryCall.placeShip(destroyer, 3, 3, 4, 'vertical'))
+        (gameboardFactoryCall.placeShip(battleShip, 1, 3, 4, 'vertical'))
     }).toThrow('ship is already there');
 })
 
@@ -58,6 +58,14 @@ test("testing to see if an attack hit a ship", () => {
     // let callCoordinates = gameBoardFunctionCall.receiveAttack(3, 3);
     expect(typeof gameBoardFunctionCall.receiveAttack(3, 3)).toBe('object');
 }) 
+
+// next I will write a test that will check if the placed ship has gone off the board, 
+
+// it will throw an error, an alert the user to adjust how they place the ship,
+
+// if the coordinates and the loop === undefined, meaning we went off the board, return false
+
+
 
 // trying to get receive attack function to work, 
 

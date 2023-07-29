@@ -33,7 +33,8 @@ export default function gameboardFactory() {
 
   if (position === 'vertical') { 
     for (let i = 1; i <= length - 1; i++) { 
-      if (typeof gameboard[x + i][y] === 'object') { 
+      if (typeof gameboard[x + i][y] === 'object') { // && or || == undefined??? 
+        // for checking if ship goes off the board, another if that checks if coordinates are undefined, 
       return false
       }
     } 
