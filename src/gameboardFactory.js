@@ -23,23 +23,18 @@ export default function gameboardFactory() {
   } 
 
   function checkForShip(shipObj, x, y, length, position) { 
-    let xCoordinate = x; 
-    let yCoordinate = y;
-    let lengthOfShip = length;
-    let shipPosition = position;
-
-  console.log(x);
-  console.log(y);
 
   if (position === 'vertical') { 
     for (let i = 1; i <= length - 1; i++) { 
-      if (typeof gameboard[x + i][y] === 'object') { // && or || == undefined??? 
-        // for checking if ship goes off the board, another if that checks if coordinates are undefined, 
+      if (typeof gameboard[x + i][y] === 'object') {
       return false
+      } 
+
+      if (typeof gameboard[x + i][y] === 'undefined') { 
+        return false;
       }
-    } 
-    
-  } 
+    }  
+  }  
   if (position === 'horizontal') { 
     for (let i = 1; i <= length - 1; i++) { 
       if (typeof gameboard[x][y + i] === 'object') { 
@@ -53,7 +48,7 @@ export default function gameboardFactory() {
 function placeShip(shipObj, x, y, length, position) {  
     console.log(typeof checkForShip);
     if (!checkForShip(shipObj, x, y, length, position)) { 
-      throw new Error('ship is already there');
+      throw new Error('ship is already there or ship is placed off the gameboard, please place ship somewhere else, and on the gameboard');
    }  
    gameboard[x][y] = shipObj; 
 
