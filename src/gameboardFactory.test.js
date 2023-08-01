@@ -6,7 +6,7 @@ test('testing to see if ship was placed at specific coordinates', () => {
     let gameboardFactoryCall = gameboardFactory();
     let placeShipMethod = gameboardFactoryCall.placeShip(battleShip, 3, 3, 4, 'vertical');
     let updatedGameboard = gameboardFactoryCall.getGameboard();
-    expect(updatedGameboard[3][3]).toBe(battleShip);
+    expect(updatedGameboard[3][3]).toBe(battleShip);   // expect wrapped within a function, 
 }); 
 
 test('testing to see if ship is already taken in that spot and if ships intersect or overlap', () => {
@@ -24,7 +24,7 @@ test('testing to see if ship is placed out of bounds', () => {
     let battleShip = ship('Battleship', 4, 'vertical'); 
     let gameboardFactoryCall = gameboardFactory();
     expect(() => { 
-        (gameboardFactoryCall.placeShip(battleShip, 7, 3, 4, 'vertical'))
+        gameboardFactoryCall.placeShip(battleShip, 7, 3, 4, 'vertical')
     }).toThrow('ship is already there or ship is placed off the gameboard, please place ship somewhere else, and on the gameboard');
 })
 

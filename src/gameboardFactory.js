@@ -40,6 +40,8 @@ export default function gameboardFactory() {
       if (typeof gameboard[x][y + i] === 'object') { 
       return false
       } 
+
+      // add the other if here, account for horizontal too === undefined 
     }
   }
   return true;
@@ -85,26 +87,26 @@ function placeShip(shipObj, x, y, length, position) {
   }
 } 
 
-let battleShip = ship('Battleship', 4, 'vertical'); 
-let destroyer = ship('Destroyer', 4, 'horizontal' );
-let patrolBoat = ship('Patrol-boat', 2, 'vertical');
-let carrierBoat = ship('Carrier', 5, 'horizontal');
-let submarine = ship('Submarine', 3, 'vertical');
-let gameboardFactoryCall = gameboardFactory();
-let getBoard = gameboardFactoryCall.getGameboard();
-console.log(gameboardFactoryCall.placeShip(battleShip, 1, 2, 4, 'vertical'));
-// console.log(gameboardFactoryCall.placeShip(carrierBoat, 1, 2, 4, 'vertical'));
-console.log(gameboardFactoryCall.placeShip(destroyer, 3, 4, 4, 'horizontal'));
+// let battleShip = ship('Battleship', 4, 'vertical'); 
+// let destroyer = ship('Destroyer', 4, 'horizontal' );
+// let patrolBoat = ship('Patrol-boat', 2, 'vertical');
+// let carrierBoat = ship('Carrier', 5, 'horizontal');
+// let submarine = ship('Submarine', 3, 'vertical');
+// let gameboardFactoryCall = gameboardFactory();
+// let getBoard = gameboardFactoryCall.getGameboard();
+// console.log(gameboardFactoryCall.placeShip(battleShip, 1, 2, 4, 'vertical'));
+// // console.log(gameboardFactoryCall.placeShip(carrierBoat, 1, 2, 4, 'vertical'));
 // console.log(gameboardFactoryCall.placeShip(destroyer, 3, 4, 4, 'horizontal'));
-console.log(gameboardFactoryCall.placeShip(patrolBoat, 4, 7, 2, 'horizontal'));
+// // console.log(gameboardFactoryCall.placeShip(destroyer, 3, 4, 4, 'horizontal'));
 // console.log(gameboardFactoryCall.placeShip(patrolBoat, 4, 7, 2, 'horizontal'));
-console.log(gameboardFactoryCall.placeShip(carrierBoat, 6, 1, 5, 'horizontal'));
+// // console.log(gameboardFactoryCall.placeShip(patrolBoat, 4, 7, 2, 'horizontal'));
 // console.log(gameboardFactoryCall.placeShip(carrierBoat, 6, 1, 5, 'horizontal'));
-console.log(gameboardFactoryCall.placeShip(submarine, 7, 2, 3, 'vertical'));
-// console.log(gameboardFactoryCall.placeShip(submarine, 7, 5, 3, 'vertical'));
-// console.log(gameboardFactoryCall.placeShip(battleShip, 0, 0, 4, 'horizontal'));
-console.log(getBoard);
-console.log(gameboardFactoryCall.receiveAttack(1, 2)); 
+// // console.log(gameboardFactoryCall.placeShip(carrierBoat, 6, 1, 5, 'horizontal'));
+// console.log(gameboardFactoryCall.placeShip(submarine, 7, 2, 3, 'vertical'));
+// // console.log(gameboardFactoryCall.placeShip(submarine, 7, 5, 3, 'vertical'));
+// // console.log(gameboardFactoryCall.placeShip(battleShip, 0, 0, 4, 'horizontal'));
+// console.log(getBoard);
+// console.log(gameboardFactoryCall.receiveAttack(1, 2)); 
 
 
 
