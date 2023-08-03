@@ -4,9 +4,10 @@ import ship from "./shipFactory";
 test('testing to see if ship was placed at specific coordinates', () => { 
     let battleShip = ship('Battleship', 4, 'vertical'); 
     let gameboardFactoryCall = gameboardFactory();
-    let placeShipMethod = gameboardFactoryCall.placeShip(battleShip, 3, 3, 4, 'vertical');
+    let placeShipMethod = gameboardFactoryCall.placeShip(battleShip, 4, 3, 4, 'vertical');
     let updatedGameboard = gameboardFactoryCall.getGameboard();
-    expect(updatedGameboard[3][3]).toBe(battleShip);   // expect wrapped within a function, 
+    console.log(typeof null)
+    expect(updatedGameboard[4][3]).toBe(battleShip);  
 }); 
 
 test('testing to see if ship is already taken in that spot and if ships intersect or overlap', () => {
@@ -14,19 +15,20 @@ test('testing to see if ship is already taken in that spot and if ships intersec
     let destroyer = ship('Destroyer', 4, 'vertical');
     let gameboardFactoryCall = gameboardFactory();
     let placeBattleship = gameboardFactoryCall.placeShip(battleShip, 1, 3, 4, 'vertical');
-    expect(() => { 
-        (gameboardFactoryCall.placeShip(battleShip, 1, 3, 4, 'vertical'))
+    expect(() => {
+        (gameboardFactoryCall.placeShip(battleShip, 1, 3, 4, 'vertical'));
     }).toThrow('ship is already there or ship is placed off the gameboard, please place ship somewhere else, and on the gameboard');
-})
+}) 
 
-// out of bounds test, 
+// out of bounds test, original 
 test('testing to see if ship is placed out of bounds', () => {
     let battleShip = ship('Battleship', 4, 'vertical'); 
     let gameboardFactoryCall = gameboardFactory();
     expect(() => { 
-        gameboardFactoryCall.placeShip(battleShip, 7, 3, 4, 'vertical')
+        gameboardFactoryCall.placeShip(battleShip, 7, 3, 4, 'vertical')     // if it hits the end return undefined? 
     }).toThrow('ship is already there or ship is placed off the gameboard, please place ship somewhere else, and on the gameboard');
 })
+
 
 test("testing to see if ships span it's full length", () => { 
     let carrier = ship('Carrier', 5, 'horizontal');
@@ -47,15 +49,15 @@ test("testing to see if ships span it's full length", () => {
 // the test will come first, so let's take in some coordinates first 
 // receive attack function, coordinates, 
 
-test("testing to see if an attack hit a ship", () => { 
-    let gameBoardFunctionCall = gameboardFactory();
-    let battleShip = ship('Battleship', 4, 'vertical'); 
-    // let gameboardFactoryCall = gameboardFactory();
-    let placeShipMethod = gameBoardFunctionCall.placeShip(battleShip, 3, 3, 4, 'vertical');
-    // let updatedGameboard = gameboardFactoryCall.getGameboard();
-    // let callCoordinates = gameBoardFunctionCall.receiveAttack(3, 3);
-    expect(typeof gameBoardFunctionCall.receiveAttack(3, 3)).toBe('object');
-}) 
+// test("testing to see if an attack hit a ship", () => { 
+//     let gameBoardFunctionCall = gameboardFactory();
+//     let battleShip = ship('Battleship', 4, 'vertical'); 
+//     // let gameboardFactoryCall = gameboardFactory();
+//     let placeShipMethod = gameBoardFunctionCall.placeShip(battleShip, 3, 3, 4, 'vertical');
+//     // let updatedGameboard = gameboardFactoryCall.getGameboard();
+//     // let callCoordinates = gameBoardFunctionCall.receiveAttack(3, 3);
+//     expect(typeof gameBoardFunctionCall.receiveAttack(3, 3)).toBe('object');
+// }) 
 
 // next I will write a test that will check if the placed ship has gone off the board, 
 

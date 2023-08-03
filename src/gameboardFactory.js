@@ -3,91 +3,113 @@ import ship from './shipFactory.js';
 
 export default function gameboardFactory() {
   let gameboard = [];
-  for (let i = 0; i < 10; i++) { 
-    gameboard.push([
-      undefined,
-      undefined,
-      undefined,
-      undefined,
-      undefined,
-      undefined,
-      undefined,
-      undefined,
-      undefined,
-      undefined,
-    ]);
-  } 
-
-  function getGameboard() { 
-    return gameboard;
-  } 
-
-  function checkForShip(shipObj, x, y, length, position) { 
-
-  if (position === 'vertical') { 
-    for (let i = 1; i <= length - 1; i++) { 
-      if (typeof gameboard[x + i][y] === 'object') {
-      return false
-      } 
-
-      if (typeof gameboard[x + i][y] === 'undefined') { 
-        return false;
-      }
-    }  
-  }  
-  if (position === 'horizontal') { 
-    for (let i = 1; i <= length - 1; i++) { 
-      if (typeof gameboard[x][y + i] === 'object') { 
-      return false
-      } 
-
-      // add the other if here, account for horizontal too === undefined 
-    }
+  for (let i = 0; i < 10; i++) {
+    gameboard.push(['', '', '', '', '', '', '', '', '', '']);
   }
-  return true;
-} 
 
-function placeShip(shipObj, x, y, length, position) {  
-    console.log(typeof checkForShip);
-    if (!checkForShip(shipObj, x, y, length, position)) { 
-      throw new Error('ship is already there or ship is placed off the gameboard, please place ship somewhere else, and on the gameboard');
-   }  
-   gameboard[x][y] = shipObj; 
-
-   if (position === 'vertical') { 
-     for (let i = 1; i <= length - 1; i++) { 
-       gameboard[x + i][y] = shipObj;
-     } 
-   } 
-
-   if (position === 'horizontal') { 
-     for (let i = 1; i <= length - 1; i++) { 
-       gameboard[x][y + i] = shipObj;
-     } 
-   } 
+  function getGameboard() {
     return gameboard;
-  } 
-  
-  function receiveAttack(x, y) { 
+  }
+
+  // the problem is getting first unit test to pass, it keeps throwing error, and I do not understand why,
+  //
+
+  function checkForShip(x, y, length, position) {
+    if (position === 'vertical') {
+      for (let i = 1; i <= length - 1; i++) {
+        // if (typeof gameboard[x + i][y] === 'object') {
+        // return false
+        // } 
+
+        if (gameboard[x] < 0 && gameboard[y] > 9) { 
+          return false
+        }
+
+        if (gameboard[x + i][y] !== '') {
+          // if the cell is not empty, a ship is already there, return false
+          return false;
+        } 
+
+        // if (typeof gameboard[x + i][y] === 'undefined') {   // check if the indices are within a valid range, 
+        //   return false;
+        // }
+
+        // if (gameboard[x] < 0 && gameboard[y] > 9) { 
+        //   return false
+        // }
+      }
+    }
+
+    if (position === 'horizontal') {
+      for (let i = 1; i <= length - 1; i++) {
+        // if (typeof gameboard[x][y + i] === 'object') {
+        // return false
+        // } 
+        if (gameboard[x] < 0 && gameboard[y] > 9) { 
+          return false
+        }
+
+
+        if (gameboard[x][y + i] !== '') {
+          // if the cell is not empty, a ship is already there, return false
+          return false;
+        }
+
+        // if (typeof gameboard[x][y + i] === 'undefined') {   // check if the indices are within a valid range, 
+        //   return false;
+        // }
+        // if (x < 0 && y > 9) { 
+        //   return false;
+        // }
+      }
+    }
+    return true;
+  }
+
+  function placeShip(shipObj, x, y, length, position) {
+    if (!checkForShip(x, y, length, position)) {
+      throw new Error('ship is already there or ship is placed off the gameboard, please place ship somewhere else, and on the gameboard'
+      );
+      // return
+    }
+    gameboard[x][y] = shipObj;
+
+    if (position === 'vertical') {
+      for (let i = 1; i <= length - 1; i++) {
+        gameboard[x + i][y] = shipObj;
+      }
+    }
+
+    if (position === 'horizontal') {
+      for (let i = 1; i <= length - 1; i++) {
+        gameboard[x][y + i] = shipObj;
+      }
+    }
+    return gameboard;
+  }
+
+  function receiveAttack(x, y) {
     let coordinates = gameboard[x][y];
-    
-    if (typeof coordinates === 'object') { 
+
+    if (typeof coordinates === 'object') {
       console.log('you hit a ship!');
-    } else { 
+    } else {
       console.log('you missed!');
     }
     return coordinates;
   }
 
-  return { 
+  return {
     getGameboard,
     placeShip,
     receiveAttack,
     checkForShip,
-  }
-} 
+  };
+}
 
-// let battleShip = ship('Battleship', 4, 'vertical'); 
+
+
+// let battleShip = ship('Battleship', 4, 'vertical');
 // let destroyer = ship('Destroyer', 4, 'horizontal' );
 // let patrolBoat = ship('Patrol-boat', 2, 'vertical');
 // let carrierBoat = ship('Carrier', 5, 'horizontal');
@@ -106,53 +128,45 @@ function placeShip(shipObj, x, y, length, position) {
 // // console.log(gameboardFactoryCall.placeShip(submarine, 7, 5, 3, 'vertical'));
 // // console.log(gameboardFactoryCall.placeShip(battleShip, 0, 0, 4, 'horizontal'));
 // console.log(getBoard);
-// console.log(gameboardFactoryCall.receiveAttack(1, 2)); 
-
-
-
+// console.log(gameboardFactoryCall.receiveAttack(1, 2));
 
 // pasted in ending here
-    // if (checkForShip) { // flipping the value WON'T WORK!!!!!! 
-    //   // all the code that prints a ship in here, 
-    //   gameboard[x][y] = shipObj;
+// if (checkForShip) { // flipping the value WON'T WORK!!!!!!
+//   // all the code that prints a ship in here,
+//   gameboard[x][y] = shipObj;
 
+//   if (position === 'vertical') {
+//     for (let i = 1; i <= length - 1; i++) {
+//       gameboard[x + i][y] = shipObj;
+//     }
+//   }
 
-    //   if (position === 'vertical') { 
-    //     for (let i = 1; i <= length - 1; i++) { 
-    //       gameboard[x + i][y] = shipObj;
-    //     } 
-    //   } 
-  
-    //   if (position === 'horizontal') { 
-    //     for (let i = 1; i <= length - 1; i++) { 
-    //       gameboard[x][y + i] = shipObj;
-    //     } 
-    //   }
-    // } else { 
-    //   return;
-    // }
+//   if (position === 'horizontal') {
+//     for (let i = 1; i <= length - 1; i++) {
+//       gameboard[x][y + i] = shipObj;
+//     }
+//   }
+// } else {
+//   return;
+// }
 
-    // gameboard[x][y] = shipObj;
+// gameboard[x][y] = shipObj;
 
+// if (position === 'vertical') {
+//   for (let i = 1; i <= length - 1; i++) {
+//     gameboard[x + i][y] = shipObj;
+//   }
+// }
 
-    // if (position === 'vertical') { 
-    //   for (let i = 1; i <= length - 1; i++) { 
-    //     gameboard[x + i][y] = shipObj;
-    //   } 
-    // } 
-
-    // if (position === 'horizontal') { 
-    //   for (let i = 1; i <= length - 1; i++) { 
-    //     gameboard[x][y + i] = shipObj;
-    //   } 
-    // }
-
-
-
+// if (position === 'horizontal') {
+//   for (let i = 1; i <= length - 1; i++) {
+//     gameboard[x][y + i] = shipObj;
+//   }
+// }
 
 // console.log(gameboardFactoryCall.checkForShip(7, 2, 3, 'vertical'));
 
-// try { 
+// try {
 //   let gameboardFactoryCall = gameboardFactory();
 //   let getBoard = gameboardFactoryCall.getGameboard();
 //   console.log(gameboardFactoryCall.placeShip(battleShip, 1, 2, 4, 'vertical'));
@@ -162,49 +176,41 @@ function placeShip(shipObj, x, y, length, position) {
 //   console.log(Error);
 // }
 
+// receive attack function
 
-// receive attack function 
-
-// function receiveAttack(x, y) { 
-  // get the board, in order to know if ship is hit, look at board 
- //  let checkGameboard = getGameboard()
-  // if (checkGameboard[x][y] === shipObj) { 
-      // if the coordinates given, match a ship obj
-      // hitCounter increases on the that ship
-  // } else { 
-      // coordinates do not match, log the missed coordinates, and save as a miss hit, 
-  // }
+// function receiveAttack(x, y) {
+// get the board, in order to know if ship is hit, look at board
+//  let checkGameboard = getGameboard()
+// if (checkGameboard[x][y] === shipObj) {
+// if the coordinates given, match a ship obj
+// hitCounter increases on the that ship
+// } else {
+// coordinates do not match, log the missed coordinates, and save as a miss hit,
+// }
 // }
 
-
-
-
-
 // let patrolBoatLength = patrolBoat.shipLength;
-// let patrolBoatCoordinates = 
+// let patrolBoatCoordinates =
 // console.log(patrolBoatCoordinates);
 
 // experiment
 // console.log(gameboardFactoryCall.placeShip(patrolBoat, (1 + patrolBoatLength), (1  + patrolBoatLength)));
 // console.log(getBoard);
 
-// how can the ship expand it's full length? 
+// how can the ship expand it's full length?
 
-// can I place multiple ships on the board? 
-// can the ship span it's full length? 
-// is another ship already in it's spot? 
+// can I place multiple ships on the board?
+// can the ship span it's full length?
+// is another ship already in it's spot?
 
+// continue to work on placeShip function and it's test,
+// right now it works for one location, can it work for another?
+// can we properly place ships at location or is another ship already there blocking it?
+// horizontal and vertical?
 
-
-// continue to work on placeShip function and it's test, 
-// right now it works for one location, can it work for another? 
-// can we properly place ships at location or is another ship already there blocking it? 
-// horizontal and vertical? 
-
-
-//   function getGameboard() { 
+//   function getGameboard() {
 //     return gameboard;
-//   } 
+//   }
 
 //   function placeShip(length, start, vertical) {
 //     const newShip = ship(length);
@@ -229,19 +235,6 @@ function placeShip(shipObj, x, y, length, position) {
 //   return { getGameboard, placeShip };
 // }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 //   function placeShip(x, y, shipObj, number, shipDirection) {
 //     let coordinateX = x;
 //     let coordinateY = y;
@@ -264,7 +257,3 @@ function placeShip(shipObj, x, y, length, position) {
 // let myGameboard = gameboardFactory();
 // let destroyer = ship('destroyer', 4, 1, 'vertical');
 // console.log(myGameboard.placeShip([0], [0], destroyer, 1, 'vertical'));
-
-
-
-
