@@ -49,15 +49,15 @@ test("testing to see if ships span it's full length", () => {
 // the test will come first, so let's take in some coordinates first 
 // receive attack function, coordinates, 
 
-// test("testing to see if an attack hit a ship", () => { 
-//     let gameBoardFunctionCall = gameboardFactory();
-//     let battleShip = ship('Battleship', 4, 'vertical'); 
-//     // let gameboardFactoryCall = gameboardFactory();
-//     let placeShipMethod = gameBoardFunctionCall.placeShip(battleShip, 3, 3, 4, 'vertical');
-//     // let updatedGameboard = gameboardFactoryCall.getGameboard();
-//     // let callCoordinates = gameBoardFunctionCall.receiveAttack(3, 3);
-//     expect(typeof gameBoardFunctionCall.receiveAttack(3, 3)).toBe('object');
-// }) 
+test("testing to see if an attack hit a ship", () => { 
+    let gameBoardFunctionCall = gameboardFactory();
+    let battleShip = ship('Battleship', 4, 'vertical'); 
+    // let gameboardFactoryCall = gameboardFactory();
+    let placeShipMethod = gameBoardFunctionCall.placeShip(battleShip, 3, 3, 4, 'vertical');
+    // let updatedGameboard = gameboardFactoryCall.getGameboard();
+    // let callCoordinates = gameBoardFunctionCall.receiveAttack(3, 3);
+    expect(typeof gameBoardFunctionCall.receiveAttack(3, 3)).toBe('object');
+}) 
 
 // next I will write a test that will check if the placed ship has gone off the board, 
 

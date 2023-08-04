@@ -11,56 +11,35 @@ export default function gameboardFactory() {
     return gameboard;
   }
 
-  // the problem is getting first unit test to pass, it keeps throwing error, and I do not understand why,
-  //
+  function checkForShip(x, y, length, position) {  // takes in coordinates, x and y, length and position
+    if (position === 'vertical') { // checking if the position is v or h, this will determine what axis we add the length to, which axis will increment 
+      for (let i = 1; i <= length - 1; i++) {  // loop thru the length of the ship that was passed in, so we know how many spots/cells to fill on the gameboard
+        // out of bounds check here, numbers 0 - 9, if numbers are less than 0, greater than 9, return false, prevent ship placement
+        if (x + i > 9) {  // what I want to check here, is that the coordinates/indexes are within the bounds of the gameboard, not in bounds return false
+          return false 
+        }     
 
-  function checkForShip(x, y, length, position) {
-    if (position === 'vertical') {
-      for (let i = 1; i <= length - 1; i++) {
-        // if (typeof gameboard[x + i][y] === 'object') {
-        // return false
-        // } 
-
-        if (gameboard[x] < 0 && gameboard[y] > 9) { 
-          return false
-        }
-
-        if (gameboard[x + i][y] !== '') {
+        if (gameboard[x + i][y] !== '') { // checking if a ship is already in the cell
           // if the cell is not empty, a ship is already there, return false
           return false;
         } 
-
-        // if (typeof gameboard[x + i][y] === 'undefined') {   // check if the indices are within a valid range, 
-        //   return false;
-        // }
-
-        // if (gameboard[x] < 0 && gameboard[y] > 9) { 
-        //   return false
-        // }
       }
     }
 
     if (position === 'horizontal') {
       for (let i = 1; i <= length - 1; i++) {
-        // if (typeof gameboard[x][y + i] === 'object') {
-        // return false
+        // if (x < 0 && y + i > 9) { 
+        //   return false
         // } 
-        if (gameboard[x] < 0 && gameboard[y] > 9) { 
-          return false
-        }
 
+        if (y + i > 9) { 
+          return false;
+        }
 
         if (gameboard[x][y + i] !== '') {
           // if the cell is not empty, a ship is already there, return false
           return false;
         }
-
-        // if (typeof gameboard[x][y + i] === 'undefined') {   // check if the indices are within a valid range, 
-        //   return false;
-        // }
-        // if (x < 0 && y > 9) { 
-        //   return false;
-        // }
       }
     }
     return true;
@@ -72,7 +51,7 @@ export default function gameboardFactory() {
       );
       // return
     }
-    gameboard[x][y] = shipObj;
+    gameboard[x][y] = shipObj;  // this line I don't believe is doing anything
 
     if (position === 'vertical') {
       for (let i = 1; i <= length - 1; i++) {
