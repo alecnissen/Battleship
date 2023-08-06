@@ -27,10 +27,7 @@ export default function gameboardFactory() {
     }
 
     if (position === 'horizontal') {
-      for (let i = 1; i <= length - 1; i++) {
-        // if (x < 0 && y + i > 9) { 
-        //   return false
-        // } 
+      for (let i = 1; i <= length - 1; i++) { 
 
         if (y + i > 9) { 
           return false;
@@ -49,9 +46,8 @@ export default function gameboardFactory() {
     if (!checkForShip(x, y, length, position)) {
       throw new Error('ship is already there or ship is placed off the gameboard, please place ship somewhere else, and on the gameboard'
       );
-      // return
     }
-    gameboard[x][y] = shipObj;  // this line I don't believe is doing anything
+    gameboard[x][y] = shipObj;
 
     if (position === 'vertical') {
       for (let i = 1; i <= length - 1; i++) {
@@ -65,15 +61,32 @@ export default function gameboardFactory() {
       }
     }
     return gameboard;
-  }
+  } 
+
+  // Gameboards should have a receiveAttack function that takes a pair of coordinates, 
+  // determines whether or not the attack hit a ship and then sends the ‘hit’ function to the correct ship, 
+  // or records the coordinates of the missed shot. 
+
 
   function receiveAttack(x, y) {
     let coordinates = gameboard[x][y];
+    console.log(coordinates);
+    // let coordinateX = x; // these coordinates will be saved if the shot is a miss
+    // let coordinateY = y;
+    let missedCoordinates = [];
 
-    if (typeof coordinates === 'object') {
+    if (typeof coordinates === 'object') { 
       console.log('you hit a ship!');
+      console.log(coordinates.shipName);
+      coordinates.hitIncrementor();
+
     } else {
       console.log('you missed!');
+      // throw new Error('Attack did not hit a ship, you missed!');
+      // missedCoordinates.push(coordinates);
+      // console.log(missedCoordinates);
+      missedCoordinates.push(coordinates);
+      console.log(missedCoordinates);
     }
     return coordinates;
   }
@@ -88,6 +101,14 @@ export default function gameboardFactory() {
 
 
 
+
+// old code 
+
+// let x = gameboardFactory();
+
+// let y = x.receiveAttack(4, 3);
+// console.log(y);
+
 // let battleShip = ship('Battleship', 4, 'vertical');
 // let destroyer = ship('Destroyer', 4, 'horizontal' );
 // let patrolBoat = ship('Patrol-boat', 2, 'vertical');
@@ -95,8 +116,8 @@ export default function gameboardFactory() {
 // let submarine = ship('Submarine', 3, 'vertical');
 // let gameboardFactoryCall = gameboardFactory();
 // let getBoard = gameboardFactoryCall.getGameboard();
-// console.log(gameboardFactoryCall.placeShip(battleShip, 1, 2, 4, 'vertical'));
-// // console.log(gameboardFactoryCall.placeShip(carrierBoat, 1, 2, 4, 'vertical'));
+// console.log(gameboardFactoryCall.placeShip(battleShip, 0, 0, 4, 'vertical'));
+// console.log(gameboardFactoryCall.placeShip(carrierBoat, 0, 0, 4, 'horizontal'));
 // console.log(gameboardFactoryCall.placeShip(destroyer, 3, 4, 4, 'horizontal'));
 // // console.log(gameboardFactoryCall.placeShip(destroyer, 3, 4, 4, 'horizontal'));
 // console.log(gameboardFactoryCall.placeShip(patrolBoat, 4, 7, 2, 'horizontal'));

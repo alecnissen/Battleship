@@ -1,6 +1,9 @@
 import gameboardFactory from "./gameboardFactory"; 
-import ship from "./shipFactory";
+import ship from "./shipFactory"; 
 
+// I want to test my unit tests again with another instance, just to make sure they work ok, then move on 
+
+// coordinate test #1
 test('testing to see if ship was placed at specific coordinates', () => { 
     let battleShip = ship('Battleship', 4, 'vertical'); 
     let gameboardFactoryCall = gameboardFactory();
@@ -10,6 +13,18 @@ test('testing to see if ship was placed at specific coordinates', () => {
     expect(updatedGameboard[4][3]).toBe(battleShip);  
 }); 
 
+// coordiante test #2 
+test('testing to see if ship was placed at specific coordinates, 2nd instance', () => { 
+    let patrolBoat = ship('patrol-boat', 2, 'horizontal'); 
+    let gameboardFactoryCall = gameboardFactory();
+    let placeShipMethod = gameboardFactoryCall.placeShip(patrolBoat, 5, 5, 2, 'horizontal');
+    let updatedGameboard = gameboardFactoryCall.getGameboard();
+    console.log(typeof null)
+    expect(updatedGameboard[5][5]).toBe(patrolBoat);  
+    expect(updatedGameboard[5][6]).toBe(patrolBoat);  
+}); 
+
+// overlap test #1
 test('testing to see if ship is already taken in that spot and if ships intersect or overlap', () => {
     let battleShip = ship('Battleship', 4, 'vertical'); 
     let destroyer = ship('Destroyer', 4, 'vertical');
@@ -20,6 +35,20 @@ test('testing to see if ship is already taken in that spot and if ships intersec
     }).toThrow('ship is already there or ship is placed off the gameboard, please place ship somewhere else, and on the gameboard');
 }) 
 
+// left off here
+// overlap test #2 
+test('testing to see if ship is already taken in that spot and if ships intersect or overlap, 2nd instance', () => {
+    let battleShip = ship('Battleship', 4, 'vertical'); 
+    let destroyer = ship('Destroyer', 4, 'vertical');
+    let gameboardFactoryCall = gameboardFactory();
+    let placeBattleship = gameboardFactoryCall.placeShip(battleShip, 0, 0, 4, 'vertical');
+    console.log(gameboardFactoryCall.getGameboard());
+    expect(() => {
+         let placeBattleship = gameboardFactoryCall.placeShip(battleShip, 0, 0, 4, 'vertical');
+        (gameboardFactoryCall.placeShip(battleShip, 0, 0, 4, 'horizontal'));
+    }).toThrow('ship is already there or ship is placed off the gameboard, please place ship somewhere else, and on the gameboard');
+})
+
 // out of bounds test, original 
 test('testing to see if ship is placed out of bounds', () => {
     let battleShip = ship('Battleship', 4, 'vertical'); 
@@ -27,9 +56,18 @@ test('testing to see if ship is placed out of bounds', () => {
     expect(() => { 
         gameboardFactoryCall.placeShip(battleShip, 7, 3, 4, 'vertical')     // if it hits the end return undefined? 
     }).toThrow('ship is already there or ship is placed off the gameboard, please place ship somewhere else, and on the gameboard');
-})
+}) 
 
+// out of bounds test 2nd instance 
+test('testing to see if ship is placed out of bounds, 2nd instance', () => {
+    let battleShip = ship('Battleship', 4, 'horizontal'); 
+    let gameboardFactoryCall = gameboardFactory();
+    expect(() => { 
+        gameboardFactoryCall.placeShip(battleShip, 1, 7, 4, 'horizontal')     // if it hits the end return undefined? 
+    }).toThrow('ship is already there or ship is placed off the gameboard, please place ship somewhere else, and on the gameboard');
+}) 
 
+// full length test #1 
 test("testing to see if ships span it's full length", () => { 
     let carrier = ship('Carrier', 5, 'horizontal');
     let gameboardFactoryCall = gameboardFactory();
@@ -42,6 +80,19 @@ test("testing to see if ships span it's full length", () => {
     expect(updatedGameboard[0][4]).toBe(carrier);
 }) 
 
+// full length test #2 
+test("testing to see if ships span it's full length, 2nd instance", () => { 
+    let carrier = ship('Carrier', 5, 'horizontal');
+    let gameboardFactoryCall = gameboardFactory();
+    let placeShipMethod = gameboardFactoryCall.placeShip(carrier, 5, 4, 5, 'vertical');
+    let updatedGameboard = gameboardFactoryCall.getGameboard();
+    expect(updatedGameboard[5][4]).toBe(carrier);
+    expect(updatedGameboard[6][4]).toBe(carrier);
+    expect(updatedGameboard[7][4]).toBe(carrier);
+    expect(updatedGameboard[8][4]).toBe(carrier);
+    expect(updatedGameboard[9][4]).toBe(carrier);
+}) 
+
 // we will now implement the next step, 
 // a receiveAttack function, takes a pair of coordinates 
 // did the attack hit a ship? 
@@ -49,15 +100,122 @@ test("testing to see if ships span it's full length", () => {
 // the test will come first, so let's take in some coordinates first 
 // receive attack function, coordinates, 
 
+// test to see if ship did receive an attack, test #1 
 test("testing to see if an attack hit a ship", () => { 
     let gameBoardFunctionCall = gameboardFactory();
     let battleShip = ship('Battleship', 4, 'vertical'); 
     // let gameboardFactoryCall = gameboardFactory();
     let placeShipMethod = gameBoardFunctionCall.placeShip(battleShip, 3, 3, 4, 'vertical');
+    console.log(battleShip.hitIncrementor());
+    console.log(battleShip.getHitCounter());
     // let updatedGameboard = gameboardFactoryCall.getGameboard();
     // let callCoordinates = gameBoardFunctionCall.receiveAttack(3, 3);
     expect(typeof gameBoardFunctionCall.receiveAttack(3, 3)).toBe('object');
 }) 
+
+// receive attack, takes coordinates, determines if it a ship, determines which ship 
+// increments that particular ships hit counter 
+
+// test to see if ship did receive an attack, test #2  
+
+test("testing to see if an attack hit a ship, 2nd instance", () => { 
+    let gameBoardFunctionCall = gameboardFactory();
+    let battleShip = ship('Battleship', 4, 'vertical'); 
+    // let gameboardFactoryCall = gameboardFactory();
+    let placeShipMethod = gameBoardFunctionCall.placeShip(battleShip, 5, 3, 4, 'horizontal');
+    // battleShip.hitIncrementor();
+    // battleShip.hitIncrementor();
+    // battleShip.hitIncrementor();
+    // console.log(battleShip.getHitCounter());
+    // let updatedGameboard = gameboardFactoryCall.getGameboard();
+    // let callCoordinates = gameBoardFunctionCall.receiveAttack(3, 3);
+    expect(gameBoardFunctionCall.receiveAttack(5, 3)).toBe(battleShip);
+    // expect(typeof gameBoardFunctionCall.receiveAttack(5, 4)).toBe('object');
+    // expect(typeof gameBoardFunctionCall.receiveAttack(5, 5)).toBe('object');
+    // expect(typeof gameBoardFunctionCall.receiveAttack(5, 6)).toBe('object');
+}) 
+
+// test will increment the selected ships hit counter / passes
+// I want a test, that will place a ship, 
+// call the receive attack function, 
+// 1: expect it to be the ship obj that was placed 
+
+// I want to increment a particular ships hit counter if an attack hits it, 
+// 
+
+
+test('testing to see if the selected ships hit counter increments and returns the correct number of hits', () => { 
+    let gameBoardFunctionCall = gameboardFactory();
+    let battleShip = ship('Battleship', 4, 'vertical'); 
+    let placeShipMethod = gameBoardFunctionCall.placeShip(battleShip, 5, 3, 4, 'horizontal');
+    expect(gameBoardFunctionCall.receiveAttack(5, 3)).toBe(battleShip);
+    // battleShip.hitIncrementor();
+    expect(battleShip.getHitCounter()).toBe(1);
+}) 
+
+
+// test('testing to see if the selected ships hit counter increments and returns the correct number of hits', () => { 
+//     let gameBoardFunctionCall = gameboardFactory();
+//     let battleShip = ship('Battleship', 4, 'vertical');
+//     let placeShipMethod = gameBoardFunctionCall.placeShip(battleShip, 5, 3, 4, 'horizontal');
+    
+
+//     battleShip.hitIncrementor();
+//     battleShip.hitIncrementor();
+//     battleShip.hitIncrementor();
+//     console.log(battleShip.getHitCounter());
+//     expect(battleShip.getHitCounter()).toBe(3);
+// })
+
+
+
+// test will check what ship received the attack, or got hit /
+
+// test that an attack missed a ship, should throw an error  
+
+test('attack misses a ship, and it records coordinates of missed shot', () => { 
+    let gameBoardFunctionCall = gameboardFactory();
+    let coordinateX = 3;
+    let coordinateY = 4;
+    let battleShip = ship('Battleship', 4, 'vertical');
+    let placeBattleship = gameBoardFunctionCall.placeShip(battleShip, 5, 3, 4, 'horizontal');
+    let attackCoordinates = gameBoardFunctionCall.receiveAttack(3, 3);
+    console.log(attackCoordinates); 
+
+    // expect(() => { 
+    //     gameBoardFunctionCall.receiveAttack(3, 3)
+    //     let missedCoordinates = [x][y];
+    // })
+}) 
+
+// I want to write a test that will place a ship, call the receive attack function passing in coordinates, 
+// how can I access those coordinates that were passed in? and save them to a variable, such as an array ? 
+
+// how can I record the coordinates of the missed shots? 
+// init missed shot variable 
+
+
+
+// Gameboards should have a receiveAttack function that takes a pair of coordinates, 
+// determines whether or not the attack hit a ship and then sends the ‘hit’ function to the correct ship, 
+// or records the coordinates of the missed shot.
+
+
+
+// expect(() => { 
+//     gameboardFactoryCall.placeShip(battleShip, 1, 7, 4, 'horizontal')     // if it hits the end return undefined? 
+// }).toThrow('ship is already there or ship is placed off the gameboard, please place ship somewhere else, and on the gameboard');
+
+
+
+
+
+
+
+
+
+
+
 
 // next I will write a test that will check if the placed ship has gone off the board, 
 
