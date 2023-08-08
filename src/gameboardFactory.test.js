@@ -101,16 +101,18 @@ test("testing to see if ships span it's full length, 2nd instance", () => {
 // receive attack function, coordinates, 
 
 // test to see if ship did receive an attack, test #1 
+// receiveAttack test
 test("testing to see if an attack hit a ship", () => { 
     let gameBoardFunctionCall = gameboardFactory();
     let battleShip = ship('Battleship', 4, 'vertical'); 
     // let gameboardFactoryCall = gameboardFactory();
-    let placeShipMethod = gameBoardFunctionCall.placeShip(battleShip, 3, 3, 4, 'vertical');
-    console.log(battleShip.hitIncrementor());
-    console.log(battleShip.getHitCounter());
+    gameBoardFunctionCall.placeShip(battleShip, 3, 3, 4, 'vertical');
+    // console.log(battleShip.hitIncrementor());
+    // console.log(battleShip.getHitCounter());
     // let updatedGameboard = gameboardFactoryCall.getGameboard();
     // let callCoordinates = gameBoardFunctionCall.receiveAttack(3, 3);
     expect(typeof gameBoardFunctionCall.receiveAttack(3, 3)).toBe('object');
+    // console.log(gameBoardFunctionCall.hitShots);
 }) 
 
 // receive attack, takes coordinates, determines if it a ship, determines which ship 
@@ -118,21 +120,27 @@ test("testing to see if an attack hit a ship", () => {
 
 // test to see if ship did receive an attack, test #2  
 
+// receiveAttack test
 test("testing to see if an attack hit a ship, 2nd instance", () => { 
     let gameBoardFunctionCall = gameboardFactory();
     let battleShip = ship('Battleship', 4, 'vertical'); 
     // let gameboardFactoryCall = gameboardFactory();
-    let placeShipMethod = gameBoardFunctionCall.placeShip(battleShip, 5, 3, 4, 'horizontal');
+    gameBoardFunctionCall.placeShip(battleShip, 5, 3, 4, 'horizontal');
     // battleShip.hitIncrementor();
     // battleShip.hitIncrementor();
     // battleShip.hitIncrementor();
     // console.log(battleShip.getHitCounter());
     // let updatedGameboard = gameboardFactoryCall.getGameboard();
     // let callCoordinates = gameBoardFunctionCall.receiveAttack(3, 3);
-    expect(gameBoardFunctionCall.receiveAttack(5, 3)).toBe(battleShip);
+
+    // expect(gameBoardFunctionCall.receiveAttack(5, 3)).toBe(battleShip);
+
+    expect(typeof gameBoardFunctionCall.receiveAttack(5, 3)).toBe('object');
     // expect(typeof gameBoardFunctionCall.receiveAttack(5, 4)).toBe('object');
     // expect(typeof gameBoardFunctionCall.receiveAttack(5, 5)).toBe('object');
     // expect(typeof gameBoardFunctionCall.receiveAttack(5, 6)).toBe('object');
+    // console.log(gameBoardFunctionCall.hitShots);
+     console.log(battleShip.getHitCounter());
 }) 
 
 // test will increment the selected ships hit counter / passes
@@ -143,16 +151,35 @@ test("testing to see if an attack hit a ship, 2nd instance", () => {
 // I want to increment a particular ships hit counter if an attack hits it, 
 // 
 
-
-test('testing to see if the selected ships hit counter increments and returns the correct number of hits', () => { 
+// receiveAttack test
+test('testing to see if the selected ships hit counter increments and returns the correct number of hits, as well as storing hit shots', () => { 
     let gameBoard = gameboardFactory();
     let battleShip = ship('Battleship', 4, 'vertical'); 
-    let placeShipMethod = gameBoard.placeShip(battleShip, 5, 3, 4, 'horizontal');
-    expect(gameBoard.receiveAttack(5, 3)).toBe(battleShip);
+    gameBoard.placeShip(battleShip, 5, 3, 4, 'vertical');
+    // expect(gameBoard.receiveAttack(5, 3)).toBe(battleShip);
+    expect(typeof gameBoard.receiveAttack(5, 3)).toBe('object');
     // battleShip.hitIncrementor();
     expect(gameBoard.hitShots).toStrictEqual([[5, 3]]);
     expect(battleShip.getHitCounter()).toBe(1);
 }) 
+// receiveAttack test
+test('testing to see if the selected ships hit counter increments and returns the correct number of hits, as well as storing hit shots, 2nd instance', () => { 
+    let gameBoard = gameboardFactory();
+    let destroyer = ship('destroyer', 4, 'horizontal'); 
+    gameBoard.placeShip(destroyer, 1, 3, 4, 'horizontal');
+    // expect(gameBoard.receiveAttack(5, 3)).toBe(battleShip);
+    expect(typeof gameBoard.receiveAttack(1, 3)).toBe('object');
+    // battleShip.hitIncrementor();
+    expect(gameBoard.hitShots).toStrictEqual([[1, 3]]);
+    expect(destroyer.getHitCounter()).toBe(1);
+}) 
+
+
+// I will check next my tests for receiveAttack and follow along 
+// the code execution to make sure it is 100% working as intended 
+// make sure you fully understand what the code is doing 
+
+
 
 
 // test('testing to see if the selected ships hit counter increments and returns the correct number of hits', () => { 
@@ -182,6 +209,7 @@ test('testing to see if the selected ships hit counter increments and returns th
 
 // have a test pass, that stores the missed shots into an array
 
+// receiveAttack test
 test('attack misses a ship, the array contains the coordinates of the missed shots', () => { 
     let gameBoard = gameboardFactory();
     // let missedShots = [];
@@ -197,6 +225,24 @@ test('attack misses a ship, the array contains the coordinates of the missed sho
     gameBoard.receiveAttack(5, 6);
     // missedShots.push(expectedMissedShots);
     expect(gameBoard.missedShots).toStrictEqual([[1, 2], [3, 4], [5, 6]]);
+}) 
+
+// receiveAttack test
+test('attack misses a ship, the array contains the coordinates of the missed shots, 2nd instance', () => { 
+    let gameBoard = gameboardFactory();
+    // let missedShots = [];
+    // let coordinateX = 3;
+    // let coordinateY = 4; 
+    //  let expectedMissedShots = [[1, 2], [3, 4], [5, 6]];
+    // let battleShip = ship('Battleship', 4, 'vertical');
+    // let placeBattleship = gameBoardFunctionCall.placeShip(battleShip, 5, 3, 4, 'horizontal');
+    // let attackCoordinates = gameBoardFunctionCall.receiveAttack(3, 3);
+    // console.log(attackCoordinates); 
+    gameBoard.receiveAttack(3, 1);
+    gameBoard.receiveAttack(6, 2);
+    gameBoard.receiveAttack(7, 4);
+    // missedShots.push(expectedMissedShots);
+    expect(gameBoard.missedShots).toStrictEqual([[3, 1], [6, 2], [7, 4]]);
 }) 
 
 // I want to write a test that will place a ship, call the receive attack function passing in coordinates, 

@@ -92,11 +92,15 @@ export default function gameboardFactory() {
     if (typeof shipOnBoard === 'object') { 
       hitShots.push([x, y])
       shipOnBoard.hitIncrementor();
+      
     } else { 
       missedShots.push([x, y])
     }
-    return shipOnBoard
-  } 
+    return { 
+      missedShots, 
+      hitShots
+  }
+}  
 
   return {
     getGameboard,
@@ -106,17 +110,10 @@ export default function gameboardFactory() {
     hitShots,
     missedShots,
   };
-}
+} 
 
-// hello everyone I am stuck on getting a unit test to pass in battleship 
-// this test will store the coordinates of missed shots in an array, 
-// the array is a public method within the gameboardFactory module 
-// when I run jest, I'm confused on why I get "" empty strings back, 
-// my gameboard is made up of empty squares 
-// in the test file I am calling receiveAttack function which takes coordinates, 
-// if those coordinates miss, put them into the missedShots array, 
-// why is the array still giving me back empty strings if I'm pushing the passed in coordinates into the array? 
-
+// problem, is my receiveAttack function working correctly? 
+// are my unit test correct and are they returning the correct values ?
 
 // old code 
 
