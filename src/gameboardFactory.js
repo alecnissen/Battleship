@@ -3,6 +3,8 @@ import ship from './shipFactory.js';
 
 export default function gameboardFactory() {
   let gameboard = [];
+  let hitShots = [];
+  let missedShots = [];
   for (let i = 0; i < 10; i++) {
     gameboard.push(['', '', '', '', '', '', '', '', '', '']);
   }
@@ -68,38 +70,52 @@ export default function gameboardFactory() {
   // or records the coordinates of the missed shot. 
 
 
-  function receiveAttack(x, y) {
-    let coordinates = gameboard[x][y];
-    console.log(coordinates);
-    // let coordinateX = x; // these coordinates will be saved if the shot is a miss
-    // let coordinateY = y;
-    let missedCoordinates = [];
+  // function receiveAttack(x, y) {
+  //   let coordinates = gameboard[x][y];
+  //   console.log(coordinates);
 
-    if (typeof coordinates === 'object') { 
-      console.log('you hit a ship!');
-      console.log(coordinates.shipName);
-      coordinates.hitIncrementor();
+  //   if (typeof coordinates === 'object') { 
+  //     console.log('you hit a ship!');
+  //     console.log(coordinates.shipName);
+  //     coordinates.hitIncrementor();
 
-    } else {
-      console.log('you missed!');
-      // throw new Error('Attack did not hit a ship, you missed!');
-      // missedCoordinates.push(coordinates);
-      // console.log(missedCoordinates);
-      missedCoordinates.push(coordinates);
-      console.log(missedCoordinates);
+  //   } else {
+  //     console.log('you missed!');
+  //     missedShots.push([x, y]);
+  //     console.log(missedShots);
+  //   }
+  //   return coordinates;
+  // }
+
+  function receiveAttack(x, y) { 
+    const shipOnBoard = gameboard[x][y]; 
+    if (typeof shipOnBoard === 'object') { 
+      hitShots.push([x, y])
+      shipOnBoard.hitIncrementor();
+    } else { 
+      missedShots.push([x, y])
     }
-    return coordinates;
-  }
+    return shipOnBoard
+  } 
 
   return {
     getGameboard,
     placeShip,
     receiveAttack,
     checkForShip,
+    hitShots,
+    missedShots,
   };
 }
 
-
+// hello everyone I am stuck on getting a unit test to pass in battleship 
+// this test will store the coordinates of missed shots in an array, 
+// the array is a public method within the gameboardFactory module 
+// when I run jest, I'm confused on why I get "" empty strings back, 
+// my gameboard is made up of empty squares 
+// in the test file I am calling receiveAttack function which takes coordinates, 
+// if those coordinates miss, put them into the missedShots array, 
+// why is the array still giving me back empty strings if I'm pushing the passed in coordinates into the array? 
 
 
 // old code 

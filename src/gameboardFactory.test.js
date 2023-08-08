@@ -145,11 +145,12 @@ test("testing to see if an attack hit a ship, 2nd instance", () => {
 
 
 test('testing to see if the selected ships hit counter increments and returns the correct number of hits', () => { 
-    let gameBoardFunctionCall = gameboardFactory();
+    let gameBoard = gameboardFactory();
     let battleShip = ship('Battleship', 4, 'vertical'); 
-    let placeShipMethod = gameBoardFunctionCall.placeShip(battleShip, 5, 3, 4, 'horizontal');
-    expect(gameBoardFunctionCall.receiveAttack(5, 3)).toBe(battleShip);
+    let placeShipMethod = gameBoard.placeShip(battleShip, 5, 3, 4, 'horizontal');
+    expect(gameBoard.receiveAttack(5, 3)).toBe(battleShip);
     // battleShip.hitIncrementor();
+    expect(gameBoard.hitShots).toStrictEqual([[5, 3]]);
     expect(battleShip.getHitCounter()).toBe(1);
 }) 
 
@@ -173,19 +174,29 @@ test('testing to see if the selected ships hit counter increments and returns th
 
 // test that an attack missed a ship, should throw an error  
 
-test('attack misses a ship, and it records coordinates of missed shot', () => { 
-    let gameBoardFunctionCall = gameboardFactory();
-    let coordinateX = 3;
-    let coordinateY = 4;
-    let battleShip = ship('Battleship', 4, 'vertical');
-    let placeBattleship = gameBoardFunctionCall.placeShip(battleShip, 5, 3, 4, 'horizontal');
-    let attackCoordinates = gameBoardFunctionCall.receiveAttack(3, 3);
-    console.log(attackCoordinates); 
+// an attack misses a ship, it should record the coordinates of the missed shot, 
 
-    // expect(() => { 
-    //     gameBoardFunctionCall.receiveAttack(3, 3)
-    //     let missedCoordinates = [x][y];
-    // })
+// the array should contain the coordinates, toBe the coordinates passed in. 
+
+// just check if the shot misses
+
+// have a test pass, that stores the missed shots into an array
+
+test('attack misses a ship, the array contains the coordinates of the missed shots', () => { 
+    let gameBoard = gameboardFactory();
+    // let missedShots = [];
+    // let coordinateX = 3;
+    // let coordinateY = 4; 
+    //  let expectedMissedShots = [[1, 2], [3, 4], [5, 6]];
+    // let battleShip = ship('Battleship', 4, 'vertical');
+    // let placeBattleship = gameBoardFunctionCall.placeShip(battleShip, 5, 3, 4, 'horizontal');
+    // let attackCoordinates = gameBoardFunctionCall.receiveAttack(3, 3);
+    // console.log(attackCoordinates); 
+    gameBoard.receiveAttack(1, 2);
+    gameBoard.receiveAttack(3, 4);
+    gameBoard.receiveAttack(5, 6);
+    // missedShots.push(expectedMissedShots);
+    expect(gameBoard.missedShots).toStrictEqual([[1, 2], [3, 4], [5, 6]]);
 }) 
 
 // I want to write a test that will place a ship, call the receive attack function passing in coordinates, 
