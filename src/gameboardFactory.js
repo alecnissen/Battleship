@@ -4,7 +4,9 @@ import ship from './shipFactory.js';
 export default function gameboardFactory() {
   let gameboard = [];
   let hitShots = [];
-  let missedShots = [];
+  let missedShots = []; 
+  // let currentShips = {ship1: battleShip, ship2: destroyer, ship3: patrolBoat, ship4: submarine, ship5: carrierBoat}
+  // console.log(currentShips.ship1.isSunk);
   for (let i = 0; i < 10; i++) {
     gameboard.push(['', '', '', '', '', '', '', '', '', '']);
   }
@@ -69,30 +71,12 @@ export default function gameboardFactory() {
   // determines whether or not the attack hit a ship and then sends the ‘hit’ function to the correct ship, 
   // or records the coordinates of the missed shot. 
 
-
-  // function receiveAttack(x, y) {
-  //   let coordinates = gameboard[x][y];
-  //   console.log(coordinates);
-
-  //   if (typeof coordinates === 'object') { 
-  //     console.log('you hit a ship!');
-  //     console.log(coordinates.shipName);
-  //     coordinates.hitIncrementor();
-
-  //   } else {
-  //     console.log('you missed!');
-  //     missedShots.push([x, y]);
-  //     console.log(missedShots);
-  //   }
-  //   return coordinates;
-  // }
-
   function receiveAttack(x, y) { 
     const shipOnBoard = gameboard[x][y]; 
     if (typeof shipOnBoard === 'object') { 
+      console.log(shipOnBoard.shipName);
       hitShots.push([x, y])
       shipOnBoard.hitIncrementor();
-      
     } else { 
       missedShots.push([x, y])
     }
@@ -112,15 +96,6 @@ export default function gameboardFactory() {
   };
 } 
 
-// problem, is my receiveAttack function working correctly? 
-// are my unit test correct and are they returning the correct values ?
-
-// old code 
-
-// let x = gameboardFactory();
-
-// let y = x.receiveAttack(4, 3);
-// console.log(y);
 
 // let battleShip = ship('Battleship', 4, 'vertical');
 // let destroyer = ship('Destroyer', 4, 'horizontal' );
