@@ -5,7 +5,7 @@ export default function gameboardFactory() {
   let gameboard = [];
   let hitShots = [];
   let missedShots = []; 
-  // let currentShips = {ship1: battleShip, ship2: destroyer, ship3: patrolBoat, ship4: submarine, ship5: carrierBoat}
+  let currentShips = {ship1: battleShip, ship2: destroyer, ship3: patrolBoat, ship4: submarine, ship5: carrierBoat}
   // console.log(currentShips.ship1.isSunk);
   for (let i = 0; i < 10; i++) {
     gameboard.push(['', '', '', '', '', '', '', '', '', '']);
@@ -71,12 +71,22 @@ export default function gameboardFactory() {
   // determines whether or not the attack hit a ship and then sends the ‘hit’ function to the correct ship, 
   // or records the coordinates of the missed shot. 
 
+  // work on next step, read over post again 
+
+  // what we need to do is loop over hitSquares to see if [x,y] exists there
+// you can make a helper function that returns true or false based on if a specific square has been hit before 
+
   function receiveAttack(x, y) { 
     const shipOnBoard = gameboard[x][y]; 
     if (typeof shipOnBoard === 'object') { 
       console.log(shipOnBoard.shipName);
       hitShots.push([x, y])
       shipOnBoard.hitIncrementor();
+      // console.log(shipOnBoard.getHitCounter());
+      // loop over hitShots and determine if the attack/coordinates within this function contain hit coordinates 
+      // call the helper function and do our check within there 
+      checkForHits(x, y);
+
     } else { 
       missedShots.push([x, y])
     }
@@ -85,6 +95,18 @@ export default function gameboardFactory() {
       hitShots
   }
 }  
+
+function checkForHits(x, y) { 
+  // console.log(x);
+  // console.log(y);
+  for (let i = 0; i < hitShots.length; i++) { 
+    let coordinate = hitShots[i];
+    if (coordinate === [x, y]) { 
+      return true; 
+    }
+  } 
+  return false;
+}
 
   return {
     getGameboard,
@@ -97,14 +119,16 @@ export default function gameboardFactory() {
 } 
 
 
-// let battleShip = ship('Battleship', 4, 'vertical');
-// let destroyer = ship('Destroyer', 4, 'horizontal' );
-// let patrolBoat = ship('Patrol-boat', 2, 'vertical');
-// let carrierBoat = ship('Carrier', 5, 'horizontal');
-// let submarine = ship('Submarine', 3, 'vertical');
+let battleShip = ship('Battleship', 4, 'vertical');
+let destroyer = ship('Destroyer', 4, 'horizontal' );
+let patrolBoat = ship('Patrol-boat', 2, 'vertical');
+let carrierBoat = ship('Carrier', 5, 'horizontal');
+let submarine = ship('Submarine', 3, 'vertical');
 // let gameboardFactoryCall = gameboardFactory();
-// let getBoard = gameboardFactoryCall.getGameboard();
+// // let getBoard = gameboardFactoryCall.getGameboard();
 // console.log(gameboardFactoryCall.placeShip(battleShip, 0, 0, 4, 'vertical'));
+// console.log(gameboardFactoryCall.receiveAttack(0, 0));
+// console.log(battleShip.getShipStatus());
 // console.log(gameboardFactoryCall.placeShip(carrierBoat, 0, 0, 4, 'horizontal'));
 // console.log(gameboardFactoryCall.placeShip(destroyer, 3, 4, 4, 'horizontal'));
 // // console.log(gameboardFactoryCall.placeShip(destroyer, 3, 4, 4, 'horizontal'));
