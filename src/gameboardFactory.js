@@ -3,10 +3,11 @@ import ship from './shipFactory.js';
 
 export default function gameboardFactory() {
   let gameboard = [];
+  let allShots = [];
+  // console.log(allShots);
   let hitShots = [];
   let missedShots = []; 
   let currentShips = {ship1: battleShip, ship2: destroyer, ship3: patrolBoat, ship4: submarine, ship5: carrierBoat}
-  // console.log(currentShips.ship1.isSunk);
   for (let i = 0; i < 10; i++) {
     gameboard.push(['', '', '', '', '', '', '', '', '', '']);
   }
@@ -15,16 +16,14 @@ export default function gameboardFactory() {
     return gameboard;
   }
 
-  function checkForShip(x, y, length, position) {  // takes in coordinates, x and y, length and position
-    if (position === 'vertical') { // checking if the position is v or h, this will determine what axis we add the length to, which axis will increment 
-      for (let i = 1; i <= length - 1; i++) {  // loop thru the length of the ship that was passed in, so we know how many spots/cells to fill on the gameboard
-        // out of bounds check here, numbers 0 - 9, if numbers are less than 0, greater than 9, return false, prevent ship placement
-        if (x + i > 9) {  // what I want to check here, is that the coordinates/indexes are within the bounds of the gameboard, not in bounds return false
+  function checkForShip(x, y, length, position) { 
+    if (position === 'vertical') { 
+      for (let i = 1; i <= length - 1; i++) { 
+        if (x + i > 9) { 
           return false 
         }     
 
-        if (gameboard[x + i][y] !== '') { // checking if a ship is already in the cell
-          // if the cell is not empty, a ship is already there, return false
+        if (gameboard[x + i][y] !== '') {
           return false;
         } 
       }
@@ -38,7 +37,6 @@ export default function gameboardFactory() {
         }
 
         if (gameboard[x][y + i] !== '') {
-          // if the cell is not empty, a ship is already there, return false
           return false;
         }
       }
@@ -67,25 +65,19 @@ export default function gameboardFactory() {
     return gameboard;
   } 
 
-  // Gameboards should have a receiveAttack function that takes a pair of coordinates, 
-  // determines whether or not the attack hit a ship and then sends the ‘hit’ function to the correct ship, 
-  // or records the coordinates of the missed shot. 
-
-  // work on next step, read over post again 
-
-  // what we need to do is loop over hitSquares to see if [x,y] exists there
-// you can make a helper function that returns true or false based on if a specific square has been hit before 
-
   function receiveAttack(x, y) { 
+    // if (allShots.includes(x, y)) { 
+    //   return
+    // } else { 
+    //   allShots.push([x, y])
+    // }
     const shipOnBoard = gameboard[x][y]; 
     if (typeof shipOnBoard === 'object') { 
-      console.log(shipOnBoard.shipName);
       hitShots.push([x, y])
       shipOnBoard.hitIncrementor();
-      // console.log(shipOnBoard.getHitCounter());
-      // loop over hitShots and determine if the attack/coordinates within this function contain hit coordinates 
-      // call the helper function and do our check within there 
-      checkForHits(x, y);
+      // if (!checkForHits(x, y)) { 
+      //   return false;
+      // }
 
     } else { 
       missedShots.push([x, y])
@@ -94,19 +86,42 @@ export default function gameboardFactory() {
       missedShots, 
       hitShots
   }
-}  
+}   
 
-function checkForHits(x, y) { 
-  // console.log(x);
-  // console.log(y);
-  for (let i = 0; i < hitShots.length; i++) { 
-    let coordinate = hitShots[i];
-    if (coordinate === [x, y]) { 
-      return true; 
+function areAllShipsSunk() {
+  for (let i = 0; i < gameboard.length; i++) { 
+    let gameboardArrays = gameboard[i];
+    // console.log(gameboardArrays);
+    for (let j = 0; j < gameboardArrays.length; j++) { 
+      let cell = gameboardArrays[j];
+      console.log('currently logging array:', gameboardArrays)
+       if (typeof cell === 'object') { 
+        console.log(`found a ship at: [${i}, ${j}]`, cell)
+       } else {
+        console.log(`no ship found at: [${i}, ${j}]!`, cell)
+      } 
     }
-  } 
-  return false;
-}
+  }
+} 
+
+areAllShipsSunk();
+
+//  let cell = gameboard[i][i];
+// if (typeof cell === 'object') { 
+//   console.log(cell.shipName);
+
+// }
+
+// function checkForHits(x, y) { 
+//   for (let i = 0; i < hitShots.length; i++) { 
+//     let hitCoordinate = hitShots[i];
+//     console.log(hitCoordinate);
+//     if (hitCoordinate === [x, y]) { 
+//       return true; 
+//     }
+//   } 
+//   return false;
+// }
 
   return {
     getGameboard,
@@ -115,6 +130,7 @@ function checkForHits(x, y) {
     checkForShip,
     hitShots,
     missedShots,
+    areAllShipsSunk,
   };
 } 
 
@@ -124,9 +140,24 @@ let destroyer = ship('Destroyer', 4, 'horizontal' );
 let patrolBoat = ship('Patrol-boat', 2, 'vertical');
 let carrierBoat = ship('Carrier', 5, 'horizontal');
 let submarine = ship('Submarine', 3, 'vertical');
-// let gameboardFactoryCall = gameboardFactory();
-// // let getBoard = gameboardFactoryCall.getGameboard();
-// console.log(gameboardFactoryCall.placeShip(battleShip, 0, 0, 4, 'vertical'));
+let gameboard = gameboardFactory();
+console.log(gameboard.placeShip(battleShip, 0, 0, 4, 'vertical'));
+console.log(gameboard.placeShip(destroyer, 5, 3, 4, 'vertical'));
+console.log(gameboard.areAllShipsSunk());
+
+
+
+
+
+
+// console.log(battleShip.getHitCounter());
+// battleShip.hitIncrementor();
+// battleShip.hitIncrementor();
+// battleShip.hitIncrementor();
+// battleShip.hitIncrementor();
+// console.log(battleShip.getHitCounter());
+// console.log(battleShip.isSunkConditional());
+// console.log(battleShip.getShipStatus());
 // console.log(gameboardFactoryCall.receiveAttack(0, 0));
 // console.log(battleShip.getShipStatus());
 // console.log(gameboardFactoryCall.placeShip(carrierBoat, 0, 0, 4, 'horizontal'));

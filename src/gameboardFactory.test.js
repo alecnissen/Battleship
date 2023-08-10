@@ -8,7 +8,7 @@ test('testing to see if ship was placed at specific coordinates', () => {
     let gameboardFactoryCall = gameboardFactory();
     let placeShipMethod = gameboardFactoryCall.placeShip(battleShip, 4, 3, 4, 'vertical');
     let updatedGameboard = gameboardFactoryCall.getGameboard();
-    console.log(typeof null)
+    // console.log(typeof null)
     expect(updatedGameboard[4][3]).toBe(battleShip);  
 }); 
 
@@ -18,7 +18,7 @@ test('testing to see if ship was placed at specific coordinates, 2nd instance', 
     let gameboardFactoryCall = gameboardFactory();
     let placeShipMethod = gameboardFactoryCall.placeShip(patrolBoat, 5, 5, 2, 'horizontal');
     let updatedGameboard = gameboardFactoryCall.getGameboard();
-    console.log(typeof null)
+    // console.log(typeof null)
     expect(updatedGameboard[5][5]).toBe(patrolBoat);  
     expect(updatedGameboard[5][6]).toBe(patrolBoat);  
 }); 
@@ -41,7 +41,7 @@ test('testing to see if ship is already taken in that spot and if ships intersec
     let destroyer = ship('Destroyer', 4, 'vertical');
     let gameboardFactoryCall = gameboardFactory();
     let placeBattleship = gameboardFactoryCall.placeShip(battleShip, 0, 0, 4, 'vertical');
-    console.log(gameboardFactoryCall.getGameboard());
+   //  console.log(gameboardFactoryCall.getGameboard());
     expect(() => {
          let placeBattleship = gameboardFactoryCall.placeShip(battleShip, 0, 0, 4, 'vertical');
         (gameboardFactoryCall.placeShip(battleShip, 0, 0, 4, 'horizontal'));
@@ -200,8 +200,41 @@ test('testing to check if all the ships on the gameboard are sunk', () => {
 
 
 
+// is my receiveAttack function working as intended? 
+// do I need to refactor or add any new features to receiveAttack? 
+// Do I need a method that checks if that coordinate already received a hit? 
+// 
 
 
+// confused on how to test that a cell does not receive multiple hits, 
+// receive attack should be modified to make sure cells do not receive multiple hits, 
+
+
+// ask question tonight about checking if all ships are sunk and whether or not the same cell has been hit already, 
+// writing the unit test 
+// Do I need to major refactor receiveAttack? 
+
+// the problem is how can I make a method to retrieve all the ship objects within the gameboard? From there I can access their properties to determine if sunk or not 
+// 
+// 
+
+
+test('testing to make sure coordinates/cells do not receive multiple hits', () => { 
+    let gameboard = gameboardFactory();
+    console.log(gameboard);
+    let patrolBoat = ship('patrol-boat', 2, 'horizontal'); 
+    gameboard.placeShip(patrolBoat, 5, 3, 2)
+    console.log(gameboard.receiveAttack(3, 3)); 
+})
+
+// So if check for hits is false
+// Tou want to proceed
+// Increment the hits and all
+// If not, you want to make the recieveAttack function return a value like:false
+// You'll use that to ask the user to make another hit
+// Since his hit wasn't legal, and he still has the turn
+// No problem yet we're just thinking ahead
+// For now you need to prevent incrementing if the square has been hit
 
 
 
