@@ -10,8 +10,7 @@ export default function ship(name, length, position) {
     }
     function isSunkConditional() {
       if (hitCounter >= length) {
-        isSunk = true; // return isSunk in another function,
-        // return isSunk;
+        isSunk = true;
       }
     }
   

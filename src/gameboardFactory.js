@@ -4,7 +4,6 @@ import ship from './shipFactory.js';
 export default function gameboardFactory() {
   let gameboard = [];
   let allShots = [];
-  // console.log(allShots);
   let hitShots = [];
   let missedShots = []; 
   let currentShips = {ship1: battleShip, ship2: destroyer, ship3: patrolBoat, ship4: submarine, ship5: carrierBoat}
@@ -66,19 +65,10 @@ export default function gameboardFactory() {
   } 
 
   function receiveAttack(x, y) { 
-    // if (allShots.includes(x, y)) { 
-    //   return
-    // } else { 
-    //   allShots.push([x, y])
-    // }
     const shipOnBoard = gameboard[x][y]; 
     if (typeof shipOnBoard === 'object') { 
       hitShots.push([x, y])
       shipOnBoard.hitIncrementor();
-      // if (!checkForHits(x, y)) { 
-      //   return false;
-      // }
-
     } else { 
       missedShots.push([x, y])
     }
@@ -88,40 +78,36 @@ export default function gameboardFactory() {
   }
 }   
 
-function areAllShipsSunk() {
-  for (let i = 0; i < gameboard.length; i++) { 
-    let gameboardArrays = gameboard[i];
-    // console.log(gameboardArrays);
-    for (let j = 0; j < gameboardArrays.length; j++) { 
-      let cell = gameboardArrays[j];
-      console.log('currently logging array:', gameboardArrays)
-       if (typeof cell === 'object') { 
-        console.log(`found a ship at: [${i}, ${j}]`, cell)
-       } else {
-        console.log(`no ship found at: [${i}, ${j}]!`, cell)
-      } 
-    }
-  }
-} 
+function areAllShipsSunk() { 
+  let sunkenShipsArray = []; 
 
-areAllShipsSunk();
+  if (sunkenShipsArray.length <= 5) { 
+    return true;
+  } 
+  return false;
+}
 
-//  let cell = gameboard[i][i];
-// if (typeof cell === 'object') { 
-//   console.log(cell.shipName);
-
-// }
-
-// function checkForHits(x, y) { 
-//   for (let i = 0; i < hitShots.length; i++) { 
-//     let hitCoordinate = hitShots[i];
-//     console.log(hitCoordinate);
-//     if (hitCoordinate === [x, y]) { 
-//       return true; 
+// function areAllShipsSunk() {
+//   let allShips = 5;
+//   let sunkShips = [];
+//   for (let i = 0; i < gameboard.length; i++) { 
+//     let gameboardArrays = gameboard[i];
+//     for (let j = 0; j < gameboardArrays.length; j++) { 
+//       let cell = gameboardArrays[j];
+//       console.log('currently logging array:', gameboardArrays)
+//        if (typeof cell === 'object') { // checking only one ship, how to check all
+//         console.log(`found a ship at: [${i}, ${j}]`, cell)
+//         cell.isSunkConditional();
+//         if (cell.getShipStatus()) { 
+//             return true;
+//         }
+//        } else { 
+//         console.log(`no ship found at: [${i}, ${j}]!`, cell)
+//       } 
 //     }
 //   } 
-//   return false;
-// }
+//   return false; 
+// } 
 
   return {
     getGameboard,
@@ -141,9 +127,17 @@ let patrolBoat = ship('Patrol-boat', 2, 'vertical');
 let carrierBoat = ship('Carrier', 5, 'horizontal');
 let submarine = ship('Submarine', 3, 'vertical');
 let gameboard = gameboardFactory();
+// console.log(gameboard.getGameboard());
 console.log(gameboard.placeShip(battleShip, 0, 0, 4, 'vertical'));
 console.log(gameboard.placeShip(destroyer, 5, 3, 4, 'vertical'));
-console.log(gameboard.areAllShipsSunk());
+console.log(gameboard.placeShip(carrierBoat, 1, 2, 4, 'horizontal'));
+console.log(gameboard.placeShip(submarine, 3, 4, 4, 'horizontal'));
+console.log(gameboard.placeShip(patrolBoat, 4, 7, 2, 'horizontal'));
+// battleShip.hitIncrementor();
+// battleShip.hitIncrementor();
+// battleShip.hitIncrementor();
+// battleShip.hitIncrementor();
+// console.log(gameboard.areAllShipsSunk());
 
 
 
