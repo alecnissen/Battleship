@@ -8,7 +8,7 @@ export default function gameboardFactory() {
   let missedShots = []; 
   let sunkenShipsArray = []; // how are the sunken ships already being added? 
   // console.log(sunkenShipsArray);
-  console.log('sunkenShipsArray', sunkenShipsArray)
+  console.log('sunkenShipsArray right after init', sunkenShipsArray)
   // let currentShips = {ship1: battleShip, ship2: destroyer, ship3: patrolBoat, ship4: submarine, ship5: carrierBoat}
   for (let i = 0; i < 10; i++) {
     gameboard.push(['', '', '', '', '', '', '', '', '', '']);
@@ -89,8 +89,8 @@ export default function gameboardFactory() {
 }   
 
 function areAllShipsSunk() { 
-  console.log(sunkenShipsArray); // logs array
-  console.log(sunkenShipsArray.length === 5) // returns true when logged in jest
+  console.log('checking if all ships are sunk, within areAllShipsSunk method', sunkenShipsArray); // logs array
+  console.log('checking if areAllShipsSunk conditional', sunkenShipsArray.length === 5) // returns true when logged in jest
   if (sunkenShipsArray.length === 5) { 
     return true;
   } 
@@ -118,12 +118,12 @@ let submarine = ship('Submarine', 3, 'vertical');
 let gameboard = gameboardFactory();
 
 
-console.log(gameboard.sunkenShipsArray); // no ships have been sunk yet, why does the array still have all the sunken ships??? Variable hoisting? 
+console.log('array before placing the ships',gameboard.sunkenShipsArray); // no ships have been sunk yet, why does the array still have all the sunken ships??? Variable hoisting? 
 
 // how are the ships still being added to the array? I have not yet placed or sunk any ships, 
 // and the test is commented out, why are ships still being added to the array? 
 
-console.log(gameboard.areAllShipsSunk()); // should be false
+// console.log(gameboard.areAllShipsSunk()); // should be false
 
 gameboard.placeShip(battleShip, 3, 2, 4, 'vertical');
 gameboard.placeShip(destroyer, 4, 5, 4, 'horizontal');
@@ -135,8 +135,8 @@ gameboard.receiveAttack(3, 2);
 gameboard.receiveAttack(4, 2);
 gameboard.receiveAttack(5, 2);
 gameboard.receiveAttack(6, 2);
-battleShip.isSunkConditional();
-battleShip.getShipStatus();
+// battleShip.isSunkConditional();
+// battleShip.getShipStatus();
 // gameboard.sunkenShipsArray.push(battleShip); // I did not have to push again, just call the function which will push ship only if sunk, ship were being added twice 
 // so the array length was never 5, it would always equal false, 
 gameboard.areAllShipsSunk();
@@ -145,13 +145,13 @@ gameboard.receiveAttack(4, 5);
 gameboard.receiveAttack(4, 6);
 gameboard.receiveAttack(4, 7);
 gameboard.receiveAttack(4, 8);
-destroyer.isSunkConditional();
+// destroyer.isSunkConditional();
 // gameboard.sunkenShipsArray.push(destroyer);
 gameboard.areAllShipsSunk();
 // sinking patrol board
 gameboard.receiveAttack(0, 0);
 gameboard.receiveAttack(1, 0);
-patrolBoat.isSunkConditional();
+// patrolBoat.isSunkConditional();
 // gameboard.sunkenShipsArray.push(patrolBoat);
 gameboard.areAllShipsSunk();
 // sinking carrier boat
@@ -159,23 +159,23 @@ gameboard.receiveAttack(1, 2);
 gameboard.receiveAttack(1, 3); 
 gameboard.receiveAttack(1, 4); 
 gameboard.receiveAttack(1, 5); 
-carrierBoat.isSunkConditional();
+// carrierBoat.isSunkConditional();
 // gameboard.sunkenShipsArray.push(carrierBoat);
 gameboard.areAllShipsSunk();
 // sinking submarine
 gameboard.receiveAttack(6, 3);
 gameboard.receiveAttack(7, 3);
 gameboard.receiveAttack(8, 3);
-submarine.isSunkConditional();
-submarine.getShipStatus();
+// submarine.isSunkConditional();
+// submarine.getShipStatus();
 // gameboard.sunkenShipsArray.push(submarine);
 gameboard.areAllShipsSunk();
 
 
 
-console.log(gameboard.sunkenShipsArray);
+console.log('checking the array after ships are placed and sunk', gameboard.sunkenShipsArray);
 console.log(gameboard.getGameboard());
-console.log(gameboard.areAllShipsSunk()); 
+console.log('checking if the areAllShipsSunk conditional returns true', gameboard.areAllShipsSunk()); 
 
 
 

@@ -169,20 +169,20 @@ test('attack misses a ship, the array contains the coordinates of the missed sho
 }) 
 
 
-test('testing to see if a sunken ship gets added to the sunkenShips array', () => { 
-    let sunkenShipsArray = [];
-    let gameboard = gameboardFactory();
-    let battleShip = ship('Battleship', 4, 'vertical'); 
-    gameboard.placeShip(battleShip, 3, 2, 4);
-    gameboard.receiveAttack(3, 2);
-    gameboard.receiveAttack(3, 2);
-    gameboard.receiveAttack(3, 2);
-    gameboard.receiveAttack(3, 2);
-    battleShip.isSunkConditional();
-    battleShip.getShipStatus(); // true
-    sunkenShipsArray.push(battleShip);
-    expect(sunkenShipsArray).toContain(battleShip);
-}) 
+// test('testing to see if a sunken ship gets added to the sunkenShips array', () => { 
+//     let sunkenShipsArray = [];
+//     let gameboard = gameboardFactory();
+//     let battleShip = ship('Battleship', 4, 'vertical'); 
+//     gameboard.placeShip(battleShip, 3, 2, 4);
+//     gameboard.receiveAttack(3, 2);
+//     gameboard.receiveAttack(3, 2);
+//     gameboard.receiveAttack(3, 2);
+//     gameboard.receiveAttack(3, 2);
+//     battleShip.isSunkConditional();
+//     battleShip.getShipStatus(); // true
+//     sunkenShipsArray.push(battleShip);
+//     expect(sunkenShipsArray).toContain(battleShip);
+// }) 
 
 test('testing to see if all ships placed on gameboard, get added to the sunkenShips array', () => { 
     // let sunkenShipsArray = [];
