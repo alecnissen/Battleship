@@ -7,7 +7,8 @@ export default function gameboardFactory() {
   let hitShots = [];
   let missedShots = []; 
   let sunkenShipsArray = []; // how are the sunken ships already being added? 
-  console.log(sunkenShipsArray);
+  // console.log(sunkenShipsArray);
+  console.log('sunkenShipsArray', sunkenShipsArray)
   // let currentShips = {ship1: battleShip, ship2: destroyer, ship3: patrolBoat, ship4: submarine, ship5: carrierBoat}
   for (let i = 0; i < 10; i++) {
     gameboard.push(['', '', '', '', '', '', '', '', '', '']);
@@ -116,25 +117,20 @@ let carrierBoat = ship('Carrier', 4, 'horizontal');
 let submarine = ship('Submarine', 3, 'vertical');
 let gameboard = gameboardFactory();
 
-// gameboard.placeShip(battleShip, 3, 2, 4, 'vertical');
-// gameboard.placeShip(destroyer, 4, 5, 4, 'horizontal');
-// gameboard.placeShip(patrolBoat, 0, 0, 2, 'vertical');
-// gameboard.placeShip(carrierBoat, 1, 2, 4, 'horizontal');
-// gameboard.placeShip(submarine, 6, 3, 3, 'vertical');
 
 console.log(gameboard.sunkenShipsArray); // no ships have been sunk yet, why does the array still have all the sunken ships??? Variable hoisting? 
 
 // how are the ships still being added to the array? I have not yet placed or sunk any ships, 
 // and the test is commented out, why are ships still being added to the array? 
 
-console.log(gameboard.areAllShipsSunk());
+console.log(gameboard.areAllShipsSunk()); // should be false
 
 gameboard.placeShip(battleShip, 3, 2, 4, 'vertical');
 gameboard.placeShip(destroyer, 4, 5, 4, 'horizontal');
 gameboard.placeShip(patrolBoat, 0, 0, 2, 'vertical');
 gameboard.placeShip(carrierBoat, 1, 2, 4, 'horizontal');
 gameboard.placeShip(submarine, 6, 3, 3, 'vertical');
-
+// sinking battleship
 gameboard.receiveAttack(3, 2);
 gameboard.receiveAttack(4, 2);
 gameboard.receiveAttack(5, 2);
@@ -182,11 +178,6 @@ console.log(gameboard.getGameboard());
 console.log(gameboard.areAllShipsSunk()); 
 
 
-// the problem is my code passes in jest, the test function returns true meaning all the ships have been sunk, 
-
-// I can log the array tha holds the sunken ships, all are inside the array 
-
-//  but yet it will still return false. 
 
 
 

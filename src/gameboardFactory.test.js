@@ -168,29 +168,6 @@ test('attack misses a ship, the array contains the coordinates of the missed sho
     expect(gameBoard.missedShots).toStrictEqual([[3, 1], [6, 2], [7, 4]]);
 }) 
 
-// test('testing to check if all the ships on the gameboard are sunk', () => { 
-//     let gameboard = gameboardFactory();
-//     let patrolBoat = ship('patrol-boat', 2, 'horizontal');
-//     let sub = ship('submarine', 3, 'vertical');
-//     gameboard.placeShip(patrolBoat, 3, 1, 2, 'vertical');
-//     gameboard.placeShip(sub, 5, 3, 3, 'horizontal');
-//     gameboard.receiveAttack(5, 3);
-//     gameboard.receiveAttack(5, 3);
-//     gameboard.receiveAttack(5, 3);
-//     console.log(gameboard.getGameboard());
-//     console.log(sub.getHitCounter());
-//     console.log(sub.isSunkConditional());
-//     console.log(sub.getShipStatus());
-
-//     let currentGameboard = gameboard.getGameboard(); 
-
-//     let returnShipObjects = currentGameboard.filter((cell) => typeof cell === 'object');
-
-//     console.log(returnShipObjects)
-
-// }) 
-
-
 
 test('testing to see if a sunken ship gets added to the sunkenShips array', () => { 
     let sunkenShipsArray = [];
@@ -208,13 +185,15 @@ test('testing to see if a sunken ship gets added to the sunkenShips array', () =
 }) 
 
 test('testing to see if all ships placed on gameboard, get added to the sunkenShips array', () => { 
-    let sunkenShipsArray = [];
-    let gameboard = gameboardFactory();
-    let battleShip = ship('Battleship', 4, 'vertical'); 
-    let destroyer = ship('Destroyer', 4, 'horizontal' );
-    let patrolBoat = ship('Patrol-boat', 2, 'vertical');
-    let carrierBoat = ship('Carrier', 4, 'horizontal');
-    let submarine = ship('Submarine', 3, 'vertical');
+    // let sunkenShipsArray = [];
+    const gameboard = gameboardFactory();
+    // const sunkenShipsArrayTest = gameboard.sunkenShipsArray;
+    // console.log(sunkenShipsArrayTest);
+    const battleShip = ship('Battleship', 4, 'vertical'); 
+    const destroyer = ship('Destroyer', 4, 'horizontal' );
+    const patrolBoat = ship('Patrol-boat', 2, 'vertical');
+    const carrierBoat = ship('Carrier', 4, 'horizontal');
+    const submarine = ship('Submarine', 3, 'vertical');
     gameboard.placeShip(battleShip, 3, 2, 4, 'vertical');
     gameboard.placeShip(destroyer, 4, 5, 4, 'horizontal');
     gameboard.placeShip(patrolBoat, 0, 0, 2, 'vertical');
@@ -225,39 +204,39 @@ test('testing to see if all ships placed on gameboard, get added to the sunkenSh
     gameboard.receiveAttack(4, 2);
     gameboard.receiveAttack(5, 2);
     gameboard.receiveAttack(6, 2);
-    battleShip.isSunkConditional();
-    battleShip.getShipStatus();
-    sunkenShipsArray.push(battleShip);
+    // battleShip.isSunkConditional();
+    // battleShip.getShipStatus();
+    // sunkenShipsArray.push(battleShip);
     // sinking destroyer 
     gameboard.receiveAttack(4, 5);
     gameboard.receiveAttack(4, 6);
     gameboard.receiveAttack(4, 7);
     gameboard.receiveAttack(4, 8);
-    destroyer.isSunkConditional();
-    sunkenShipsArray.push(destroyer);
+    // destroyer.isSunkConditional();
+    // sunkenShipsArray.push(destroyer);
     // sinking patrol board
     gameboard.receiveAttack(0, 0);
     gameboard.receiveAttack(1, 0);
-    patrolBoat.isSunkConditional();
-    sunkenShipsArray.push(patrolBoat);
+    // patrolBoat.isSunkConditional();
+    // sunkenShipsArray.push(patrolBoat);
     // sinking carrier boat
     gameboard.receiveAttack(1, 2); 
     gameboard.receiveAttack(1, 3); 
     gameboard.receiveAttack(1, 4); 
     gameboard.receiveAttack(1, 5); 
-    carrierBoat.isSunkConditional();
-    sunkenShipsArray.push(carrierBoat);
+    // carrierBoat.isSunkConditional();
+    // sunkenShipsArray.push(carrierBoat);
     // sinking submarine
     gameboard.receiveAttack(6, 3);
     gameboard.receiveAttack(7, 3);
     gameboard.receiveAttack(8, 3);
-    submarine.isSunkConditional();
-    sunkenShipsArray.push(submarine);
-    expect(sunkenShipsArray).toContain(battleShip);
-    expect(sunkenShipsArray).toContain(submarine);
-    expect(sunkenShipsArray).toContain(carrierBoat);
-    expect(sunkenShipsArray).toContain(destroyer);
-    expect(sunkenShipsArray).toContain(patrolBoat);
+    // submarine.isSunkConditional();
+    // sunkenShipsArray.push(submarine);
+    // expect(sunkenShipsArray).toContain(battleShip);
+    // expect(sunkenShipsArray).toContain(submarine);
+    // expect(sunkenShipsArray).toContain(carrierBoat);
+    // expect(sunkenShipsArray).toContain(destroyer);
+    // expect(sunkenShipsArray).toContain(patrolBoat);
     expect(gameboard.areAllShipsSunk()).toBe(true);
 }) 
 
