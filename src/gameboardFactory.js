@@ -6,7 +6,8 @@ export default function gameboardFactory() {
   let allShots = [];
   let hitShots = [];
   let missedShots = []; 
-  let sunkenShipsArray = []; 
+  let sunkenShipsArray = []; // how are the sunken ships already being added? 
+  console.log(sunkenShipsArray);
   // let currentShips = {ship1: battleShip, ship2: destroyer, ship3: patrolBoat, ship4: submarine, ship5: carrierBoat}
   for (let i = 0; i < 10; i++) {
     gameboard.push(['', '', '', '', '', '', '', '', '', '']);
@@ -121,7 +122,7 @@ let gameboard = gameboardFactory();
 // gameboard.placeShip(carrierBoat, 1, 2, 4, 'horizontal');
 // gameboard.placeShip(submarine, 6, 3, 3, 'vertical');
 
-console.log(gameboard.sunkenShipsArray); 
+console.log(gameboard.sunkenShipsArray); // no ships have been sunk yet, why does the array still have all the sunken ships??? Variable hoisting? 
 
 // how are the ships still being added to the array? I have not yet placed or sunk any ships, 
 // and the test is commented out, why are ships still being added to the array? 
