@@ -72,10 +72,7 @@ export default function gameboardFactory() {
     if (typeof shipOnBoard === 'object') { 
       hitShots.push([x, y])
       shipOnBoard.hitIncrementor();
-      // shipOnBoard.isSunkConditional();
-      // shipOnBoard.getShipStatus();
-      // console.log(sunkenShipsArray);
-      // console.log(shipOnBoard.getShipStatus());
+      // console.log(hitShots);
       if (shipOnBoard.getShipStatus()) { 
         sunkenShipsArray.push(shipOnBoard);
         // console.log(shipOnBoard.getShipStatus());
@@ -137,6 +134,13 @@ gameboard.receiveAttack(3, 2);
 gameboard.receiveAttack(4, 2);
 gameboard.receiveAttack(5, 2);
 gameboard.receiveAttack(6, 2);
+// testing if ship sinks, if you hit the same spot 4 times. 
+// gameboard.receiveAttack(3, 2);
+// gameboard.receiveAttack(3, 2);
+// gameboard.receiveAttack(3, 2);
+// gameboard.receiveAttack(3, 2);
+// console.log(battleShip.getShipStatus());
+// following the code execution below
 console.log(JSON.parse(JSON.stringify(gameboard.sunkenShipsArray)));
 // battleShip.isSunkConditional();
 // battleShip.getShipStatus();
@@ -174,11 +178,13 @@ gameboard.receiveAttack(8, 3);
 // gameboard.sunkenShipsArray.push(submarine);
 gameboard.areAllShipsSunk();
 
-
 console.log(JSON.parse(JSON.stringify(gameboard.sunkenShipsArray)));
 console.log('checking the array after ships are placed and sunk', gameboard.sunkenShipsArray);
 console.log(gameboard.getGameboard());
-console.log('checking what the areAllShipsSunk conditional returns', gameboard.areAllShipsSunk()); 
+console.log('checking what the areAllShipsSunk conditional returns', gameboard.areAllShipsSunk());  
+
+console.log(gameboard.hitShots);
+console.log(gameboard.missedShots);
 
 
 

@@ -5,6 +5,15 @@ import './gameboardFactory.js';
 
 
 
+// prevent the user from sinking a ship if hits are in the same location, 4 hits in the same coordinate will sink ship, 
+// consider the hitIncrementor function, receiveAttack function, receiveAttack should have type of conditional inside it, 
+// that conditional will check if that square has already been hit, and prevent a user from placing a hit in that square, 
+
+// check for hits function, that determines if the move is legal. 
+// we could check it in the same conditional, if the coordiantes are an obj && the value of check for hits is false, then the hitIncrementor can be called, 
+// 
+
+
 // 1. when I console.log the sunkenShipsArray right after I initalize it, it has all the sunken ships in it already 
 // 2. all the ship objects even after placing, and sinking each ship, still return it's isSunk value as false, (it has not been sunk)
  // however when I check scope, and closure within dev tools, each ship's isSunk variable is true!
