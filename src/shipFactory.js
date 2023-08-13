@@ -1,20 +1,25 @@
 export default function ship(name, length, position) {
     let hitCounter = 0;
     let isSunk = false;
+
     function hitIncrementor() {
       hitCounter++;
-    }
-  
-    function getHitCounter() {
-      return hitCounter;
-    }
-    function isSunkConditional() {
       if (hitCounter >= length) {
         isSunk = true;
       }
     }
   
+    function getHitCounter() {
+      return hitCounter;
+    }
+    // function isSunkConditional() {
+    //   if (hitCounter >= length) {
+    //     isSunk = true;
+    //   }
+    // }
+  
     function getShipStatus() {
+      console.log('logging the status of isSunk variable within getShipStatus in the shipFactory module', isSunk);
       return isSunk;
     }
   
@@ -25,7 +30,7 @@ export default function ship(name, length, position) {
       shipPosition: position,
       hitIncrementor,
       getHitCounter,
-      isSunkConditional,
+      // isSunkConditional,
       getShipStatus,
     };
   }

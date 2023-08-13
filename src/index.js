@@ -3,6 +3,23 @@ import './shipFactory.js';
 
 import './gameboardFactory.js';
 
+
+
+// 1. when I console.log the sunkenShipsArray right after I initalize it, it has all the sunken ships in it already 
+// 2. all the ship objects even after placing, and sinking each ship, still return it's isSunk value as false, (it has not been sunk)
+ // however when I check scope, and closure within dev tools, each ship's isSunk variable is true!
+// two isses 
+// why is the sunkenShipsArray after init already have the sunken ships in it, should be empty, its 
+// its still saying false, all the ships are not sunk but yet the array contains all sunken ships, 
+// why is the isSunk variable of the ships not changing? It still shows false but yet the ships 
+// are sunk and have been added to the array, 
+// when I check the scope and closure in dev tools, the isSunk variable IS changing 
+
+// yesterdays problem was I was pushing the ship objects twice into the array so there 10 items instead of 5 
+// it does return true, at the end but yet ship objects are within array before I sink them 
+// and the isSunk property never changes but yet in dev tools closures and scope objects has them set to true
+// 
+
 // function ship(length, hits, sunk) {
 //     this.length = length;
 //     this.hits = hits;

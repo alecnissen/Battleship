@@ -15,6 +15,7 @@ test('testing to see if the isSunkConditional and getShipStatus functions are re
     battleShip.hitIncrementor();
     battleShip.hitIncrementor();
     battleShip.hitIncrementor();
-    battleShip.isSunkConditional();
+    // battleShip.isSunkConditional();
     expect(battleShip.getShipStatus()).toBe(true);
+    // expect(battleShip.isSunk).toBe(true);
 })

@@ -72,11 +72,13 @@ export default function gameboardFactory() {
     if (typeof shipOnBoard === 'object') { 
       hitShots.push([x, y])
       shipOnBoard.hitIncrementor();
-      shipOnBoard.isSunkConditional();
-      shipOnBoard.getShipStatus();
+      // shipOnBoard.isSunkConditional();
+      // shipOnBoard.getShipStatus();
       // console.log(sunkenShipsArray);
+      // console.log(shipOnBoard.getShipStatus());
       if (shipOnBoard.getShipStatus()) { 
         sunkenShipsArray.push(shipOnBoard);
+        // console.log(shipOnBoard.getShipStatus());
       }
 
     } else { 
@@ -90,7 +92,7 @@ export default function gameboardFactory() {
 
 function areAllShipsSunk() { 
   console.log('checking if all ships are sunk, within areAllShipsSunk method', sunkenShipsArray); // logs array
-  console.log('checking if areAllShipsSunk conditional', sunkenShipsArray.length === 5) // returns true when logged in jest
+  console.log('checking the conditional within areAllShipsSunk method', sunkenShipsArray.length === 5) // returns true when logged in jest
   if (sunkenShipsArray.length === 5) { 
     return true;
   } 
@@ -118,7 +120,7 @@ let submarine = ship('Submarine', 3, 'vertical');
 let gameboard = gameboardFactory();
 
 
-console.log('array before placing the ships',gameboard.sunkenShipsArray); // no ships have been sunk yet, why does the array still have all the sunken ships??? Variable hoisting? 
+console.log('sunkenShipsArray before placing any of the ships',gameboard.sunkenShipsArray); // no ships have been sunk yet, why does the array still have all the sunken ships??? Variable hoisting? 
 
 // how are the ships still being added to the array? I have not yet placed or sunk any ships, 
 // and the test is commented out, why are ships still being added to the array? 
@@ -175,7 +177,7 @@ gameboard.areAllShipsSunk();
 
 console.log('checking the array after ships are placed and sunk', gameboard.sunkenShipsArray);
 console.log(gameboard.getGameboard());
-console.log('checking if the areAllShipsSunk conditional returns true', gameboard.areAllShipsSunk()); 
+console.log('checking what the areAllShipsSunk conditional returns', gameboard.areAllShipsSunk()); 
 
 
 
