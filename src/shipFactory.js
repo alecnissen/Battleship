@@ -1,6 +1,8 @@
+
 export default function ship(name, length, position) {
     let hitCounter = 0;
     let isSunk = false;
+    // let gameBoard = gameboardFactory.sunkenShipsArray;
 
     function hitIncrementor() {
       hitCounter++;
@@ -20,12 +22,14 @@ export default function ship(name, length, position) {
   
     function getShipStatus() {
       console.log('logging the status of isSunk variable within getShipStatus in the shipFactory module', isSunk);
+      // console.log(JSON.parse(JSON.stringify(sunkenShipsArray)));
       return isSunk;
     }
   
     return {
       shipName: name,
-      isSunk,
+      get isSunk() {return isSunk},
+      // isSunk,
       shipLength: length,
       shipPosition: position,
       hitIncrementor,

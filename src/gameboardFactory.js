@@ -119,7 +119,7 @@ let carrierBoat = ship('Carrier', 4, 'horizontal');
 let submarine = ship('Submarine', 3, 'vertical');
 let gameboard = gameboardFactory();
 
-
+console.log(JSON.parse(JSON.stringify(gameboard.sunkenShipsArray)));
 console.log('sunkenShipsArray before placing any of the ships',gameboard.sunkenShipsArray); // no ships have been sunk yet, why does the array still have all the sunken ships??? Variable hoisting? 
 
 // how are the ships still being added to the array? I have not yet placed or sunk any ships, 
@@ -137,6 +137,7 @@ gameboard.receiveAttack(3, 2);
 gameboard.receiveAttack(4, 2);
 gameboard.receiveAttack(5, 2);
 gameboard.receiveAttack(6, 2);
+console.log(JSON.parse(JSON.stringify(gameboard.sunkenShipsArray)));
 // battleShip.isSunkConditional();
 // battleShip.getShipStatus();
 // gameboard.sunkenShipsArray.push(battleShip); // I did not have to push again, just call the function which will push ship only if sunk, ship were being added twice 
@@ -174,7 +175,7 @@ gameboard.receiveAttack(8, 3);
 gameboard.areAllShipsSunk();
 
 
-
+console.log(JSON.parse(JSON.stringify(gameboard.sunkenShipsArray)));
 console.log('checking the array after ships are placed and sunk', gameboard.sunkenShipsArray);
 console.log(gameboard.getGameboard());
 console.log('checking what the areAllShipsSunk conditional returns', gameboard.areAllShipsSunk()); 
