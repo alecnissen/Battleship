@@ -88,10 +88,13 @@ function checkForHits(x, y) {
   function receiveAttack(x, y) { 
     const shipOnBoard = gameboard[x][y]; 
     if (typeof shipOnBoard === 'object') { 
-      if (checkForHits(x, y)) { 
+      if (checkForHits(x, y)) { // if the coordinates match, (true) throw error
         console.log('cell has aready been hit')
-        throw new Error('Hit was already placed at that cell, pick a different cell');
+         throw new Error('Hit was already placed at that cell, pick a different cell');
+        // shipOnBoard.hitIncrementor();
+        // hitShots.push([x, y])
       }
+
       shipOnBoard.hitIncrementor();
       hitShots.push([x, y])
 
@@ -143,7 +146,7 @@ gameboard.placeShip(carrierBoat, 1, 2, 4, 'horizontal');
 gameboard.placeShip(submarine, 6, 3, 3, 'vertical');
 // sinking battleship
 gameboard.receiveAttack(3, 2);
-gameboard.receiveAttack(3, 2);
+// gameboard.receiveAttack(3, 2);
 gameboard.receiveAttack(4, 2);
 gameboard.receiveAttack(5, 2);
 gameboard.receiveAttack(6, 2);
@@ -173,7 +176,7 @@ gameboard.areAllShipsSunk();
 
 // console.log(JSON.parse(JSON.stringify(gameboard.sunkenShipsArray)));
 // console.log('checking the array after ships are placed and sunk', gameboard.sunkenShipsArray);
-// console.log(gameboard.getGameboard());
+console.log(gameboard.getGameboard());
 // console.log('checking what the areAllShipsSunk conditional returns', gameboard.areAllShipsSunk());  
 
 console.log(gameboard.hitShots);

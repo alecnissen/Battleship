@@ -240,10 +240,37 @@ test('testing to see if all ships placed on gameboard, get added to the sunkenSh
     expect(gameboard.areAllShipsSunk()).toBe(true);
 }) 
 
+// now I will write a test to make sure an error is thrown when user tries to hit the same cell twice, 
 
+test('making sure test throws error, when user attempts to hit the same cell twice', () => { 
+    const gameboard = gameboardFactory();
+    const battleShip = ship('Battleship', 4, 'vertical'); 
+    gameboard.placeShip(battleShip, 3, 2, 4, 'vertical');
+    gameboard.receiveAttack(3, 2);
+    gameboard.receiveAttack(4, 2);
+    gameboard.receiveAttack(5, 2);
+    gameboard.receiveAttack(6, 2);
+    expect(() => { 
+        gameboard.receiveAttack(3, 2);
+    }).toThrow('Hit was already placed at that cell, pick a different cell');
+}) 
 
+test('making sure test throws error, when user attempts to hit the same cell twice, 2nd instance', () => { 
+    const gameboard = gameboardFactory();
+    const destroyer = ship('Destroyer', 4, 'horizontal'); 
+    gameboard.placeShip(destroyer, 6, 2, 4, 'horizontal');
+    gameboard.receiveAttack(6, 2);
+    gameboard.receiveAttack(6, 3);
+    gameboard.receiveAttack(6, 4);
+    gameboard.receiveAttack(6, 5);
+    expect(() => { 
+        gameboard.receiveAttack(6, 5);
+    }).toThrow('Hit was already placed at that cell, pick a different cell');
+})
 
-
+//   expect(() => { 
+//     gameboardFactoryCall.placeShip(battleShip, 1, 7, 4, 'horizontal')     // if it hits the end return undefined? 
+// }).toThrow('ship is already there or ship is placed off the gameboard, 
 
 
 
