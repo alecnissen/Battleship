@@ -20,7 +20,7 @@ export default function ship(name, length, position) {
     // }
   
     function getShipStatus() {
-      console.log('logging the status of isSunk variable within getShipStatus in the shipFactory module', isSunk);
+      // console.log('logging the status of isSunk variable within getShipStatus in the shipFactory module', isSunk);
       // console.log(JSON.parse(JSON.stringify(sunkenShipsArray)));
       return isSunk;
     }

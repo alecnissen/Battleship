@@ -6,9 +6,9 @@ export default function gameboardFactory() {
   let allShots = [];
   let hitShots = [];
   let missedShots = []; 
-  let sunkenShipsArray = []; // how are the sunken ships already being added? 
+  let sunkenShipsArray = [];
   // console.log(sunkenShipsArray);
-  console.log('sunkenShipsArray right after init', sunkenShipsArray)
+  // console.log('sunkenShipsArray right after init', sunkenShipsArray)
   // let currentShips = {ship1: battleShip, ship2: destroyer, ship3: patrolBoat, ship4: submarine, ship5: carrierBoat}
   for (let i = 0; i < 10; i++) {
     gameboard.push(['', '', '', '', '', '', '', '', '', '']);
@@ -67,15 +67,36 @@ export default function gameboardFactory() {
     return gameboard;
   } 
 
+function checkForHits(x, y) { 
+    console.log('THE PASSED IN COORDINATES FROM RECEIVEATTACK', [x, y]);
+    for (let i = 0; i < hitShots.length; i++) { 
+      const hitShotCoordinates = hitShots[i];
+      console.log('LOOPING THROUGH THE HIT SHOTS ARRAY', hitShotCoordinates);
+      // let z = [x, y];
+      // console.log(JSON.stringify(z));
+      // console.log(JSON.stringify(hitShotCoordinates));
+      console.log('CHECKING THE CONDITION WITHIN CHECKFORHITS FUNCTION', JSON.stringify(hitShotCoordinates),  JSON.stringify([x, y]));
+      if (JSON.stringify(hitShotCoordinates) === JSON.stringify([x, y])) { // if a coordinate from hitShots array is equal to the coordinate passed in from receiveAttack
+        console.log('ERROR cell already has a hit')
+        return true; 
+      }
+    }
+    return false;
+  } 
+
+
   function receiveAttack(x, y) { 
     const shipOnBoard = gameboard[x][y]; 
     if (typeof shipOnBoard === 'object') { 
-      hitShots.push([x, y])
+      if (checkForHits(x, y)) { 
+        console.log('cell has aready been hit')
+        throw new Error('Hit was already placed at that cell, pick a different cell');
+      }
       shipOnBoard.hitIncrementor();
-      // console.log(hitShots);
+      hitShots.push([x, y])
+
       if (shipOnBoard.getShipStatus()) { 
         sunkenShipsArray.push(shipOnBoard);
-        // console.log(shipOnBoard.getShipStatus());
       }
 
     } else { 
@@ -88,8 +109,6 @@ export default function gameboardFactory() {
 }   
 
 function areAllShipsSunk() { 
-  console.log('checking if all ships are sunk, within areAllShipsSunk method', sunkenShipsArray); // logs array
-  console.log('checking the conditional within areAllShipsSunk method', sunkenShipsArray.length === 5) // returns true when logged in jest
   if (sunkenShipsArray.length === 5) { 
     return true;
   } 
@@ -104,7 +123,8 @@ function areAllShipsSunk() {
     hitShots,
     missedShots,
     areAllShipsSunk,
-    sunkenShipsArray
+    sunkenShipsArray,
+    checkForHits
   };
 } 
 
@@ -116,14 +136,6 @@ let carrierBoat = ship('Carrier', 4, 'horizontal');
 let submarine = ship('Submarine', 3, 'vertical');
 let gameboard = gameboardFactory();
 
-console.log(JSON.parse(JSON.stringify(gameboard.sunkenShipsArray)));
-console.log('sunkenShipsArray before placing any of the ships',gameboard.sunkenShipsArray); // no ships have been sunk yet, why does the array still have all the sunken ships??? Variable hoisting? 
-
-// how are the ships still being added to the array? I have not yet placed or sunk any ships, 
-// and the test is commented out, why are ships still being added to the array? 
-
-// console.log(gameboard.areAllShipsSunk()); // should be false
-
 gameboard.placeShip(battleShip, 3, 2, 4, 'vertical');
 gameboard.placeShip(destroyer, 4, 5, 4, 'horizontal');
 gameboard.placeShip(patrolBoat, 0, 0, 2, 'vertical');
@@ -131,57 +143,38 @@ gameboard.placeShip(carrierBoat, 1, 2, 4, 'horizontal');
 gameboard.placeShip(submarine, 6, 3, 3, 'vertical');
 // sinking battleship
 gameboard.receiveAttack(3, 2);
+gameboard.receiveAttack(3, 2);
 gameboard.receiveAttack(4, 2);
 gameboard.receiveAttack(5, 2);
 gameboard.receiveAttack(6, 2);
-// testing if ship sinks, if you hit the same spot 4 times. 
-// gameboard.receiveAttack(3, 2);
-// gameboard.receiveAttack(3, 2);
-// gameboard.receiveAttack(3, 2);
-// gameboard.receiveAttack(3, 2);
-// console.log(battleShip.getShipStatus());
-// following the code execution below
-console.log(JSON.parse(JSON.stringify(gameboard.sunkenShipsArray)));
-// battleShip.isSunkConditional();
-// battleShip.getShipStatus();
-// gameboard.sunkenShipsArray.push(battleShip); // I did not have to push again, just call the function which will push ship only if sunk, ship were being added twice 
-// so the array length was never 5, it would always equal false, 
 gameboard.areAllShipsSunk();
 // sinking destroyer 
 gameboard.receiveAttack(4, 5);
 gameboard.receiveAttack(4, 6);
+// gameboard.receiveAttack(4, 5);
 gameboard.receiveAttack(4, 7);
 gameboard.receiveAttack(4, 8);
-// destroyer.isSunkConditional();
-// gameboard.sunkenShipsArray.push(destroyer);
 gameboard.areAllShipsSunk();
 // sinking patrol board
 gameboard.receiveAttack(0, 0);
 gameboard.receiveAttack(1, 0);
-// patrolBoat.isSunkConditional();
-// gameboard.sunkenShipsArray.push(patrolBoat);
 gameboard.areAllShipsSunk();
 // sinking carrier boat
 gameboard.receiveAttack(1, 2); 
 gameboard.receiveAttack(1, 3); 
 gameboard.receiveAttack(1, 4); 
 gameboard.receiveAttack(1, 5); 
-// carrierBoat.isSunkConditional();
-// gameboard.sunkenShipsArray.push(carrierBoat);
 gameboard.areAllShipsSunk();
 // sinking submarine
 gameboard.receiveAttack(6, 3);
 gameboard.receiveAttack(7, 3);
 gameboard.receiveAttack(8, 3);
-// submarine.isSunkConditional();
-// submarine.getShipStatus();
-// gameboard.sunkenShipsArray.push(submarine);
 gameboard.areAllShipsSunk();
 
-console.log(JSON.parse(JSON.stringify(gameboard.sunkenShipsArray)));
-console.log('checking the array after ships are placed and sunk', gameboard.sunkenShipsArray);
-console.log(gameboard.getGameboard());
-console.log('checking what the areAllShipsSunk conditional returns', gameboard.areAllShipsSunk());  
+// console.log(JSON.parse(JSON.stringify(gameboard.sunkenShipsArray)));
+// console.log('checking the array after ships are placed and sunk', gameboard.sunkenShipsArray);
+// console.log(gameboard.getGameboard());
+// console.log('checking what the areAllShipsSunk conditional returns', gameboard.areAllShipsSunk());  
 
 console.log(gameboard.hitShots);
 console.log(gameboard.missedShots);
