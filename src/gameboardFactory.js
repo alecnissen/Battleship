@@ -68,16 +68,16 @@ export default function gameboardFactory() {
   } 
 
 function checkForHits(x, y) { 
-    console.log('THE PASSED IN COORDINATES FROM RECEIVEATTACK', [x, y]);
+    // console.log('THE PASSED IN COORDINATES FROM RECEIVEATTACK', [x, y]);
     for (let i = 0; i < hitShots.length; i++) { 
       const hitShotCoordinates = hitShots[i];
-      console.log('LOOPING THROUGH THE HIT SHOTS ARRAY', hitShotCoordinates);
+      // console.log('LOOPING THROUGH THE HIT SHOTS ARRAY', hitShotCoordinates);
       // let z = [x, y];
       // console.log(JSON.stringify(z));
       // console.log(JSON.stringify(hitShotCoordinates));
-      console.log('CHECKING THE CONDITION WITHIN CHECKFORHITS FUNCTION', JSON.stringify(hitShotCoordinates),  JSON.stringify([x, y]));
+      // console.log('CHECKING THE CONDITION WITHIN CHECKFORHITS FUNCTION', JSON.stringify(hitShotCoordinates),  JSON.stringify([x, y]));
       if (JSON.stringify(hitShotCoordinates) === JSON.stringify([x, y])) { // if a coordinate from hitShots array is equal to the coordinate passed in from receiveAttack
-        console.log('ERROR cell already has a hit')
+        // console.log('ERROR cell already has a hit')
         return true; 
       }
     }
@@ -89,12 +89,11 @@ function checkForHits(x, y) {
     const shipOnBoard = gameboard[x][y]; 
     if (typeof shipOnBoard === 'object') { 
       if (checkForHits(x, y)) { // if the coordinates match, (true) throw error
-        console.log('cell has aready been hit')
+        // console.log('cell has aready been hit')
          throw new Error('Hit was already placed at that cell, pick a different cell');
         // shipOnBoard.hitIncrementor();
         // hitShots.push([x, y])
       }
-
       shipOnBoard.hitIncrementor();
       hitShots.push([x, y])
 
@@ -176,11 +175,11 @@ gameboard.areAllShipsSunk();
 
 // console.log(JSON.parse(JSON.stringify(gameboard.sunkenShipsArray)));
 // console.log('checking the array after ships are placed and sunk', gameboard.sunkenShipsArray);
-console.log(gameboard.getGameboard());
+// console.log(gameboard.getGameboard());
 // console.log('checking what the areAllShipsSunk conditional returns', gameboard.areAllShipsSunk());  
 
-console.log(gameboard.hitShots);
-console.log(gameboard.missedShots);
+// console.log(gameboard.hitShots);
+// console.log(gameboard.missedShots);
 
 
 

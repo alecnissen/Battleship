@@ -3,6 +3,50 @@ import './shipFactory.js';
 
 import './gameboardFactory.js';
 
+import './playerFactory.js';
+
+
+
+
+// const mockObject = {
+//     name: "joe",
+//     age: 25,
+//     incrementAge: function() {
+//       this.age++;
+//     }
+//   } 
+
+
+
+//   function ageIncrementor(exampleObj) { 
+//     exampleObj.incrementAge();
+//     console.log(exampleObj.age);
+//   } 
+
+
+// let exampleObj = mockObject;
+
+// console.log(ageIncrementor(exampleObj));
+
+
+
+//   console.log(ageIncrementor());
+//   console.log(ageIncrementor());
+//   console.log(ageIncrementor(mockObject));
+
+
+
+  // call it outside the obj and log it 
+
+
+
+
+
+
+
+
+
+
 
 
 // prevent the user from sinking a ship if hits are in the same location, 4 hits in the same coordinate will sink ship, 
