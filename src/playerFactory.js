@@ -141,7 +141,7 @@ import gameboardFactory from './gameboardFactory.js';
 // access the enemys gameboard using a getter and setter, 
 
 
-function playerFactory(name, turn, gameboardFactoryObj) { 
+function playerFactory(name, turn) { 
     const getName = (() => {
         return name; 
     })
@@ -171,7 +171,7 @@ function playerFactory(name, turn, gameboardFactoryObj) {
 } 
 
 
-function computerFactory(name, turn, gameboardFactoryObj) { 
+function computerFactory(name, turn) { 
     const getName = (() => {
         return name; 
     }) 

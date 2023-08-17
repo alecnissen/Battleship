@@ -7,9 +7,6 @@ export default function gameboardFactory() {
   let hitShots = [];
   let missedShots = []; 
   let sunkenShipsArray = [];
-  // console.log(sunkenShipsArray);
-  // console.log('sunkenShipsArray right after init', sunkenShipsArray)
-  // let currentShips = {ship1: battleShip, ship2: destroyer, ship3: patrolBoat, ship4: submarine, ship5: carrierBoat}
   for (let i = 0; i < 10; i++) {
     gameboard.push(['', '', '', '', '', '', '', '', '', '']);
   }
@@ -68,16 +65,9 @@ export default function gameboardFactory() {
   } 
 
 function checkForHits(x, y) { 
-    // console.log('THE PASSED IN COORDINATES FROM RECEIVEATTACK', [x, y]);
     for (let i = 0; i < hitShots.length; i++) { 
       const hitShotCoordinates = hitShots[i];
-      // console.log('LOOPING THROUGH THE HIT SHOTS ARRAY', hitShotCoordinates);
-      // let z = [x, y];
-      // console.log(JSON.stringify(z));
-      // console.log(JSON.stringify(hitShotCoordinates));
-      // console.log('CHECKING THE CONDITION WITHIN CHECKFORHITS FUNCTION', JSON.stringify(hitShotCoordinates),  JSON.stringify([x, y]));
-      if (JSON.stringify(hitShotCoordinates) === JSON.stringify([x, y])) { // if a coordinate from hitShots array is equal to the coordinate passed in from receiveAttack
-        // console.log('ERROR cell already has a hit')
+      if (JSON.stringify(hitShotCoordinates) === JSON.stringify([x, y])) {
         return true; 
       }
     }
@@ -88,11 +78,8 @@ function checkForHits(x, y) {
   function receiveAttack(x, y) { 
     const shipOnBoard = gameboard[x][y]; 
     if (typeof shipOnBoard === 'object') { 
-      if (checkForHits(x, y)) { // if the coordinates match, (true) throw error
-        // console.log('cell has aready been hit')
+      if (checkForHits(x, y)) {
          throw new Error('Hit was already placed at that cell, pick a different cell');
-        // shipOnBoard.hitIncrementor();
-        // hitShots.push([x, y])
       }
       shipOnBoard.hitIncrementor();
       hitShots.push([x, y])
