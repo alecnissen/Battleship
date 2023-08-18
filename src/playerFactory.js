@@ -138,10 +138,29 @@ import gameboardFactory from './gameboardFactory.js';
 
 // access the gameboardFactory module within the playerFactory 
 
-// access the enemys gameboard using a getter and setter, 
+// access the enemys gameboard using a getter and setter, // done
+
+// placePlayerShips method, takes a ship obj and places it on the gameboard that was created, 
+
+// if I call placeShips would that not place it correctly??? 
+
+// is there a way I can test the attack method now? before I make the logic for ship placement? 
+
+// try to test attack method, 
+
+// I have methods within playerFactory and compFactory that returns back enemy's gameboard as well players board, 
+
+// I wanted to start placing hits on the board, I need to use receiveAttack method which is in gameboardFactory, 
+
+// how do I use methods within gameboardFactory on the board variables? 
+
+// look over nevz messages and commit to save work, 
+
+// then begin to refactor playerFactory, only returns a name and gameboard. 
 
 
 function playerFactory(name, turn) { 
+    let gameboardModuleMethods = gameboardFactory();
     const getName = (() => {
         return name; 
     })
@@ -153,13 +172,15 @@ function playerFactory(name, turn) {
     } 
 
     function getComputerBoard() { 
-      let getCompBoard = computerFactory().getComputerBoard();
+      let getCompBoard = gameboardModuleMethods.getGameboard();
       return getCompBoard;
     } 
 
     function attack(x, y) {
-        console.log('LOGGING THE COMPUTERS GAMEBOARD WITHIN PLAYERFACTORY ATTACK', getComputerBoard());
-} 
+        let computerBoard = getComputerBoard();
+        // computerBoard.receiveAttack(x, y);  // how can I use the receiveAttack method on the board? 
+        
+    } 
     return { 
         name: name,
         turn: turn,
@@ -167,11 +188,13 @@ function playerFactory(name, turn) {
         attack, 
         getName,
         getComputerBoard,
+        gameboardModuleMethods,
     }
 } 
 
 
 function computerFactory(name, turn) { 
+    let gameboardModuleMethods = gameboardFactory();
     const getName = (() => {
         return name; 
     }) 
@@ -199,18 +222,19 @@ function computerFactory(name, turn) {
         getName,
         getComputerBoard,
         getPlayersBoard,
+        gameboardModuleMethods
     }
 }
 
 
-console.log(playerFactory().attack(3, 3));
-
-console.log(computerFactory().attack(5, 5));
 
 console.log(playerFactory('alec', true));
 
 console.log(computerFactory('comp', false));
 
+console.log(playerFactory().attack(3, 3));
+
+console.log(computerFactory().attack(5, 5));
 // console.log(playerFactory.getComputerBoard());
 
 // function computerFactory(name, turn) { 

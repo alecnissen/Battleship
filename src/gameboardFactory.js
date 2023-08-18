@@ -74,7 +74,7 @@ function checkForHits(x, y) {
     return false;
   } 
 
-
+// allows user to place hits on the board if the hit is valid, 
   function receiveAttack(x, y) { 
     const shipOnBoard = gameboard[x][y]; 
     if (typeof shipOnBoard === 'object') { 
