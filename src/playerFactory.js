@@ -170,17 +170,17 @@ import gameboardFactory from './gameboardFactory.js';
 
 // determine a winner and print a message or modal pop-up that displays winner 
 
-function playerFactory(name) { 
-    const gameboard = gameboardFactory().getGameboard();
+export default function playerFactory(name) { 
+    const gameboard = gameboardFactory();
     return {name, gameboard};
 } 
 
 
-const player1 = playerFactory('alec');
-const computer = playerFactory('computer');
+// const player1 = playerFactory('alec');
+// const computer = playerFactory('computer');
 
-console.log(player1);
-console.log(computer); 
+// console.log(player1);
+// console.log(computer); 
 
 
 
