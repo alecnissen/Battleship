@@ -158,83 +158,130 @@ import gameboardFactory from './gameboardFactory.js';
 
 // then begin to refactor playerFactory, only returns a name and gameboard. 
 
+// I dont think its necessary to test these methods, its pretty basic stuff
 
-function playerFactory(name, turn) { 
-    let gameboardModuleMethods = gameboardFactory();
-    const getName = (() => {
-        return name; 
-    })
-    let playerTurn = turn; 
-    const playerGameboard = gameboardFactory().getGameboard();
+// I deleted the test file, now I will make the game module/loop 
 
-    function getBoard() { 
-        return playerGameboard;
-    } 
+// game module will use the receiveAttack method, 
 
-    function getComputerBoard() { 
-      let getCompBoard = gameboardModuleMethods.getGameboard();
-      return getCompBoard;
-    } 
+// determine whose turn it is, 
 
-    function attack(x, y) {
-        let computerBoard = getComputerBoard();
-        // computerBoard.receiveAttack(x, y);  // how can I use the receiveAttack method on the board? 
-        
-    } 
-    return { 
-        name: name,
-        turn: turn,
-        getBoard,
-        attack, 
-        getName,
-        getComputerBoard,
-        gameboardModuleMethods,
-    }
+// determine if the ships have been sunk, 
+
+// determine a winner and print a message or modal pop-up that displays winner 
+
+function playerFactory(name) { 
+    const gameboard = gameboardFactory().getGameboard();
+    return {name, gameboard};
 } 
 
 
-function computerFactory(name, turn) { 
-    let gameboardModuleMethods = gameboardFactory();
-    const getName = (() => {
-        return name; 
-    }) 
-    let computerTurn = turn;
-    const computerGameboard = gameboardFactory().getGameboard();
-    console.log(computerGameboard); 
+const player1 = playerFactory('alec');
+const computer = playerFactory('computer');
 
-    function getComputerBoard() { 
-        return computerGameboard;
-    } 
-
-    function getPlayersBoard() { 
-        let getPlayerBoard = playerFactory().getBoard();
-        return getPlayerBoard;
-    }
-
-    function attack(x, y) { 
-        console.log('LOGGING THE PLAYERS GAMEBOARD WITHIN THE COMPUTERFACTORY FUNCTION', getPlayersBoard())
-    }
-
-    return { 
-        name: name,
-        turn: turn,
-        attack, 
-        getName,
-        getComputerBoard,
-        getPlayersBoard,
-        gameboardModuleMethods
-    }
-}
+console.log(player1);
+console.log(computer); 
 
 
 
-console.log(playerFactory('alec', true));
 
-console.log(computerFactory('comp', false));
 
-console.log(playerFactory().attack(3, 3));
 
-console.log(computerFactory().attack(5, 5));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// function playerFactory(name, turn) { 
+//     let gameboardModuleMethods = gameboardFactory();
+//     const getName = (() => {
+//         return name; 
+//     })
+//     let playerTurn = turn; 
+//     const playerGameboard = gameboardFactory().getGameboard();
+
+//     function getBoard() { 
+//         return playerGameboard;
+//     } 
+
+//     function getComputerBoard() { 
+//       let getCompBoard = gameboardModuleMethods.getGameboard();
+//       return getCompBoard;
+//     } 
+
+//     function attack(x, y) {
+//         let computerBoard = getComputerBoard();
+//         // computerBoard.receiveAttack(x, y);  // how can I use the receiveAttack method on the board? 
+        
+//     } 
+//     return { 
+//         name: name,
+//         turn: turn,
+//         getBoard,
+//         attack, 
+//         getName,
+//         getComputerBoard,
+//         gameboardModuleMethods,
+//     }
+// } 
+
+
+// function computerFactory(name, turn) { 
+//     let gameboardModuleMethods = gameboardFactory();
+//     const getName = (() => {
+//         return name; 
+//     }) 
+//     let computerTurn = turn;
+//     const computerGameboard = gameboardFactory().getGameboard();
+//     console.log(computerGameboard); 
+
+//     function getComputerBoard() { 
+//         return computerGameboard;
+//     } 
+
+//     function getPlayersBoard() { 
+//         let getPlayerBoard = playerFactory().getBoard();
+//         return getPlayerBoard;
+//     }
+
+//     function attack(x, y) { 
+//         console.log('LOGGING THE PLAYERS GAMEBOARD WITHIN THE COMPUTERFACTORY FUNCTION', getPlayersBoard())
+//     }
+
+//     return { 
+//         name: name,
+//         turn: turn,
+//         attack, 
+//         getName,
+//         getComputerBoard,
+//         getPlayersBoard,
+//         gameboardModuleMethods
+//     }
+// }
+
+
+
+// console.log(playerFactory('alec', true));
+
+// console.log(computerFactory('comp', false));
+
+// console.log(playerFactory().attack(3, 3));
+
+// console.log(computerFactory().attack(5, 5));
 // console.log(playerFactory.getComputerBoard());
 
 // function computerFactory(name, turn) { 
