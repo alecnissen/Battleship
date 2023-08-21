@@ -59,55 +59,23 @@ function createPlayer(name, type) {
   // check if all ships sunk, if no, keep playing 
   // switch to the other user, user makes hit, check if all ships sunk, if no, switch to other user, 
 
-  function playGame() { 
-    let playerTurn = 1;
-    const computer = createPlayer('PC', 'computer') // added turn var
-    const player = createPlayer('player', 'player') // add turn var
+  // what I want is to play a game completly in the console, and have it print a winner 
 
-    console.log(computer);
-    console.log(player);
+  // without any infinite loop, 
 
-    while (!computer.gameboard.areAllShipsSunk() && player.gameboard.areAllShipsSunk()) { 
-      // all the code goes in here, within the condition.
-    }
+  // seems to never hit checking for a winner, 
 
-    // place ships on players board
-    placeShipsOnPlayersBoard(player);
-    // place ships on computers board 
-    placeShipsOnComputersBoard(computer); 
+  // fist receiving error that it's hitting the same coordinate twice, 
 
-    // while areAllShipsSunk() is false for both gameboards, keep playing,
+  // for console version, use random coordiantes again but make sure the check for all ships sunk is being hit, 
 
-    // determine whose turn it is, let player go first, 
-    // once we figure it out, pass the enemy's board, and pass in the players attack coordinates (x, y)
-    // call attack, pass in enemys board and the users attack coordinates, use receiveAttack on enemys board. 
-    
-    // player has gone, disable them to prevent them for making a turn, 
-    //  allow computer to follow same process. Then once computer goes, disable computer and allow player to go. 
 
-    // attack(userObj, x, y)
-    if (playerTurn === 1) { // player is === 1, attack comps board
-      attack(computer, 3, 3); // can test for multiple attacks, apply attack method x amount of times, 
-      if (checkForWinner(computer)) { 
-        return; // print/access winner modal
-      }
-      playerTurn = 2;
-
-    } else { // have to make the computer capable of making random moves, generate random coordinates, 
-      // call another function here, which generates 2 random numbers, and returns them, 
-      const randomCoordinate1 = Math.floor(Math.random() * 9) + 1;
-      const randomCoordinate2 = Math.floor(Math.random() * 9) + 1;
-      attack(player, randomCoordinate1, randomCoordinate2); // this should be random attack, 
-      if (checkForWinner(player)) { 
-        return; // print/access winner modal
-      } 
-      playerTurn = 1;
-    }
-  }  
 
   function checkForWinner(userObj) { 
-    let selectedUser = userObj;
+    console.log('CHECKING FOR WINNER!');
+    const selectedUser = userObj;
     if (selectedUser.gameboard.areAllShipsSunk()) { 
+      // access another helper function to print a victory message/modal pop-up
       return true;
     } 
     return false;
@@ -115,18 +83,139 @@ function createPlayer(name, type) {
 
 
   function attack(userObj, x, y) { 
-    let selectedUser = userObj;
+    const selectedUser = userObj;
     selectedUser.gameboard.receiveAttack(x, y);
   }
 
-// let randomCoordinate1 = Math.floor(Math.random() * 9) + 1;
-// let randomCoordinate2 = Math.floor(Math.random() * 9) + 1;
 
-// console.log(randomCoordinate1);
-// console.log(randomCoordinate2);
 
+  function playGame() { 
+    let playerTurn = 1;
+    const computer = createPlayer('PC', 'computer') // added turn var
+    const player = createPlayer('player', 'player') // add turn var
+
+    console.log(computer);
+    console.log(player); 
+
+    // place ships on players board
+    placeShipsOnPlayersBoard(player);
+    // place ships on computers board 
+    placeShipsOnComputersBoard(computer); 
+    // console.log('before game loop')
+    while (!computer.gameboard.areAllShipsSunk() && !player.gameboard.areAllShipsSunk()) { 
+      
+    if (playerTurn === 1) { // player is === 1, attack comps board
+      // attack(computer, 3, 3); // can test for multiple attacks, apply attack method x amount of times, 
+      console.log('checking if statement!')
+      // sinking battleshit
+      attack(computer, 0, 0); 
+
+
+      if (checkForWinner(computer)) { 
+        console.log('PLAYER WINS');
+        return; // print/access winner modal
+      }
+      playerTurn = 2;
+      // console.log('if statement is running')
+
+    } else { 
+      console.log('ELSE STATEMENT CHECK!')
+      const randomCoordinate1 = Math.floor(Math.random() * 9) + 1;
+      const randomCoordinate2 = Math.floor(Math.random() * 9) + 1;
+      attack(player, randomCoordinate1, randomCoordinate2); // this should be random attack, 
+      if (checkForWinner(player)) { 
+        console.log('COMP WINS');
+        return; 
+      } 
+      playerTurn = 1;
+    } 
+  }  
+} 
 
   playGame();
+
+
+
+
+// I don't know if I can make it work in the console with the current loop I have 
+
+// I be better off to start crafting the UI now, 
+
+// because with the loop, I'm only passing in one coordinate, 
+
+// it will loop again and an error wil throw saying a hit is already at that cell 
+
+// theres no way for me to dynamically change the coordinates with 
+
+// I tried using random coordinates but that caused an infinte loop. 
+
+// 
+
+
+
+
+
+
+
+
+
+  //  // sunk battleship
+  //  attack(player, 0, 0); 
+  //  attack(player, 0, 1); 
+  //  attack(player, 0, 2); 
+  //  attack(player, 0, 3); 
+  //  // sunk destroyer
+  //  attack(player, 1, 2); 
+  //  attack(player, 1, 3); 
+  //  attack(player, 1, 4); 
+  //  attack(player, 1, 1); 
+  //  // sunk patrol boat
+  //  attack(player, 2, 2); 
+  //  attack(player, 2, 3); 
+  //  // sunk carrier boat 
+  //  attack(player, 3, 3); 
+  //  attack(player, 3, 4); 
+  //  attack(player, 3, 5); 
+  //  attack(player, 3, 6); 
+  //  // sunk submarine
+  //  attack(player, 4, 4); 
+  //  attack(player, 4, 5); 
+  //  attack(player, 4, 6); 
+
+
+
+// // sunk battleship
+      // attack(computer, 0, 0); 
+      // attack(computer, 0, 1); 
+      // attack(computer, 0, 2); 
+      // attack(computer, 0, 3); 
+      // // sunk destroyer
+      // attack(computer, 1, 1); 
+      // attack(computer, 1, 2); 
+      // attack(computer, 1, 3); 
+      // attack(computer, 1, 4); 
+      // // sunk patrol boat
+      // attack(computer, 2, 2); 
+      // attack(computer, 2, 3); 
+      // // sunk carrier boat 
+      // attack(computer, 3, 3); 
+      // attack(computer, 3, 4); 
+      // attack(computer, 3, 5); 
+      // attack(computer, 3, 6); 
+      // // sunk submarine
+      // attack(computer, 7, 4); 
+      // attack(computer, 7, 5); 
+      // attack(computer, 7, 6); 
+
+
+
+
+
+
+
+
+
+
 
   // old attack function
   // function attack(user1, user2,) { 

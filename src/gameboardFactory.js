@@ -125,40 +125,40 @@ let carrierBoat = ship('Carrier', 4, 'horizontal');
 let submarine = ship('Submarine', 3, 'vertical');
 let gameboard = gameboardFactory();
 
-gameboard.placeShip(battleShip, 3, 2, 4, 'vertical');
-gameboard.placeShip(destroyer, 4, 5, 4, 'horizontal');
-gameboard.placeShip(patrolBoat, 0, 0, 2, 'vertical');
-gameboard.placeShip(carrierBoat, 1, 2, 4, 'horizontal');
-gameboard.placeShip(submarine, 6, 3, 3, 'vertical');
-// sinking battleship
-gameboard.receiveAttack(3, 2);
+// gameboard.placeShip(battleShip, 3, 2, 4, 'vertical');
+// gameboard.placeShip(destroyer, 4, 5, 4, 'horizontal');
+// gameboard.placeShip(patrolBoat, 0, 0, 2, 'vertical');
+// gameboard.placeShip(carrierBoat, 1, 2, 4, 'horizontal');
+// gameboard.placeShip(submarine, 6, 3, 3, 'vertical');
+// // sinking battleship
 // gameboard.receiveAttack(3, 2);
-gameboard.receiveAttack(4, 2);
-gameboard.receiveAttack(5, 2);
-gameboard.receiveAttack(6, 2);
-gameboard.areAllShipsSunk();
-// sinking destroyer 
-gameboard.receiveAttack(4, 5);
-gameboard.receiveAttack(4, 6);
+// // gameboard.receiveAttack(3, 2);
+// gameboard.receiveAttack(4, 2);
+// gameboard.receiveAttack(5, 2);
+// gameboard.receiveAttack(6, 2);
+// gameboard.areAllShipsSunk();
+// // sinking destroyer 
 // gameboard.receiveAttack(4, 5);
-gameboard.receiveAttack(4, 7);
-gameboard.receiveAttack(4, 8);
-gameboard.areAllShipsSunk();
-// sinking patrol board
-gameboard.receiveAttack(0, 0);
-gameboard.receiveAttack(1, 0);
-gameboard.areAllShipsSunk();
-// sinking carrier boat
-gameboard.receiveAttack(1, 2); 
-gameboard.receiveAttack(1, 3); 
-gameboard.receiveAttack(1, 4); 
-gameboard.receiveAttack(1, 5); 
-gameboard.areAllShipsSunk();
-// sinking submarine
-gameboard.receiveAttack(6, 3);
-gameboard.receiveAttack(7, 3);
-gameboard.receiveAttack(8, 3);
-gameboard.areAllShipsSunk();
+// gameboard.receiveAttack(4, 6);
+// // gameboard.receiveAttack(4, 5);
+// gameboard.receiveAttack(4, 7);
+// gameboard.receiveAttack(4, 8);
+// gameboard.areAllShipsSunk();
+// // sinking patrol board
+// gameboard.receiveAttack(0, 0);
+// gameboard.receiveAttack(1, 0);
+// gameboard.areAllShipsSunk();
+// // sinking carrier boat
+// gameboard.receiveAttack(1, 2); 
+// gameboard.receiveAttack(1, 3); 
+// gameboard.receiveAttack(1, 4); 
+// gameboard.receiveAttack(1, 5); 
+// gameboard.areAllShipsSunk();
+// // sinking submarine
+// gameboard.receiveAttack(6, 3);
+// gameboard.receiveAttack(7, 3);
+// gameboard.receiveAttack(8, 3);
+// gameboard.areAllShipsSunk();
 
 // console.log(JSON.parse(JSON.stringify(gameboard.sunkenShipsArray)));
 // console.log('checking the array after ships are placed and sunk', gameboard.sunkenShipsArray);
