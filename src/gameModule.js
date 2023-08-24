@@ -130,28 +130,12 @@ export default function createPlayer(name, type) {
       playerTurn = 1;
     } 
   } 
-  // return { 
-  //   player, 
-  //   computer,
-  // } 
 } 
 
   // playGame();
 
 
 
-
-// I don't know if I can make it work in the console with the current loop I have 
-
-// I be better off to start crafting the UI now, 
-
-// because with the loop, I'm only passing in one coordinate, 
-
-// it will loop again and an error wil throw saying a hit is already at that cell 
-
-// theres no way for me to dynamically change the coordinates with 
-
-// I tried using random coordinates but that caused an infinte loop. 
 
 // 
 

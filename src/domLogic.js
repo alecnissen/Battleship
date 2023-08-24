@@ -5,40 +5,9 @@ import './gameModule.js';
 import { placeShipsOnPlayersBoard, playGame } from './gameModule.js';
 
 
-// const thePlayer = playGame();
-
-// console.log(thePlayer);
-// we need a way to access the players board, 
-
-// how can I access players board, its a function within a different module, it's not a method, 
-
-// how to access a function within a different module, export and import
-
-// ok I can call the functions, 
-
-// am I supposed to create a new board, to allow users to drag and drop in the homescreen 
-
-// or am I supposed to somehow access players board within gameModule? 
-
-// I;m having trouble accessing the board, 
-
-// how can I style the board that was created? 
-
-
 
 
 const playerBoardContainer = document.getElementById('gameboard-container');
-
-// playerBoardContainer.id = 'player-board-container-styles';
-
-// playerBoardContainer.style.display = 'flex';
-// playerBoardContainer.style.flexWrap = 'wrap';
-// playerBoardContainer.style.height = '350px';
-// playerBoardContainer.style.width = '350px';
-
-// playerBoardContainer.style.maxHeight = '300px';
-// playerBoardContainer.style.maxWidth = '300px';
-// playerBoardContainer.style.gap = ;
 
 let gameboardModule = gameboardFactory();
 
@@ -49,6 +18,15 @@ let playerBoard = gameboardModule.getGameboard();
 
 // console.log(playerBoardContainer.children); 
 
+// problem is connecting DOM cells and gameboard array indexes, if user clicks on DOM gameboard cell 
+
+// should return back the corresponding array index. 
+
+// basically created a grid, using nested for loops, 
+// then inside used in IIFE, to capture current i and j indexes, 
+// problem is that it does not log back any value when I try to log it 
+// I notice the datasets are working and logging back value
+
 
 for (let i = 0; i < 10; i++) { 
     for(let j = 0; j < 10; j++) { 
@@ -57,17 +35,39 @@ for (let i = 0; i < 10; i++) {
         playerBoardContainer.append(div);
         div.dataset.row = i;
         div.dataset.column = j;
-        // div.style.height = '35px';
-        // div.style.width = '35px';
-        // div.style.backgroundColor = 'blue';
-        // div.style.border = '1px solid black'; 
         div.id = 'cell-styles';
         
-        div.addEventListener('click', (e) => { 
-            console.log(e.target);
-        })
+        (function(row, column) {
+            div.addEventListener('click', (e) => { 
+                console.log(e.target);
+                console.log(row);
+                console.log(column);
+                console.log('logging gameboard within event listener', gameboard);
+                // console.log(gameboard);
+                 // Accessing the corresponding cell in the gameboard array
+                 // console.log(gameboard[row][column]);
+                 const clickedCell = gameboard[row][column];
+                 console.log('Clicked cell in gameboard:', clickedCell);
+            });
+        })(i, j);
     } 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
