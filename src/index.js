@@ -5,8 +5,13 @@ import './gameboardFactory.js';
 
 import './playerFactory.js';
 
-import './gameModule.js'
+import './gameModule.js';
 
+import './domLogic.js';
+
+// import './style.css';
+
+// import './main.scss';
 
 
 

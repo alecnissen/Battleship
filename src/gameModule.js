@@ -3,7 +3,7 @@ import gameboardFactory from './gameboardFactory.js';
 import playerFactory from './playerFactory.js';
 
 // create players here
-function createPlayer(name, type) { 
+export default function createPlayer(name, type) { 
     if(type === 'computer') {
       const computerName = playerFactory(name); // add turn var
       return computerName;
@@ -13,7 +13,7 @@ function createPlayer(name, type) {
     }
   } 
   
-  function placeShipsOnPlayersBoard(user) { 
+  export function placeShipsOnPlayersBoard(user) { 
     const player = user; 
     const battleShip = ship('Battleship', 4, 'vertical');
     const destroyer = ship('Destroyer', 4, 'horizontal' );
@@ -32,7 +32,7 @@ function createPlayer(name, type) {
     return getPlayerBoard;
   } 
 
-  function placeShipsOnComputersBoard(user) { 
+  export function placeShipsOnComputersBoard(user) { 
     const computer = user;
     const battleShip = ship('Battleship', 4, 'vertical');
     const destroyer = ship('Destroyer', 4, 'horizontal' );
@@ -71,7 +71,7 @@ function createPlayer(name, type) {
 
 
 
-  function checkForWinner(userObj) { 
+  export function checkForWinner(userObj) { 
     console.log('CHECKING FOR WINNER!');
     const selectedUser = userObj;
     if (selectedUser.gameboard.areAllShipsSunk()) { 
@@ -82,14 +82,14 @@ function createPlayer(name, type) {
   }
 
 
-  function attack(userObj, x, y) { 
+  export function attack(userObj, x, y) { 
     const selectedUser = userObj;
     selectedUser.gameboard.receiveAttack(x, y);
   }
 
 
 
-  function playGame() { 
+  export function playGame() { 
     let playerTurn = 1;
     const computer = createPlayer('PC', 'computer') // added turn var
     const player = createPlayer('player', 'player') // add turn var
@@ -129,10 +129,14 @@ function createPlayer(name, type) {
       } 
       playerTurn = 1;
     } 
-  }  
+  } 
+  // return { 
+  //   player, 
+  //   computer,
+  // } 
 } 
 
-  playGame();
+  // playGame();
 
 
 

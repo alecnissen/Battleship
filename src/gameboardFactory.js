@@ -9,7 +9,7 @@ export default function gameboardFactory() {
   let sunkenShipsArray = [];
   for (let i = 0; i < 10; i++) {
     gameboard.push(['', '', '', '', '', '', '', '', '', '']);
-  }
+  } 
 
   function getGameboard() {
     return gameboard;

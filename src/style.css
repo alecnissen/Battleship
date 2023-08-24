@@ -1,0 +1,39 @@
+#main-title-container { 
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+    text-align: center;
+    font-size: 2rem;
+} 
+
+body { 
+    background-color: skyblue;
+}
+
+* { 
+    box-sizing: border-box;
+} 
+
+#player-board-flex-container { 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#gameboard-container { 
+    display: flex;
+    flex-wrap: wrap;
+    /* height: 350px; 
+    width: 350px; */
+    height: 450px; 
+    width: 450px;
+    /* justify-content: center;
+    align-items: center;  */
+}
+
+#cell-styles { 
+    height: 45px; 
+    width: 45px; 
+    background-color: blue;
+    border: 1px solid black;
+}
