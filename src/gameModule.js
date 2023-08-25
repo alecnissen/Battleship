@@ -1,6 +1,7 @@
 import ship from './shipFactory.js';
 import gameboardFactory from './gameboardFactory.js'; 
 import playerFactory from './playerFactory.js';
+import createGameboardGridDOM from './domLogic.js';
 
 // create players here
 export default function createPlayer(name, type) { 
@@ -98,10 +99,13 @@ export default function createPlayer(name, type) {
     console.log(player); 
 
     // place ships on players board
+
     placeShipsOnPlayersBoard(player);
     // place ships on computers board 
     placeShipsOnComputersBoard(computer); 
     // console.log('before game loop')
+
+    
     while (!computer.gameboard.areAllShipsSunk() && !player.gameboard.areAllShipsSunk()) { 
       
     if (playerTurn === 1) { // player is === 1, attack comps board

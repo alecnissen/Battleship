@@ -5,29 +5,14 @@ import './gameModule.js';
 import { placeShipsOnPlayersBoard, playGame } from './gameModule.js';
 
 
-
-
 const playerBoardContainer = document.getElementById('gameboard-container');
 
-let gameboardModule = gameboardFactory();
+const gameboardModule = gameboardFactory();
 
-let playerBoard = gameboardModule.getGameboard(); 
-
-
-// playerBoardContainer.classList.add('board-container-styles');
-
-// console.log(playerBoardContainer.children); 
-
-// problem is connecting DOM cells and gameboard array indexes, if user clicks on DOM gameboard cell 
-
-// should return back the corresponding array index. 
-
-// basically created a grid, using nested for loops, 
-// then inside used in IIFE, to capture current i and j indexes, 
-// problem is that it does not log back any value when I try to log it 
-// I notice the datasets are working and logging back value
+const playerBoard = gameboardModule.getGameboard(); 
 
 
+export default function createGameboardGridDOM() {  
 for (let i = 0; i < 10; i++) { 
     for(let j = 0; j < 10; j++) { 
         const gameboard = gameboardFactory().getGameboard();
@@ -36,22 +21,73 @@ for (let i = 0; i < 10; i++) {
         div.dataset.row = i;
         div.dataset.column = j;
         div.id = 'cell-styles';
-        
-        (function(row, column) {
-            div.addEventListener('click', (e) => { 
-                console.log(e.target);
-                console.log(row);
-                console.log(column);
-                console.log('logging gameboard within event listener', gameboard);
-                // console.log(gameboard);
-                 // Accessing the corresponding cell in the gameboard array
-                 // console.log(gameboard[row][column]);
-                 const clickedCell = gameboard[row][column];
-                 console.log('Clicked cell in gameboard:', clickedCell);
-            });
-        })(i, j);
+        div.addEventListener('click', (e) => { 
+            console.log(e.target);
+            // console.log(row);
+            // console.log(column);
+            console.log('logging gameboard within event listener', gameboard);
+            // console.log(gameboard);
+             // Accessing the corresponding cell in the gameboard array
+             // console.log(gameboard[row][column]);
+             // returns the cooresponding coordinates within the gameboard
+             const clickedCell = gameboard[i][j]; 
+             console.log('Clicked cell in gameboard:', clickedCell);
+        });
     } 
 }
+
+} 
+
+createGameboardGridDOM();
+
+
+// placing ships on players board, 
+
+// use another loop to create the ship in the DOM, you will probably want to call ship factory so you have access to its object, 
+
+// start there first, then worry about the click and place on the board, 
+
+function battleShipDOMObject() { 
+    const battleshipObj = ship('Battleship', 4, 'vertical');
+    console.log(battleshipObj);
+
+    for (let i = 0; i < 4; i++) { 
+        const div = document.createElement('div');
+        div.id = 'battleship-obj-styles';
+        const battleShipContainer = document.getElementById('battleship-container');
+        battleShipContainer.append(div);        
+    }    
+} 
+
+// refactor to create a function which accepts ship objects, and length and position 
+
+// that way we can create ship objects then pass them to this function 
+
+// which makes ship obj in the DOM. 
+
+// Before moving on I would make sure the gameboard grid is 100% responsive before moving, MOBILE FIRST, maybe min widths, 
+
+// I want to make sure this board does not break on smaller screens. 
+
+battleShipDOMObject();
+
+
+
+
+
+
+
+
+
+
+// well I have the loop created, where should this loop go? 
+// should the loop go within a function, then be called in the playGame()?
+
+// I put the gameboard grid within the function, 
+ 
+// I think I will have to create another one for the computer, the computers board will be auto placed, 
+
+// once player places his ships on his board, a start game option will pop-up, once pressed, comps board will auto fill, and will display comps board but hidden, 
 
 
 

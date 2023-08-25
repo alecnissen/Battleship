@@ -14,6 +14,7 @@ body {
     box-sizing: border-box;
 } 
 
+/* player board, flex container */
 #player-board-flex-container { 
     display: flex;
     justify-content: center;
@@ -25,15 +26,40 @@ body {
     flex-wrap: wrap;
     /* height: 350px; 
     width: 350px; */
-    height: 450px; 
-    width: 450px;
+    /* max-height: 350px;  */
+    width: 350px;
     /* justify-content: center;
     align-items: center;  */
+} 
+
+/* DOM ship placement styles */
+
+#ship-containers-for-placement { 
+    display: flex;
+    min-width: 100px; 
+    min-height: 100px;
+    justify-content: center;
+    align-items: center;
 }
 
 #cell-styles { 
-    height: 45px; 
-    width: 45px; 
+    height: 35px; 
+    width: 35px; 
     background-color: blue;
     border: 1px solid black;
+} 
+
+#battleship-container { 
+    display: flex;
+    flex-wrap: wrap;
+    /* height: 50px; 
+    width: 50px; */
 }
+
+#battleship-obj-styles { 
+    height: 35px; 
+    width: 35px; 
+    background-color: silver;
+    border: 1px solid black;
+} 
+
