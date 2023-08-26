@@ -35,10 +35,10 @@ body {
 
 /* ship objects for DOM and container styles below */
 
-#battleship-text { 
+/* #battleship-description-text-container { 
     display: flex;
-    flex-direction: column;
-}
+    flex-direction: r;
+} */
 
 
 #container-for-ship-objects { 
@@ -47,9 +47,20 @@ body {
     justify-content: center;
 }
 
+#container-for-battleship-description-text, 
+#container-for-destroyer-description-text, 
+#container-for-patrolboat-description-text, 
+#container-for-carrier-boat-description-text,
+#container-for-submarine-description-text { 
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    text-decoration: underline;
+}
 
 #container-for-battleship, #container-for-destroyer, #container-for-patrol-boat, #container-for-carrier-boat, #container-for-submarine { 
     display: flex;
+    flex-direction: row;
 } 
 
 #ship-obj-styles { 

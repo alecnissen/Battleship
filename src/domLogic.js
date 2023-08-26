@@ -122,7 +122,7 @@ function createPatrolBoatDOMObj() {
         patrolBoatContainer.dataset.shipID = JSON.stringify(patrolBoat);
         console.log(patrolBoatContainer);
         patrolBoatContainer.addEventListener('click', (e) => { 
-
+        
         })
     }
 }
