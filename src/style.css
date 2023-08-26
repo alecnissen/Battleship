@@ -14,7 +14,57 @@ body {
     box-sizing: border-box;
 } 
 
-/* player board, flex container */
+
+#main-title-container > h1 { 
+    font-size: 5rem;
+}
+
+#wrapping-container { 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#gameboard-grid-container { 
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-rows: repeat(10, 1fr);
+    max-width: 250px;
+    justify-content: center;
+} 
+
+/* ship objects for DOM and container styles below */
+
+#battleship-text { 
+    display: flex;
+    flex-direction: column;
+}
+
+
+#container-for-ship-objects { 
+    display: flex;
+    gap: 2em; 
+    justify-content: center;
+}
+
+
+#container-for-battleship, #container-for-destroyer, #container-for-patrol-boat, #container-for-carrier-boat, #container-for-submarine { 
+    display: flex;
+} 
+
+#ship-obj-styles { 
+    height: 35px; 
+    width: 35px; 
+    background-color: silver;
+    border: 1px solid black;
+} 
+
+
+
+
+
+
+/* player board, flex container
 #player-board-flex-container { 
     display: flex;
     justify-content: center;
@@ -27,14 +77,23 @@ body {
     /* height: 350px; 
     width: 350px; */
     /* max-height: 350px;  */
-    width: 350px;
+    /* max-width: 350px; */
     /* justify-content: center;
     align-items: center;  */
-} 
+/* }  */
+
+/* #cell-styles { 
+    min-height: 35px; 
+    min-width: 35px; 
+    background-color: blue;
+    border: 1px solid black;
+}  */
+
+
 
 /* DOM ship placement styles */
 
-#ship-containers-for-placement { 
+/* #ship-containers-for-placement { 
     display: flex;
     min-width: 100px; 
     min-height: 100px;
@@ -42,24 +101,18 @@ body {
     align-items: center;
 }
 
-#cell-styles { 
-    height: 35px; 
-    width: 35px; 
-    background-color: blue;
-    border: 1px solid black;
-} 
-
 #battleship-container { 
     display: flex;
     flex-wrap: wrap;
     /* height: 50px; 
     width: 50px; */
-}
+/* }
 
 #battleship-obj-styles { 
     height: 35px; 
     width: 35px; 
     background-color: silver;
     border: 1px solid black;
-} 
+}  */ 
+
 

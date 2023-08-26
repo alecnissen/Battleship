@@ -1,7 +1,6 @@
 import ship from './shipFactory.js';
 import gameboardFactory from './gameboardFactory.js'; 
 import playerFactory from './playerFactory.js';
-import createGameboardGridDOM from './domLogic.js';
 
 // create players here
 export default function createPlayer(name, type) { 

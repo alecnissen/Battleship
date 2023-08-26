@@ -5,71 +5,263 @@ import './gameModule.js';
 import { placeShipsOnPlayersBoard, playGame } from './gameModule.js';
 
 
-const playerBoardContainer = document.getElementById('gameboard-container');
 
-const gameboardModule = gameboardFactory();
-
-const playerBoard = gameboardModule.getGameboard(); 
+const gridContainer = document.getElementById('gameboard-grid-container');
 
 
-export default function createGameboardGridDOM() {  
 for (let i = 0; i < 10; i++) { 
-    for(let j = 0; j < 10; j++) { 
-        const gameboard = gameboardFactory().getGameboard();
-        const div = document.createElement('div'); 
-        playerBoardContainer.append(div);
-        div.dataset.row = i;
-        div.dataset.column = j;
-        div.id = 'cell-styles';
-        div.addEventListener('click', (e) => { 
-            console.log(e.target);
-            // console.log(row);
-            // console.log(column);
-            console.log('logging gameboard within event listener', gameboard);
-            // console.log(gameboard);
-             // Accessing the corresponding cell in the gameboard array
-             // console.log(gameboard[row][column]);
-             // returns the cooresponding coordinates within the gameboard
-             const clickedCell = gameboard[i][j]; 
-             console.log('Clicked cell in gameboard:', clickedCell);
-        });
-    } 
-}
+    for (let j = 0; j < 10; j++) { 
+    let div = document.createElement('div');
+    const gameboard = gameboardFactory().getGameboard();
+    div.style.backgroundColor = 'blue';
+    div.style.border = '1px solid black';
+    div.style.height = '35px';
+    div.style.width = '35px';
+    div.dataset.row = i;
+    div.dataset.column = j;
+    gridContainer.append(div);
+    div.addEventListener('click', (e) => { 
+        console.log(e.target);
+        // returning back gameboards corresponding board cell
+        const clickedCell = gameboard[i][j]; 
+        console.log('Clicked cell in gameboard:', clickedCell);
+    })
 
 } 
+}                         
 
-createGameboardGridDOM();
+// I will begin to display the ships, so the user can start to click
+
+// them and place them on the board, 
+
+// make a big container for them, 
+
+// add the ships to that container 
+
+// each ship will needs its own container, 
+
+// big container for all ships, each ship has own container, 
+
+// begin with html 
+
+// Ok how the fuck do I begin placing ships, and making ship objects within DOM 
+
+// do I make a function which has ship objects 
+
+// then pass so there styles are created then append, 
+
+// how will I associate each DOM ship with it's object?????  
+
+// create factory, that creates the ship object 
+
+// and also creates its DOM structure? 
+
+// takes in ship object and a length, 
+
+// ship is created inside, 
+
+// then loops through and creates ship object within the DOM 
+
+// HOW TO CONNECT THEM ? `
 
 
-// placing ships on players board, 
 
-// use another loop to create the ship in the DOM, you will probably want to call ship factory so you have access to its object, 
 
-// start there first, then worry about the click and place on the board, 
+let battleShip = ship('Battleship', 4, 'vertical');
+let destroyer = ship('Destroyer', 4, 'horizontal' );
+let patrolBoat = ship('Patrol-boat', 2, 'vertical');
+let carrierBoat = ship('Carrier', 4, 'horizontal');
+let submarine = ship('Submarine', 3, 'vertical');
 
-function battleShipDOMObject() { 
-    const battleshipObj = ship('Battleship', 4, 'vertical');
-    console.log(battleshipObj);
 
+
+
+
+
+
+
+    function createBattleShipDOMObj() { 
     for (let i = 0; i < 4; i++) { 
         const div = document.createElement('div');
-        div.id = 'battleship-obj-styles';
-        const battleShipContainer = document.getElementById('battleship-container');
-        battleShipContainer.append(div);        
-    }    
+        div.id = 'ship-obj-styles';
+        // div.dataset.shipID = battleShip;
+        console.log(div);
+        const battleshipContainer = document.getElementById('container-for-battleship');
+        battleshipContainer.append(div);
+        battleshipContainer.dataset.shipID = JSON.stringify(battleShip);
+        console.log(battleshipContainer);
+        battleshipContainer.addEventListener('click', (e) => { 
+        })
+    } 
 } 
 
-// refactor to create a function which accepts ship objects, and length and position 
+createBattleShipDOMObj(); 
 
-// that way we can create ship objects then pass them to this function 
+function createDestroyerDOMObj() { 
+    for (let i = 0; i < 4; i++) { 
+        const div = document.createElement('div');
+        div.id = 'ship-obj-styles';
+        const destroyerContainer = document.getElementById('container-for-destroyer');
+        destroyerContainer.append(div);
+        destroyerContainer.dataset.shipID = JSON.stringify(destroyer);
+        console.log(destroyerContainer);
+        destroyerContainer.addEventListener('click', (e) => { 
 
-// which makes ship obj in the DOM. 
+        })
+    }
+}
 
-// Before moving on I would make sure the gameboard grid is 100% responsive before moving, MOBILE FIRST, maybe min widths, 
+createDestroyerDOMObj();
 
-// I want to make sure this board does not break on smaller screens. 
+function createPatrolBoatDOMObj() { 
+    for (let i = 0; i < 2; i++) { 
+        const div = document.createElement('div');
+        div.id = 'ship-obj-styles';
+        const patrolBoatContainer = document.getElementById('container-for-patrol-boat');
+        patrolBoatContainer.append(div);
+        patrolBoatContainer.dataset.shipID = JSON.stringify(patrolBoat);
+        console.log(patrolBoatContainer);
+        patrolBoatContainer.addEventListener('click', (e) => { 
 
-battleShipDOMObject();
+        })
+    }
+}
+
+
+createPatrolBoatDOMObj(); 
+
+function createCarrierBoatDOMObj() { 
+    for (let i = 0; i < 4; i++) { 
+        const div = document.createElement('div');
+        div.id = 'ship-obj-styles';
+        const carrierBoatContainer = document.getElementById('container-for-carrier-boat');
+        carrierBoatContainer.append(div);
+        carrierBoatContainer.dataset.shipID = JSON.stringify(carrierBoat);
+        console.log(carrierBoatContainer);
+        carrierBoatContainer.addEventListener('click', (e) => { 
+
+        })
+    }
+}
+
+createCarrierBoatDOMObj(); 
+
+function createSubmarineDOMObj() { 
+    for (let i = 0; i < 3; i++) { 
+        const div = document.createElement('div');
+        div.id = 'ship-obj-styles';
+        const submarineContainer = document.getElementById('container-for-submarine');
+        submarineContainer.append(div);
+        submarineContainer.dataset.shipID = JSON.stringify(submarine);
+        console.log(submarineContainer);
+        submarineContainer.addEventListener('click', (e) => { 
+
+        })
+    }
+}
+
+createSubmarineDOMObj();
+
+// createShipObjectsDOM(battleShip, 4);
+
+
+// function to place ships 
+// has ship objects, 
+// 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// old BS
+// const playerBoardContainer = document.getElementById('gameboard-container');
+
+// const gameboardModule = gameboardFactory();
+
+// const playerBoard = gameboardModule.getGameboard(); 
+
+
+// export default function createGameboardGridDOM() {  
+// for (let i = 0; i < 10; i++) { 
+//     for(let j = 0; j < 10; j++) { 
+//         const gameboard = gameboardFactory().getGameboard();
+//         const div = document.createElement('div'); 
+//         playerBoardContainer.append(div);
+//         div.dataset.row = i;
+//         div.dataset.column = j;
+//         div.id = 'cell-styles';
+//         div.addEventListener('click', (e) => { 
+//             console.log(e.target);
+//             // console.log(row);
+//             // console.log(column);
+//             console.log('logging gameboard within event listener', gameboard);
+//             // console.log(gameboard);
+//              // Accessing the corresponding cell in the gameboard array
+//              // console.log(gameboard[row][column]);
+//              // returns the cooresponding coordinates within the gameboard
+//              const clickedCell = gameboard[i][j]; 
+//              console.log('Clicked cell in gameboard:', clickedCell);
+//         });
+//     } 
+// }
+
+// } 
+
+// createGameboardGridDOM();
+
+
+// // placing ships on players board, 
+
+// // use another loop to create the ship in the DOM, you will probably want to call ship factory so you have access to its object, 
+
+// // start there first, then worry about the click and place on the board, 
+
+// function battleShipDOMObject() { 
+//     const battleshipObj = ship('Battleship', 4, 'vertical');
+//     console.log(battleshipObj);
+
+//     for (let i = 0; i < 4; i++) { 
+//         const div = document.createElement('div');
+//         div.id = 'battleship-obj-styles';
+//         const battleShipContainer = document.getElementById('battleship-container');
+//         battleShipContainer.append(div);        
+//     }    
+// } 
+
+// // refactor to create a function which accepts ship objects, and length and position 
+
+// // that way we can create ship objects then pass them to this function 
+
+// // which makes ship obj in the DOM. 
+
+// // Before moving on I would make sure the gameboard grid is 100% responsive before moving, MOBILE FIRST, maybe min widths, 
+
+// // I want to make sure this board does not break on smaller screens. 
+
+// battleShipDOMObject();
 
 
 
