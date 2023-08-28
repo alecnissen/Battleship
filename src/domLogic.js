@@ -12,52 +12,38 @@ let currentShipLength
 let currentShipDirection
 
 
+// the x coordinates are incrementing and working 
+// but the problem is now, I am not sure I need to pass in currentCell 
+// I think we can use the event listener for the gameboard cell, it updates that global variable, 
+// then inside here we can access that currentCell variable,
+
 function findCoords(currentCell, currentShipDirection, currentShipLength) { 
     let selectedCell = currentCell;
     let selectedShipDirection = currentShipDirection;
-    let selectedShipLength = currentShipLength;
+    let selectedShipLength = currentShipLength; 
+
+    // cant you find the current cell in here,
     
-    console.log(selectedCell.dataset.row);
-    console.log(selectedShipDirection);
-    console.log(selectedShipLength);
+    // console.log(selectedCell.dataset.row);
+    // console.log(selectedShipDirection);
+    // console.log(selectedShipLength);
     if (selectedShipDirection === 'vertical') { 
-        // console.log('testing');
-        // add onto the current x with the ships length, 
-        // trying to add onto the current row 
+        let updatedCoordinatesX = [];
         let currentRow = selectedCell.dataset.row;
         let currentColumn = selectedCell.dataset.column;
-        console.log(currentColumn);
-
+        let convertColumnToNumber = Number(currentColumn);
         let convertRowToNumber = Number(currentRow);
-        console.log('starting number for row, before adding ships length', convertRowToNumber);
-        // console.log(typeof convertRowToNumber);
-        // console.log(typeof selectedShipLength);
+        // console.log('starting number for row, before adding ships length', convertRowToNumber);
 
-        // both the selectedShips length and the row number are both number, 
-        // now we can add them together. 
-        // we are only returning the end coordinates 
-        // loop to get each one, 
-
-        let newRowNumber = convertRowToNumber + selectedShipLength;
-
-        console.log('ending number for row, after adding ships length to selected cell', newRowNumber);
-
-        let coordinates = [newRowNumber, currentColumn];
-        console.log(coordinates);
-        // console.log(typeof selectedShipLength);
-        // console.log(JSON.stringify(selectedShipLength));
-        // // console.log(typeof selectedShipLength);
-        // // turn selectedShipLength into a string, so the
-        // console.log(selectedShipLength);
-        // console.log(typeof selectedShipLength);
-
-
-        // selectedCell = currentRow + selectedShipLength;
-        // currentRow += currentRow + currentShipLength;
-        // console.log(currentRow);
-
+        for (let i = 0; i < selectedShipLength; i++) { 
+            let updatedXCoordinate 
+            console.log(convertRowToNumber + i); 
+            updatedXCoordinate = convertRowToNumber + i;
+            console.log(typeof convertColumnToNumber);
+            updatedCoordinatesX.push([updatedXCoordinate, convertColumnToNumber]);
+        } 
+        console.log(updatedCoordinatesX);
     }
-
 } 
 
 
@@ -65,7 +51,7 @@ function findCoords(currentCell, currentShipDirection, currentShipLength) {
 
 
 
-
+// gameboard grid
 for (let i = 0; i < 10; i++) { 
     for (let j = 0; j < 10; j++) { 
     let div = document.createElement('div');
@@ -136,6 +122,8 @@ let submarine = ship('Submarine', 3, 'vertical');
             // what would that function do? access the gameboard, mouseover event, if it mouses over the gameboard show the ship object (the hover class)
             console.log(battleshipContainer);
 
+
+            // maybe you dont need to pass in current cell, current cell can be found, within the event listener function, 
             findCoords(currentCell, currentShipDirection, currentShipLength);
         })
     } 
