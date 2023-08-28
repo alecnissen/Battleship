@@ -6,6 +6,66 @@ import { placeShipsOnPlayersBoard, playGame } from './gameModule.js';
 
 const gridContainer = document.getElementById('gameboard-grid-container');
 
+let currentShip 
+let currentCell
+let currentShipLength
+let currentShipDirection
+
+
+function findCoords(currentCell, currentShipDirection, currentShipLength) { 
+    let selectedCell = currentCell;
+    let selectedShipDirection = currentShipDirection;
+    let selectedShipLength = currentShipLength;
+    
+    console.log(selectedCell.dataset.row);
+    console.log(selectedShipDirection);
+    console.log(selectedShipLength);
+    if (selectedShipDirection === 'vertical') { 
+        // console.log('testing');
+        // add onto the current x with the ships length, 
+        // trying to add onto the current row 
+        let currentRow = selectedCell.dataset.row;
+        let currentColumn = selectedCell.dataset.column;
+        console.log(currentColumn);
+
+        let convertRowToNumber = Number(currentRow);
+        console.log('starting number for row, before adding ships length', convertRowToNumber);
+        // console.log(typeof convertRowToNumber);
+        // console.log(typeof selectedShipLength);
+
+        // both the selectedShips length and the row number are both number, 
+        // now we can add them together. 
+        // we are only returning the end coordinates 
+        // loop to get each one, 
+
+        let newRowNumber = convertRowToNumber + selectedShipLength;
+
+        console.log('ending number for row, after adding ships length to selected cell', newRowNumber);
+
+        let coordinates = [newRowNumber, currentColumn];
+        console.log(coordinates);
+        // console.log(typeof selectedShipLength);
+        // console.log(JSON.stringify(selectedShipLength));
+        // // console.log(typeof selectedShipLength);
+        // // turn selectedShipLength into a string, so the
+        // console.log(selectedShipLength);
+        // console.log(typeof selectedShipLength);
+
+
+        // selectedCell = currentRow + selectedShipLength;
+        // currentRow += currentRow + currentShipLength;
+        // console.log(currentRow);
+
+    }
+
+} 
+
+
+
+
+
+
+
 for (let i = 0; i < 10; i++) { 
     for (let j = 0; j < 10; j++) { 
     let div = document.createElement('div');
@@ -24,8 +84,10 @@ for (let i = 0; i < 10; i++) {
         console.log('Clicked cell in gameboard:', clickedCell);
     })
     div.addEventListener('mouseenter', (e) => { 
-        console.log(div);
+        // console.log(div);
         div.classList.add('battleship-hover-class');
+        currentCell = e.target;
+        console.log(currentCell);
         
     })
     div.addEventListener('mouseleave', (e) => {
@@ -33,14 +95,16 @@ for (let i = 0; i < 10; i++) {
         // div.style.backgroundColor = 'blue';
     })
 } 
-}                         
+}  
 
 
 let battleShip = ship('Battleship', 4, 'vertical');
 let destroyer = ship('Destroyer', 4, 'horizontal' );
 let patrolBoat = ship('Patrol-boat', 2, 'vertical');
 let carrierBoat = ship('Carrier', 4, 'horizontal');
-let submarine = ship('Submarine', 3, 'vertical');
+let submarine = ship('Submarine', 3, 'vertical'); 
+
+
 
 
 
@@ -57,12 +121,22 @@ let submarine = ship('Submarine', 3, 'vertical');
         battleshipContainer.addEventListener('click', (e) => { 
             battleshipContainer.classList.add('battleship-hover-class');
             console.log(e.target);
+            console.log(battleshipContainer.dataset.shipID);
+            console.log(battleShip.shipLength);
+            currentShip = battleShip;
+            console.log(currentShip);
+            currentShipLength = battleShip.shipLength;
+            console.log(currentShipLength);
+            currentShipDirection = battleShip.shipPosition;
+            console.log(currentShipDirection);
              // only added hover class for BS, testing this first. 
             // I would have to add another function. or at least call another function which places the ship on the board. 
             // click on the ship and it will trigger another function, 
             // pass the ship obj to it, 
             // what would that function do? access the gameboard, mouseover event, if it mouses over the gameboard show the ship object (the hover class)
             console.log(battleshipContainer);
+
+            findCoords(currentCell, currentShipDirection, currentShipLength);
         })
     } 
 } 
