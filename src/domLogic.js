@@ -10,7 +10,7 @@ for (let i = 0; i < 10; i++) {
     for (let j = 0; j < 10; j++) { 
     let div = document.createElement('div');
     const gameboard = gameboardFactory().getGameboard();
-    div.style.backgroundColor = 'blue';
+    // div.style.backgroundColor = 'blue';
     div.style.border = '1px solid black';
     div.style.height = '35px';
     div.style.width = '35px';
@@ -22,6 +22,15 @@ for (let i = 0; i < 10; i++) {
         // returning back gameboards corresponding board cell
         const clickedCell = gameboard[i][j]; 
         console.log('Clicked cell in gameboard:', clickedCell);
+    })
+    div.addEventListener('mouseenter', (e) => { 
+        console.log(div);
+        div.classList.add('battleship-hover-class');
+        
+    })
+    div.addEventListener('mouseleave', (e) => {
+        div.classList.remove('battleship-hover-class');
+        // div.style.backgroundColor = 'blue';
     })
 } 
 }                         
@@ -46,7 +55,9 @@ let submarine = ship('Submarine', 3, 'vertical');
         battleshipContainer.dataset.shipID = JSON.stringify(battleShip);
         console.log(battleshipContainer);
         battleshipContainer.addEventListener('click', (e) => { 
-            battleshipContainer.classList.add('battleship-hover-class'); // only added hover class for BS, testing this first. 
+            battleshipContainer.classList.add('battleship-hover-class');
+            console.log(e.target);
+             // only added hover class for BS, testing this first. 
             // I would have to add another function. or at least call another function which places the ship on the board. 
             // click on the ship and it will trigger another function, 
             // pass the ship obj to it, 
