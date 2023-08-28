@@ -51,25 +51,6 @@ export default function createPlayer(name, type) {
 
   }
 
-  // think of the game flow, 
-  // players have their ships on the board, 
-  // now we can determine whose turn it is, 
-  // once we know whose turn it is, that user can make there hit 
-  // once the user makes hit, 
-  // check if all ships sunk, if no, keep playing 
-  // switch to the other user, user makes hit, check if all ships sunk, if no, switch to other user, 
-
-  // what I want is to play a game completly in the console, and have it print a winner 
-
-  // without any infinite loop, 
-
-  // seems to never hit checking for a winner, 
-
-  // fist receiving error that it's hitting the same coordinate twice, 
-
-  // for console version, use random coordiantes again but make sure the check for all ships sunk is being hit, 
-
-
 
   export function checkForWinner(userObj) { 
     console.log('CHECKING FOR WINNER!');

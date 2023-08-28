@@ -4,10 +4,7 @@ import playerFactory from './playerFactory.js';
 import './gameModule.js';
 import { placeShipsOnPlayersBoard, playGame } from './gameModule.js';
 
-
-
 const gridContainer = document.getElementById('gameboard-grid-container');
-
 
 for (let i = 0; i < 10; i++) { 
     for (let j = 0; j < 10; j++) { 
@@ -26,45 +23,8 @@ for (let i = 0; i < 10; i++) {
         const clickedCell = gameboard[i][j]; 
         console.log('Clicked cell in gameboard:', clickedCell);
     })
-
 } 
 }                         
-
-// I will begin to display the ships, so the user can start to click
-
-// them and place them on the board, 
-
-// make a big container for them, 
-
-// add the ships to that container 
-
-// each ship will needs its own container, 
-
-// big container for all ships, each ship has own container, 
-
-// begin with html 
-
-// Ok how the fuck do I begin placing ships, and making ship objects within DOM 
-
-// do I make a function which has ship objects 
-
-// then pass so there styles are created then append, 
-
-// how will I associate each DOM ship with it's object?????  
-
-// create factory, that creates the ship object 
-
-// and also creates its DOM structure? 
-
-// takes in ship object and a length, 
-
-// ship is created inside, 
-
-// then loops through and creates ship object within the DOM 
-
-// HOW TO CONNECT THEM ? `
-
-
 
 
 let battleShip = ship('Battleship', 4, 'vertical');
@@ -72,11 +32,6 @@ let destroyer = ship('Destroyer', 4, 'horizontal' );
 let patrolBoat = ship('Patrol-boat', 2, 'vertical');
 let carrierBoat = ship('Carrier', 4, 'horizontal');
 let submarine = ship('Submarine', 3, 'vertical');
-
-
-
-
-
 
 
 
@@ -91,6 +46,12 @@ let submarine = ship('Submarine', 3, 'vertical');
         battleshipContainer.dataset.shipID = JSON.stringify(battleShip);
         console.log(battleshipContainer);
         battleshipContainer.addEventListener('click', (e) => { 
+            battleshipContainer.classList.add('battleship-hover-class'); // only added hover class for BS, testing this first. 
+            // I would have to add another function. or at least call another function which places the ship on the board. 
+            // click on the ship and it will trigger another function, 
+            // pass the ship obj to it, 
+            // what would that function do? access the gameboard, mouseover event, if it mouses over the gameboard show the ship object (the hover class)
+            console.log(battleshipContainer);
         })
     } 
 } 
@@ -106,7 +67,6 @@ function createDestroyerDOMObj() {
         destroyerContainer.dataset.shipID = JSON.stringify(destroyer);
         console.log(destroyerContainer);
         destroyerContainer.addEventListener('click', (e) => { 
-
         })
     }
 }
@@ -162,12 +122,6 @@ function createSubmarineDOMObj() {
 
 createSubmarineDOMObj();
 
-// createShipObjectsDOM(battleShip, 4);
-
-
-// function to place ships 
-// has ship objects, 
-// 
 
 
 

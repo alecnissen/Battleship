@@ -8,6 +8,10 @@ import ship from './shipFactory.js';
 
 import gameboardFactory from './gameboardFactory.js';
 
+export default function playerFactory(name) { 
+    const gameboard = gameboardFactory();
+    return {name, gameboard};
+} 
 
 // make a player factory function.
 // that makes a player for the game 
@@ -170,10 +174,6 @@ import gameboardFactory from './gameboardFactory.js';
 
 // determine a winner and print a message or modal pop-up that displays winner 
 
-export default function playerFactory(name) { 
-    const gameboard = gameboardFactory();
-    return {name, gameboard};
-} 
 
 
 // const player1 = playerFactory('alec');

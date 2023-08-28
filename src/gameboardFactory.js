@@ -125,6 +125,12 @@ let carrierBoat = ship('Carrier', 4, 'horizontal');
 let submarine = ship('Submarine', 3, 'vertical');
 let gameboard = gameboardFactory();
 
+
+
+
+
+
+
 // gameboard.placeShip(battleShip, 3, 2, 4, 'vertical');
 // gameboard.placeShip(destroyer, 4, 5, 4, 'horizontal');
 // gameboard.placeShip(patrolBoat, 0, 0, 2, 'vertical');

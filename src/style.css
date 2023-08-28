@@ -35,11 +35,10 @@ body {
 
 /* ship objects for DOM and container styles below */
 
-/* #battleship-description-text-container { 
+#change-ship-direction-btn { 
     display: flex;
-    flex-direction: r;
-} */
-
+    justify-content: center;
+}
 
 #container-for-ship-objects { 
     display: flex;
@@ -69,10 +68,6 @@ body {
     background-color: silver;
     border: 1px solid black;
 } 
-
-
-
-
 
 
 /* player board, flex container
