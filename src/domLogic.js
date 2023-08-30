@@ -17,34 +17,75 @@ let currentShipDirection
 // I think we can use the event listener for the gameboard cell, it updates that global variable, 
 // then inside here we can access that currentCell variable,
 
+// will work next on use coordinate 
+// will need to look over else if block just to make sure it is right, and renaming variables 
+// look over else block then begin on next step use coordiantes, 
+// that function will take in the coordinates and add certain classes to them so it highlights the gameboard when you hover over it based on ships length. 
+
+
+
+let battleShip = ship('Battleship', 4, 'vertical');
+let destroyer = ship('Destroyer', 4, 'horizontal' );
+let patrolBoat = ship('Patrol-boat', 2, 'vertical');
+let carrierBoat = ship('Carrier', 4, 'horizontal');
+let submarine = ship('Submarine', 3, 'vertical'); 
+
+
+
+
 function findCoords(currentCell, currentShipDirection, currentShipLength) { 
     let selectedCell = currentCell;
     let selectedShipDirection = currentShipDirection;
     let selectedShipLength = currentShipLength; 
 
-    // cant you find the current cell in here,
-    
-    // console.log(selectedCell.dataset.row);
-    // console.log(selectedShipDirection);
-    // console.log(selectedShipLength);
     if (selectedShipDirection === 'vertical') { 
         let updatedCoordinatesX = [];
         let currentRow = selectedCell.dataset.row;
         let currentColumn = selectedCell.dataset.column;
         let convertColumnToNumber = Number(currentColumn);
         let convertRowToNumber = Number(currentRow);
-        // console.log('starting number for row, before adding ships length', convertRowToNumber);
 
         for (let i = 0; i < selectedShipLength; i++) { 
             let updatedXCoordinate 
             console.log(convertRowToNumber + i); 
             updatedXCoordinate = convertRowToNumber + i;
-            console.log(typeof convertColumnToNumber);
             updatedCoordinatesX.push([updatedXCoordinate, convertColumnToNumber]);
         } 
         console.log(updatedCoordinatesX);
+        return updatedCoordinatesX;
+        // left off here working on updating the coordinates on the y axis, and returning the updated array
+    } else if (selectedShipDirection === 'horizontal') { 
+        let updatedCoordinatesY = [];
+        let currentRow = selectedCell.dataset.row;
+        let currentColumn = selectedCell.dataset.column;
+        let convertColumnToNumber = Number(currentColumn);
+        let convertRowToNumber = Number(currentRow);
+
+        for (let i = 0; i < selectedShipLength; i++) { 
+            let updatedYCoordinate 
+            // console.log(convertRowToNumber + i); 
+            updatedYCoordinate = convertColumnToNumber + i;
+            // console.log(typeof convertColumnToNumber);
+            updatedCoordinatesY.push([convertRowToNumber, updatedYCoordinate]);
+        } 
+        console.log(updatedCoordinatesY); 
+        return updatedCoordinatesY;
     }
 } 
+
+// OK so the next step is creating useCoordinates function, first we will need a way to access the coordinates from findCoordinates 
+// is returning the coordinates the correct method? How can I access the functions return value? 
+
+// wouldnt it be easier, to have another global variable that keeps updated? So that way we can access it? 
+
+function useCoords() {
+    // get cords from above
+    // loop through the cords, selecting the cells by using the data-attributes
+    // add the same highlight class.
+
+} 
+
+// useCoords();
 
 
 
@@ -84,11 +125,11 @@ for (let i = 0; i < 10; i++) {
 }  
 
 
-let battleShip = ship('Battleship', 4, 'vertical');
-let destroyer = ship('Destroyer', 4, 'horizontal' );
-let patrolBoat = ship('Patrol-boat', 2, 'vertical');
-let carrierBoat = ship('Carrier', 4, 'horizontal');
-let submarine = ship('Submarine', 3, 'vertical'); 
+// let battleShip = ship('Battleship', 4, 'horizontal');
+// let destroyer = ship('Destroyer', 4, 'horizontal' );
+// let patrolBoat = ship('Patrol-boat', 2, 'vertical');
+// let carrierBoat = ship('Carrier', 4, 'horizontal');
+// let submarine = ship('Submarine', 3, 'vertical'); 
 
 
 
