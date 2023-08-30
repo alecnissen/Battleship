@@ -10,28 +10,11 @@ let currentShip
 let currentCell
 let currentShipLength
 let currentShipDirection
-
-
-// the x coordinates are incrementing and working 
-// but the problem is now, I am not sure I need to pass in currentCell 
-// I think we can use the event listener for the gameboard cell, it updates that global variable, 
-// then inside here we can access that currentCell variable,
-
-// will work next on use coordinate 
-// will need to look over else if block just to make sure it is right, and renaming variables 
-// look over else block then begin on next step use coordiantes, 
-// that function will take in the coordinates and add certain classes to them so it highlights the gameboard when you hover over it based on ships length. 
-
-
-
 let battleShip = ship('Battleship', 4, 'vertical');
 let destroyer = ship('Destroyer', 4, 'horizontal' );
 let patrolBoat = ship('Patrol-boat', 2, 'vertical');
 let carrierBoat = ship('Carrier', 4, 'horizontal');
 let submarine = ship('Submarine', 3, 'vertical'); 
-
-
-
 
 function findCoords(currentCell, currentShipDirection, currentShipLength) { 
     let selectedCell = currentCell;
@@ -44,7 +27,7 @@ function findCoords(currentCell, currentShipDirection, currentShipLength) {
         let currentColumn = selectedCell.dataset.column;
         let convertColumnToNumber = Number(currentColumn);
         let convertRowToNumber = Number(currentRow);
-
+        
         for (let i = 0; i < selectedShipLength; i++) { 
             let updatedXCoordinate 
             console.log(convertRowToNumber + i); 
@@ -52,8 +35,7 @@ function findCoords(currentCell, currentShipDirection, currentShipLength) {
             updatedCoordinatesX.push([updatedXCoordinate, convertColumnToNumber]);
         } 
         console.log(updatedCoordinatesX);
-        return updatedCoordinatesX;
-        // left off here working on updating the coordinates on the y axis, and returning the updated array
+        useCoords(updatedCoordinatesX);
     } else if (selectedShipDirection === 'horizontal') { 
         let updatedCoordinatesY = [];
         let currentRow = selectedCell.dataset.row;
@@ -63,13 +45,12 @@ function findCoords(currentCell, currentShipDirection, currentShipLength) {
 
         for (let i = 0; i < selectedShipLength; i++) { 
             let updatedYCoordinate 
-            // console.log(convertRowToNumber + i); 
             updatedYCoordinate = convertColumnToNumber + i;
-            // console.log(typeof convertColumnToNumber);
             updatedCoordinatesY.push([convertRowToNumber, updatedYCoordinate]);
         } 
         console.log(updatedCoordinatesY); 
-        return updatedCoordinatesY;
+        useCoords(updatedCoordinatesY);
+        // return updatedCoordinatesY;
     }
 } 
 
@@ -77,17 +58,25 @@ function findCoords(currentCell, currentShipDirection, currentShipLength) {
 // is returning the coordinates the correct method? How can I access the functions return value? 
 
 // wouldnt it be easier, to have another global variable that keeps updated? So that way we can access it? 
+// variable is updating 4 times, can we move the updated coordinate variable outside of the loop? 
+// maybe once they are pushed, pass to the other function right away 
+// we have the coordinates, now we need to access each one and add a class to it, 
+// got each coordinate, add the class to each one 
 
-function useCoords() {
+
+function useCoords(coords) {
+    let passedCoordinates = coords;
+    console.log('these are the coordinates passed from findCoords function', passedCoordinates);
     // get cords from above
     // loop through the cords, selecting the cells by using the data-attributes
     // add the same highlight class.
 
+    for (let i = 0; i < passedCoordinates.length; i++) { 
+        let coordinate = passedCoordinates[i];
+        console.log(coordinate);
+        coordinate.classList.add('battleship-hover-class');
+    }
 } 
-
-// useCoords();
-
-
 
 
 
@@ -124,17 +113,6 @@ for (let i = 0; i < 10; i++) {
 } 
 }  
 
-
-// let battleShip = ship('Battleship', 4, 'horizontal');
-// let destroyer = ship('Destroyer', 4, 'horizontal' );
-// let patrolBoat = ship('Patrol-boat', 2, 'vertical');
-// let carrierBoat = ship('Carrier', 4, 'horizontal');
-// let submarine = ship('Submarine', 3, 'vertical'); 
-
-
-
-
-
     function createBattleShipDOMObj() { 
     for (let i = 0; i < 4; i++) { 
         const div = document.createElement('div');
@@ -156,15 +134,7 @@ for (let i = 0; i < 10; i++) {
             console.log(currentShipLength);
             currentShipDirection = battleShip.shipPosition;
             console.log(currentShipDirection);
-             // only added hover class for BS, testing this first. 
-            // I would have to add another function. or at least call another function which places the ship on the board. 
-            // click on the ship and it will trigger another function, 
-            // pass the ship obj to it, 
-            // what would that function do? access the gameboard, mouseover event, if it mouses over the gameboard show the ship object (the hover class)
             console.log(battleshipContainer);
-
-
-            // maybe you dont need to pass in current cell, current cell can be found, within the event listener function, 
             findCoords(currentCell, currentShipDirection, currentShipLength);
         })
     } 
