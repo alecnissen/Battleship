@@ -10,7 +10,7 @@ let currentShip
 let currentCell
 let currentShipLength
 let currentShipDirection
-let battleShip = ship('Battleship', 4, 'vertical');
+let battleShip = ship('Battleship', 4, 'horizontal');
 let destroyer = ship('Destroyer', 4, 'horizontal' );
 let patrolBoat = ship('Patrol-boat', 2, 'vertical');
 let carrierBoat = ship('Carrier', 4, 'horizontal');
@@ -20,6 +20,8 @@ function findCoords(currentCell, currentShipDirection, currentShipLength) {
     let selectedCell = currentCell;
     let selectedShipDirection = currentShipDirection;
     let selectedShipLength = currentShipLength; 
+    let x = currentCell;
+    console.log(currentCell);
 
     if (selectedShipDirection === 'vertical') { 
         let updatedCoordinatesX = [];
@@ -50,7 +52,6 @@ function findCoords(currentCell, currentShipDirection, currentShipLength) {
         } 
         console.log(updatedCoordinatesY); 
         useCoords(updatedCoordinatesY);
-        // return updatedCoordinatesY;
     }
 } 
 
@@ -63,19 +64,51 @@ function findCoords(currentCell, currentShipDirection, currentShipLength) {
 // we have the coordinates, now we need to access each one and add a class to it, 
 // got each coordinate, add the class to each one 
 
+// we needed to access the DOM equilvent of the coordinates, cannot add classes and styling to properties not on the DOM 
+
+// next task is figuring out that when user selects a ship and hovers over gameboard, it will show that ship, and highlight it's areas, 
+
+
+
+
+// adapt to the areas that were highlighted, if user moves away from a sqaure, remove styles but add new styles to the newly selected square. 
+// remove the styles once user moves away from that cell
+
+// It will work vertical and horizontal but user clicks on ship and if they hover over board, it will show the ship object and all the cells it will fill before being placed 
+// the problem is it just stays there, it doesn't remove styles when user hovers away, 
+
+// get cords from above
+// loop through the cords, selecting the cells by using the data-attributes
+// add the same highlight class.
+
+// try this method too
+// <div data-cords='[0, 0]'></div>
+// document.querySelector('[data-cords="[0, 0]"]').classList.add(class)  
+
+// problem is I have to hover over a cell, then click on the ship for this to work. 
+// click on a ship, hover over the board and get current cell so it gets dynamically updated. 
 
 function useCoords(coords) {
     let passedCoordinates = coords;
     console.log('these are the coordinates passed from findCoords function', passedCoordinates);
-    // get cords from above
-    // loop through the cords, selecting the cells by using the data-attributes
-    // add the same highlight class.
 
     for (let i = 0; i < passedCoordinates.length; i++) { 
         let coordinate = passedCoordinates[i];
-        console.log(coordinate);
-        coordinate.classList.add('battleship-hover-class');
-    }
+        let row = coordinate[0];
+        console.log(row);
+        let column = coordinate[1];
+        console.log(column);
+
+        // let cell = document.querySelector(`[data-row="${row}"][data-column="${column}"]`);
+
+        let x = document.querySelector(`[data-row="${row}"][data-column="${column}"]`);
+        console.log(x);
+
+        if(x) { 
+        x.classList.add('battleship-hover-class');
+        } 
+        // coordinate.classList.add('battleship-hover-class');
+    } 
 } 
 
 
@@ -102,9 +135,9 @@ for (let i = 0; i < 10; i++) {
     div.addEventListener('mouseenter', (e) => { 
         // console.log(div);
         div.classList.add('battleship-hover-class');
+        // current cell updated here, maybe the problem is how it is being passed. 
         currentCell = e.target;
         console.log(currentCell);
-        
     })
     div.addEventListener('mouseleave', (e) => {
         div.classList.remove('battleship-hover-class');
