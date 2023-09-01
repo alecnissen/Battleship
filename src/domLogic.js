@@ -6,6 +6,7 @@ import { placeShipsOnPlayersBoard, playGame } from './gameModule.js';
 
 const gridContainer = document.getElementById('gameboard-grid-container');
 
+// let isMouseOver = false;
 let currentShip 
 let currentCell
 let currentShipLength
@@ -20,8 +21,6 @@ function findCoords(currentCell, currentShipDirection, currentShipLength) {
     let selectedCell = currentCell;
     let selectedShipDirection = currentShipDirection;
     let selectedShipLength = currentShipLength; 
-    let x = currentCell;
-    console.log(currentCell);
 
     if (selectedShipDirection === 'vertical') { 
         let updatedCoordinatesX = [];
@@ -32,11 +31,11 @@ function findCoords(currentCell, currentShipDirection, currentShipLength) {
         
         for (let i = 0; i < selectedShipLength; i++) { 
             let updatedXCoordinate 
-            console.log(convertRowToNumber + i); 
+            // console.log(convertRowToNumber + i); 
             updatedXCoordinate = convertRowToNumber + i;
             updatedCoordinatesX.push([updatedXCoordinate, convertColumnToNumber]);
         } 
-        console.log(updatedCoordinatesX);
+        // console.log(updatedCoordinatesX);
         useCoords(updatedCoordinatesX);
     } else if (selectedShipDirection === 'horizontal') { 
         let updatedCoordinatesY = [];
@@ -50,32 +49,11 @@ function findCoords(currentCell, currentShipDirection, currentShipLength) {
             updatedYCoordinate = convertColumnToNumber + i;
             updatedCoordinatesY.push([convertRowToNumber, updatedYCoordinate]);
         } 
-        console.log(updatedCoordinatesY); 
+        // console.log(updatedCoordinatesY); 
         useCoords(updatedCoordinatesY);
     }
 } 
 
-// OK so the next step is creating useCoordinates function, first we will need a way to access the coordinates from findCoordinates 
-// is returning the coordinates the correct method? How can I access the functions return value? 
-
-// wouldnt it be easier, to have another global variable that keeps updated? So that way we can access it? 
-// variable is updating 4 times, can we move the updated coordinate variable outside of the loop? 
-// maybe once they are pushed, pass to the other function right away 
-// we have the coordinates, now we need to access each one and add a class to it, 
-// got each coordinate, add the class to each one 
-
-// we needed to access the DOM equilvent of the coordinates, cannot add classes and styling to properties not on the DOM 
-
-// next task is figuring out that when user selects a ship and hovers over gameboard, it will show that ship, and highlight it's areas, 
-
-
-
-
-// adapt to the areas that were highlighted, if user moves away from a sqaure, remove styles but add new styles to the newly selected square. 
-// remove the styles once user moves away from that cell
-
-// It will work vertical and horizontal but user clicks on ship and if they hover over board, it will show the ship object and all the cells it will fill before being placed 
-// the problem is it just stays there, it doesn't remove styles when user hovers away, 
 
 // get cords from above
 // loop through the cords, selecting the cells by using the data-attributes
@@ -85,33 +63,24 @@ function findCoords(currentCell, currentShipDirection, currentShipLength) {
 // <div data-cords='[0, 0]'></div>
 // document.querySelector('[data-cords="[0, 0]"]').classList.add(class)  
 
-// problem is I have to hover over a cell, then click on the ship for this to work. 
-// click on a ship, hover over the board and get current cell so it gets dynamically updated. 
 
+
+// will accept the passed in coordinates, this will include all the cells that will need to be filled, 
 function useCoords(coords) {
     let passedCoordinates = coords;
-    console.log('these are the coordinates passed from findCoords function', passedCoordinates);
+    // console.log('these are the coordinates passed from findCoords function', passedCoordinates);
 
     for (let i = 0; i < passedCoordinates.length; i++) { 
         let coordinate = passedCoordinates[i];
         let row = coordinate[0];
-        console.log(row);
+        // console.log(row);
         let column = coordinate[1];
-        console.log(column);
-
-        // let cell = document.querySelector(`[data-row="${row}"][data-column="${column}"]`);
-
-        let x = document.querySelector(`[data-row="${row}"][data-column="${column}"]`);
-        console.log(x);
-
-        if(x) { 
-        x.classList.add('battleship-hover-class');
-        } 
+        let cell = document.querySelector(`[data-row="${row}"][data-column="${column}"]`); // find the DOM cells that correspond to the coordinates passed in,
+       // console.log(cell);
+        cell.classList.add('battleship-hover-class'); // add the styling and class to all the cells, 
         // coordinate.classList.add('battleship-hover-class');
     } 
 } 
-
-
 
 
 // gameboard grid
@@ -127,22 +96,33 @@ for (let i = 0; i < 10; i++) {
     div.dataset.column = j;
     gridContainer.append(div);
     div.addEventListener('click', (e) => { 
-        console.log(e.target);
+        // console.log(e.target);
         // returning back gameboards corresponding board cell
         const clickedCell = gameboard[i][j]; 
-        console.log('Clicked cell in gameboard:', clickedCell);
-    })
+        // console.log('Clicked cell in gameboard:', clickedCell);
+    }) 
+
     div.addEventListener('mouseenter', (e) => { 
+        // isMouseOver = true;
         // console.log(div);
-        div.classList.add('battleship-hover-class');
+        console.log("Mouse Enter, before adding class: ", e.target);
+        // console.log(div);
+        // div.classList.add('battleship-hover-class');
+        console.log("Classes after mouseenter: ", div.classList);
         // current cell updated here, maybe the problem is how it is being passed. 
         currentCell = e.target;
-        console.log(currentCell);
+        // console.log(currentCell);
+        // / findCoords(currentShipDirection, currentShipLength);
+        findCoords(currentCell, currentShipDirection, currentShipLength);
     })
+
+
     div.addEventListener('mouseleave', (e) => {
-        div.classList.remove('battleship-hover-class');
-        // div.style.backgroundColor = 'blue';
-    })
+        // isMouseOver = false;
+        console.log("Mouse Leave: ", e.target);
+        div.classList.remove('battleship-hover-class'); 
+       console.log("Classes after mouseleave: ", div.classList);
+    }) 
 } 
 }  
 
@@ -151,24 +131,25 @@ for (let i = 0; i < 10; i++) {
         const div = document.createElement('div');
         div.id = 'ship-obj-styles';
         // div.dataset.shipID = battleShip;
-        console.log(div);
+        // console.log(div);
         const battleshipContainer = document.getElementById('container-for-battleship');
         battleshipContainer.append(div);
         battleshipContainer.dataset.shipID = JSON.stringify(battleShip);
-        console.log(battleshipContainer);
+        // console.log(battleshipContainer);
         battleshipContainer.addEventListener('click', (e) => { 
-            battleshipContainer.classList.add('battleship-hover-class');
-            console.log(e.target);
-            console.log(battleshipContainer.dataset.shipID);
-            console.log(battleShip.shipLength);
+            // should not add the class after clicking ship obj, 
+            // battleshipContainer.classList.add('battleship-hover-class');
+            // console.log(e.target);
+            // console.log(battleshipContainer.dataset.shipID);
+            // console.log(battleShip.shipLength);
             currentShip = battleShip;
-            console.log(currentShip);
+            // console.log(currentShip);
             currentShipLength = battleShip.shipLength;
-            console.log(currentShipLength);
+            // console.log(currentShipLength);
             currentShipDirection = battleShip.shipPosition;
-            console.log(currentShipDirection);
-            console.log(battleshipContainer);
-            findCoords(currentCell, currentShipDirection, currentShipLength);
+            // console.log(currentShipDirection);
+            // console.log(battleshipContainer);
+            // findCoords(currentShipDirection, currentShipLength);
         })
     } 
 } 
@@ -182,7 +163,7 @@ function createDestroyerDOMObj() {
         const destroyerContainer = document.getElementById('container-for-destroyer');
         destroyerContainer.append(div);
         destroyerContainer.dataset.shipID = JSON.stringify(destroyer);
-        console.log(destroyerContainer);
+        // console.log(destroyerContainer);
         destroyerContainer.addEventListener('click', (e) => { 
         })
     }
@@ -197,7 +178,7 @@ function createPatrolBoatDOMObj() {
         const patrolBoatContainer = document.getElementById('container-for-patrol-boat');
         patrolBoatContainer.append(div);
         patrolBoatContainer.dataset.shipID = JSON.stringify(patrolBoat);
-        console.log(patrolBoatContainer);
+        // console.log(patrolBoatContainer);
         patrolBoatContainer.addEventListener('click', (e) => { 
         
         })
@@ -214,7 +195,7 @@ function createCarrierBoatDOMObj() {
         const carrierBoatContainer = document.getElementById('container-for-carrier-boat');
         carrierBoatContainer.append(div);
         carrierBoatContainer.dataset.shipID = JSON.stringify(carrierBoat);
-        console.log(carrierBoatContainer);
+        // console.log(carrierBoatContainer);
         carrierBoatContainer.addEventListener('click', (e) => { 
 
         })
@@ -230,7 +211,7 @@ function createSubmarineDOMObj() {
         const submarineContainer = document.getElementById('container-for-submarine');
         submarineContainer.append(div);
         submarineContainer.dataset.shipID = JSON.stringify(submarine);
-        console.log(submarineContainer);
+        // console.log(submarineContainer);
         submarineContainer.addEventListener('click', (e) => { 
 
         })
@@ -244,7 +225,33 @@ createSubmarineDOMObj();
 
 
 
+// we have looked over the behavior, and I'm still at a lost for understanding this, 
 
+// The behavior I am looking for is when a user clicks on a ship obj in the DOM, 
+
+// then they hover over the board, 
+
+// the gameboard cells will be highlighted/filled based on ship length, and ship direction with a different color before being placed, 
+
+// Once the user mouse enters a cell, it will 
+
+// it will correctly calculate how many cells will need to be filled, and it does correctly add the right class, 
+
+// it just that when you mouse leave on the cell, the styles are still being applied. 
+
+// I click on the battleship in the DOM, ship length and position variables are updated 
+
+// then I hover over the board, whatever cell I hover over will be saved to a variable, then all those variables are passed to a function, 
+
+// the functions will calculate how many cells will need to be filled, and then also applies those styles to those cells, 
+
+// it will highlight the correct cells on the gameboard, but it will not correctly remove the cells, 
+
+// I have tried using console logs all throughout the program to track the execution of the code, 
+
+// I have tried setting a variable, then updating that variable which will determine if the cells will need to be filled or not, 
+
+// but the same behavior. 
 
 
 

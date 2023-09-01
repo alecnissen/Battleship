@@ -71,8 +71,12 @@ body {
 
 
 .battleship-hover-class { 
-    background-color: rgb(233, 195, 195); 
+    background-color: red; 
 }
+
+/* .battleship-remove-class { 
+    background-color: skyblue;
+} */
 
 
 /* player board, flex container
