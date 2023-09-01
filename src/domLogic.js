@@ -11,7 +11,7 @@ let currentShip
 let currentCell
 let currentShipLength
 let currentShipDirection
-let battleShip = ship('Battleship', 4, 'horizontal');
+let battleShip = ship('Battleship', 4, 'vertical');
 let destroyer = ship('Destroyer', 4, 'horizontal' );
 let patrolBoat = ship('Patrol-boat', 2, 'vertical');
 let carrierBoat = ship('Carrier', 4, 'horizontal');
@@ -69,18 +69,40 @@ function findCoords(currentCell, currentShipDirection, currentShipLength) {
 function useCoords(coords) {
     let passedCoordinates = coords;
     // console.log('these are the coordinates passed from findCoords function', passedCoordinates);
-
+    // removeCoords(passedCoordinates);
     for (let i = 0; i < passedCoordinates.length; i++) { 
         let coordinate = passedCoordinates[i];
         let row = coordinate[0];
         // console.log(row);
         let column = coordinate[1];
         let cell = document.querySelector(`[data-row="${row}"][data-column="${column}"]`); // find the DOM cells that correspond to the coordinates passed in,
-       // console.log(cell);
-        cell.classList.add('battleship-hover-class'); // add the styling and class to all the cells, 
+        console.log(cell);
+        // cell.classList.add('battleship-hover-class'); 
+        cell.classList.toggle('battleship-hover-class');
+        
+        // add the styling and class to all the cells, 
+        // cell.toggle('battleship-hover-class');
         // coordinate.classList.add('battleship-hover-class');
     } 
 } 
+
+// function removeCoords(coords) {
+//     let passedCoordinates = coords;
+
+//     for (let i = 0; i < passedCoordinates.length; i++) { 
+//         let coordinate = passedCoordinates[i];
+//         let row = coordinate[0];
+//         // console.log(row);
+//         let column = coordinate[1];
+//         let cell = document.querySelector(`[data-row="${row}"][data-column="${column}"]`); // find the DOM cells that correspond to the coordinates passed in,
+//        console.log(cell);
+//         cell.addEventListener('mouseleave', (e) => { 
+//              cell.classList.remove('battleship-hover-class');
+//         })
+//         // cell.classList.add('battleship-hover-class'); // add the styling and class to all the cells, 
+//         // coordinate.classList.add('battleship-hover-class');
+//     }   
+// }
 
 
 // gameboard grid
@@ -111,16 +133,23 @@ for (let i = 0; i < 10; i++) {
         console.log("Classes after mouseenter: ", div.classList);
         // current cell updated here, maybe the problem is how it is being passed. 
         currentCell = e.target;
+
+       //  useCoords();
         // console.log(currentCell);
         // / findCoords(currentShipDirection, currentShipLength);
+        // use an event listener to change the value of currentShipDirection 
         findCoords(currentCell, currentShipDirection, currentShipLength);
-    })
+    }) 
 
 
     div.addEventListener('mouseleave', (e) => {
         // isMouseOver = false;
+        // we are removing class from one cell, need to remove class from all cells, 
         console.log("Mouse Leave: ", e.target);
-        div.classList.remove('battleship-hover-class'); 
+        // div.classList.remove('battleship-hover-class'); 
+        // div.toggle('battleship-hover-class', false);
+        findCoords(currentCell, currentShipDirection, currentShipLength);
+
        console.log("Classes after mouseleave: ", div.classList);
     }) 
 } 
