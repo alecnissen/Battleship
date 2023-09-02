@@ -35,7 +35,7 @@ body {
 
 /* ship objects for DOM and container styles below */
 
-#change-ship-direction-btn { 
+#change-ship-direction-btn-container { 
     display: flex;
     justify-content: center;
 }

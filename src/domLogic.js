@@ -6,6 +6,20 @@ import { placeShipsOnPlayersBoard, playGame } from './gameModule.js';
 
 const gridContainer = document.getElementById('gameboard-grid-container');
 
+// const changeShipPositionBtn = document.getElementById('change-ship-direction-btn');
+
+// console.log(changeShipPositionBtn);
+
+// changeShipPositionBtn.addEventListener('click', (e) => { 
+//     // how to alternate back and forth. 
+//     currentShipDirection = 'horizontal';
+//     changeShipPositionBtn.textContent = 'horizontal';
+// }) 
+
+// changeShipPositionBtn.addEventListener('click', (e) => { 
+//     changeShipPositionBtn.textContent = 'vertical';
+// }) 
+
 // let isMouseOver = false;
 let currentShip 
 let currentCell
@@ -14,8 +28,35 @@ let currentShipDirection
 let battleShip = ship('Battleship', 4, 'vertical');
 let destroyer = ship('Destroyer', 4, 'horizontal' );
 let patrolBoat = ship('Patrol-boat', 2, 'vertical');
-let carrierBoat = ship('Carrier', 4, 'horizontal');
+let carrierBoat = ship('Carrier', 5, 'horizontal');
 let submarine = ship('Submarine', 3, 'vertical'); 
+
+
+const changeShipPositionBtn = document.getElementById('change-ship-direction-btn');
+
+console.log(changeShipPositionBtn);
+
+const changeShipPositionBtnHorizontal = document.getElementById('change-ship-direction-btn-h');
+
+console.log(changeShipPositionBtnHorizontal);
+
+changeShipPositionBtnHorizontal.addEventListener('click', (e) => { 
+    currentShipDirection = 'horizontal';
+})
+
+// make two seperate buttons. 
+
+changeShipPositionBtn.addEventListener('click', (e) => { 
+    // how to alternate back and forth. 
+    console.log('before changing', currentShipDirection);
+    currentShipDirection = 'vertical';
+    console.log('after changing', currentShipDirection);
+    // changeShipPositionBtn.textContent = 'horizontal';
+}) 
+
+
+
+
 
 function findCoords(currentCell, currentShipDirection, currentShipLength) { 
     let selectedCell = currentCell;
@@ -172,6 +213,7 @@ for (let i = 0; i < 10; i++) {
             // console.log(battleshipContainer.dataset.shipID);
             // console.log(battleShip.shipLength);
             currentShip = battleShip;
+            console.log('the current ship clicked on is..', currentShip)
             // console.log(currentShip);
             currentShipLength = battleShip.shipLength;
             // console.log(currentShipLength);
@@ -194,6 +236,10 @@ function createDestroyerDOMObj() {
         destroyerContainer.dataset.shipID = JSON.stringify(destroyer);
         // console.log(destroyerContainer);
         destroyerContainer.addEventListener('click', (e) => { 
+            currentShip = destroyer;
+            console.log('the current ship clicked on is..', currentShip)
+            currentShipLength = destroyer.shipLength;
+            currentShipDirection = destroyer.shipPosition;
         })
     }
 }
@@ -209,7 +255,10 @@ function createPatrolBoatDOMObj() {
         patrolBoatContainer.dataset.shipID = JSON.stringify(patrolBoat);
         // console.log(patrolBoatContainer);
         patrolBoatContainer.addEventListener('click', (e) => { 
-        
+            currentShip = patrolBoat;
+            console.log('the current ship clicked on is..', currentShip)
+            currentShipLength = patrolBoat.shipLength;
+            currentShipDirection = patrolBoat.shipPosition;
         })
     }
 }
@@ -218,7 +267,7 @@ function createPatrolBoatDOMObj() {
 createPatrolBoatDOMObj(); 
 
 function createCarrierBoatDOMObj() { 
-    for (let i = 0; i < 4; i++) { 
+    for (let i = 0; i < 5; i++) { 
         const div = document.createElement('div');
         div.id = 'ship-obj-styles';
         const carrierBoatContainer = document.getElementById('container-for-carrier-boat');
@@ -226,7 +275,10 @@ function createCarrierBoatDOMObj() {
         carrierBoatContainer.dataset.shipID = JSON.stringify(carrierBoat);
         // console.log(carrierBoatContainer);
         carrierBoatContainer.addEventListener('click', (e) => { 
-
+            currentShip = carrierBoat;
+            console.log('the current ship clicked on is..', currentShip)
+            currentShipLength = carrierBoat.shipLength;
+            currentShipDirection = carrierBoat.shipPosition;
         })
     }
 }
@@ -242,7 +294,10 @@ function createSubmarineDOMObj() {
         submarineContainer.dataset.shipID = JSON.stringify(submarine);
         // console.log(submarineContainer);
         submarineContainer.addEventListener('click', (e) => { 
-
+            currentShip = submarine;
+            console.log('the current ship clicked on is..', currentShip)
+            currentShipLength = submarine.shipLength;
+            currentShipDirection = submarine.shipPosition;
         })
     }
 }
