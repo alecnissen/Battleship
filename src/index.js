@@ -26,9 +26,20 @@ import './domLogic.js';
 
 // first start with creating the computer instance/gamebaord 
 
+// how will we randomly place ships, how can we randomly change ship direction, 
 
+// currently for player I set a default value for ship direction, but that can be changed from a button click, 
 
+// can we randomly place ships first? 
 
+// the random coordinates passed in will eventually throw an error from going out of bounds, 
+// however I do have a method which checks for legal placement before ship is placed, 
+// how can I get around this, ships will need to be randomly placed, 
+// and I need to pass in random coordinates, 
+
+// save the work, I will need to refactor checkForShip, it should be returning a value instead of false, right now its just throwing an error 
+// get the return value, if the return value is true, place the ship, else try again with another pair of random coordinates, 
+// keep track of repeated failed shots, so the coordinates do not repeat themselves 
 
 
 

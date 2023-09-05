@@ -25,6 +25,46 @@ let patrolBoat = ship('Patrol-boat', 2, 'vertical');
 let carrierBoat = ship('Carrier', 5, 'horizontal');
 let submarine = ship('Submarine', 3, 'vertical'); 
 
+let computerArray = [battleShip, destroyer, patrolBoat, carrierBoat, submarine]; 
+
+console.log(computerArray);
+
+// begin by seeing if you can place them first, then work logic which can select random direction so it is not hardcoded in, and is truly random 
+// apply a random value when looping? 
+
+
+// first put the ships into an array, use placeShip method on the computers own gameboard, consider also when u call this function, maybe after all ships are placed, 
+// or if it really does not make a difference? computers ships are already randomly placed on page load, 
+// you dont need to see the players ships, only players, not need to apply styles 
+
+// function randomly place computers ships, 
+// // an array of ship objects, 
+
+
+function placeComputerShips(computerArray) { 
+    for (let i = 0; i < computerArray.length; i++) { 
+        let computersShip = computerArray[i];
+        console.log(computersShip.shipPosition);
+        // randomly change ship position 
+        // place them next
+        // randomly get x coordinate and y coordinate
+        // how to prevent random coordinates from going off the board, 
+        let randomCoordinate1 = Math.floor(Math.random() * 9) + 1;
+        let randomCoordinate2 = Math.floor(Math.random() * 9) + 1;
+        console.log(typeof randomCoordinate1); 
+        console.log(typeof randomCoordinate2);
+        // it will place some of the ships, but eventually it will throw an error that ship goes out of bounds or overlaps with another ship, 
+        // place ship already has a checkForShip 
+        // instead of throwing error, should be returning a boolean to make sure placement is legal, this will affect a few of my unit tests. 
+        computerGameboard.gameboard.placeShip(computersShip, randomCoordinate1, randomCoordinate2, computersShip.shipLength, computersShip.shipPosition);
+        console.log('THIS IS THE COMPUTERS GAMEBOARD W/RANDOM COORDINATES', computerGameboard.gameboard.getGameboard()); 
+    }
+} 
+
+placeComputerShips(computerArray);
+
+// let chosenValue = Math.random() < 0.5 ? value1 : value2;
+
 
 
 const changeShipPositionBtn = document.getElementById('change-ship-direction-btn');

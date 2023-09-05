@@ -37,12 +37,13 @@ export default function gameboardFactory() {
       }
     }
     return true;
-  }
+  } 
 
   function placeShip(shipObj, x, y, length, position) {
     if (!checkForShip(x, y, length, position)) {
       throw new Error('ship is already there or ship is placed off the gameboard, please place ship somewhere else, and on the gameboard'
       );
+     //  return false;
     }
     gameboard[x][y] = shipObj;
 
