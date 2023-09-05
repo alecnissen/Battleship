@@ -13,43 +13,43 @@ export default function createPlayer(name, type) {
     }
   } 
   
-  export function placeShipsOnPlayersBoard(user) { 
-    const player = user; 
-    const battleShip = ship('Battleship', 4, 'vertical');
-    const destroyer = ship('Destroyer', 4, 'horizontal' );
-    const patrolBoat = ship('Patrol-boat', 2, 'vertical');
-    const carrierBoat = ship('Carrier', 4, 'horizontal');
-    const submarine = ship('Submarine', 3, 'vertical');
-    // const player = createPlayer('player', 'player');
-    // console.log(player);
-    const getPlayerBoard = player.gameboard.getGameboard();
-    const placeBattleShip = player.gameboard.placeShip(battleShip, 0, 0, 4, 'horizontal');
-    const placeDestroyer = player.gameboard.placeShip(destroyer, 1, 1, 4, 'horizontal');
-    const placePatrolBoat = player.gameboard.placeShip(patrolBoat, 2, 2, 2, 'horizontal');
-    const placeCarrierBoat = player.gameboard.placeShip(carrierBoat, 3, 3, 4, 'horizontal');
-    const placeSubmarine = player.gameboard.placeShip(submarine, 4, 4, 3, 'horizontal');
-    console.log(getPlayerBoard);
-    return getPlayerBoard;
-  } 
+  // export function placeShipsOnPlayersBoard(user) { 
+  //   const player = user; 
+  //   const battleShip = ship('Battleship', 4, 'vertical');
+  //   const destroyer = ship('Destroyer', 4, 'horizontal' );
+  //   const patrolBoat = ship('Patrol-boat', 2, 'vertical');
+  //   const carrierBoat = ship('Carrier', 4, 'horizontal');
+  //   const submarine = ship('Submarine', 3, 'vertical');
+  //   // const player = createPlayer('player', 'player');
+  //   // console.log(player);
+  //   const getPlayerBoard = player.gameboard.getGameboard();
+  //   const placeBattleShip = player.gameboard.placeShip(battleShip, 0, 0, 4, 'horizontal');
+  //   const placeDestroyer = player.gameboard.placeShip(destroyer, 1, 1, 4, 'horizontal');
+  //   const placePatrolBoat = player.gameboard.placeShip(patrolBoat, 2, 2, 2, 'horizontal');
+  //   const placeCarrierBoat = player.gameboard.placeShip(carrierBoat, 3, 3, 4, 'horizontal');
+  //   const placeSubmarine = player.gameboard.placeShip(submarine, 4, 4, 3, 'horizontal');
+  //   console.log(getPlayerBoard);
+  //   return getPlayerBoard;
+  // } 
 
-  export function placeShipsOnComputersBoard(user) { 
-    const computer = user;
-    const battleShip = ship('Battleship', 4, 'vertical');
-    const destroyer = ship('Destroyer', 4, 'horizontal' );
-    const patrolBoat = ship('Patrol-boat', 2, 'vertical');
-    const carrierBoat = ship('Carrier', 4, 'horizontal');
-    const submarine = ship('Submarine', 3, 'vertical');
-    // const computer = createPlayer('PC', 'computer');
-    const getComputerBoard = computer.gameboard.getGameboard();
-    const placeBattleShip = computer.gameboard.placeShip(battleShip, 0, 0, 4, 'horizontal');
-    const placeDestroyer = computer.gameboard.placeShip(destroyer, 1, 1, 4, 'horizontal');
-    const placePatrolBoat = computer.gameboard.placeShip(patrolBoat, 2, 2, 2, 'horizontal');
-    const placeCarrierBoat = computer.gameboard.placeShip(carrierBoat, 3, 3, 4, 'horizontal');
-    const placeSubmarine = computer.gameboard.placeShip(submarine, 7, 4, 3, 'horizontal');
-    console.log(getComputerBoard);
-    return getComputerBoard;
+  // export function placeShipsOnComputersBoard(user) { 
+  //   const computer = user;
+  //   const battleShip = ship('Battleship', 4, 'vertical');
+  //   const destroyer = ship('Destroyer', 4, 'horizontal' );
+  //   const patrolBoat = ship('Patrol-boat', 2, 'vertical');
+  //   const carrierBoat = ship('Carrier', 4, 'horizontal');
+  //   const submarine = ship('Submarine', 3, 'vertical');
+  //   // const computer = createPlayer('PC', 'computer');
+  //   const getComputerBoard = computer.gameboard.getGameboard();
+  //   const placeBattleShip = computer.gameboard.placeShip(battleShip, 0, 0, 4, 'horizontal');
+  //   const placeDestroyer = computer.gameboard.placeShip(destroyer, 1, 1, 4, 'horizontal');
+  //   const placePatrolBoat = computer.gameboard.placeShip(patrolBoat, 2, 2, 2, 'horizontal');
+  //   const placeCarrierBoat = computer.gameboard.placeShip(carrierBoat, 3, 3, 4, 'horizontal');
+  //   const placeSubmarine = computer.gameboard.placeShip(submarine, 7, 4, 3, 'horizontal');
+  //   console.log(getComputerBoard);
+  //   return getComputerBoard;
 
-  }
+  // }
 
 
   export function checkForWinner(userObj) { 
