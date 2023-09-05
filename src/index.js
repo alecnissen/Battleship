@@ -7,7 +7,31 @@ import './playerFactory.js';
 
 import './gameModule.js';
 
-import './domLogic.js';
+import './domLogic.js'; 
+
+
+
+
+// today will be about placing the computers ships randomly on the board, 
+// player is able to place their ships, now is the time for the computer 
+// also consider using your player factory, remeber each player needs their own gameboard
+// where would the player factory be called? 
+// once they place there ship? 
+// before moving on lets consider how we can tie the player board to the ship placement, 
+// we can place ships, but we need to make sure the board is connected to a player, 
+// same process for the computer 
+
+
+// now randomly place computers ships, 
+
+// first start with creating the computer instance/gamebaord 
+
+
+
+
+
+
+
 
 // import './style.css';
 

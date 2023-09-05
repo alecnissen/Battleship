@@ -2,12 +2,18 @@ import ship from './shipFactory.js';
 import gameboardFactory from './gameboardFactory.js'; 
 import playerFactory from './playerFactory.js';
 import './gameModule.js';
+import createPlayer from './gameModule.js';
 // import { placeShipsOnPlayersBoard, playGame } from './gameModule.js';
 // import gameboardFactory from './gameboardFactory.js';
 
 const gridContainer = document.getElementById('gameboard-grid-container');
 
 let gameboard = gameboardFactory();
+
+let playerGameboard = createPlayer('Alec', 'player');
+console.log(playerGameboard);
+let computerGameboard = createPlayer('Sonny', 'computer');
+console.log(computerGameboard); 
 
 let currentShip 
 let currentCell
@@ -31,11 +37,11 @@ changeShipPositionBtnHorizontal.addEventListener('click', (e) => {
 })
 
 changeShipPositionBtn.addEventListener('click', (e) => {  
-    console.log('before changing', currentShipDirection);
+    // console.log('before changing', currentShipDirection);
     currentShipDirection = 'vertical';
-    console.log('after changing', currentShipDirection);
+    // console.log('after changing', currentShipDirection);
 }) 
-
+// hover class
 function findCoords(currentCell, currentShipDirection, currentShipLength) { 
     let selectedCell = currentCell;
     let selectedShipDirection = currentShipDirection;
@@ -78,22 +84,16 @@ function findCoords(currentCell, currentShipDirection, currentShipLength) {
 
 
 
-// will accept the passed in coordinates, this will include all the cells that will need to be filled, 
+// hover class, filling in the selected cells 
 function useCoords(coords) {
     let passedCoordinates = coords;
     for (let i = 0; i < passedCoordinates.length; i++) { 
         let coordinate = passedCoordinates[i];
         let row = coordinate[0];
-        // console.log(row);
         let column = coordinate[1];
         let cell = document.querySelector(`[data-row="${row}"][data-column="${column}"]`); // find the DOM cells that correspond to the coordinates passed in,
        //  console.log(cell);
-        // cell.classList.add('battleship-hover-class'); 
-        cell.classList.toggle('battleship-hover-class');  
-        // cell.addEventListener('click', (e) => { 
-        //     console.log('HELLLLO');
-        //     console.log(e.target);
-        // })    
+        cell.classList.toggle('battleship-hover-class');     
     } 
 } 
 
@@ -111,19 +111,59 @@ function placeCurrentShip(x, y, currentShip, currentShipLength, currentShipDirec
     console.log(selectedShip);
     console.log(selectedShipLength);
     console.log(selectedShipDirection); 
-    
-    gameboard.placeShip(selectedShip, selectedXCoordinate, selectedYCoordinate, selectedShipLength, selectedShipDirection);
 
-    console.log(gameboard.getGameboard()); 
+    // this was the original, that did place all ships
+    // gameboard.placeShip(selectedShip, selectedXCoordinate, selectedYCoordinate, selectedShipLength, selectedShipDirection);
 
-    
+    playerGameboard.gameboard.placeShip(selectedShip, selectedXCoordinate, selectedYCoordinate, selectedShipLength, selectedShipDirection);
+    console.log(playerGameboard.gameboard.getGameboard());
+    getShipCoordinates(selectedXCoordinate, selectedYCoordinate, selectedShipLength, selectedShipDirection);
+} 
 
-    // call another function to place ship styles, 
-    // is it just following the same process as the hover class, 
-    // we send the coordinates that were clicked on, 
-    // determine ships length and position, 
+function getShipCoordinates(x, y, length, position) { 
+    let coordianteX = x;
+    let coordinateY = y; 
+    let currentShipLength = length; 
+    let currentShipPosition = position;
+
+    console.log(typeof coordianteX);
+    console.log(coordinateY);
+    console.log(currentShipLength);
+    console.log(currentShipPosition); 
+
+    if (currentShipPosition === 'vertical') { 
+        let updatedCoordinatesX = [];
+        for (let i = 0; i < currentShipLength; i++) { 
+            let updatedXCoordinate
+            updatedXCoordinate = coordianteX + i;
+            updatedCoordinatesX.push([updatedXCoordinate, coordinateY]);
+            console.log(updatedCoordinatesX);
+        }
+        displayShipStyles(updatedCoordinatesX);
+    } else if (currentShipPosition === 'horizontal') { 
+     let updatedCoordinatesY = [];   
+     for (let i = 0; i < currentShipLength; i++) { 
+        let updatedYCoordinate
+        updatedYCoordinate = coordinateY + i;
+        updatedCoordinatesY.push([coordianteX, updatedYCoordinate]);
+        console.log(updatedCoordinatesY);
+    }
+    displayShipStyles(updatedCoordinatesY);
+    } 
+
+    function displayShipStyles(coords) { 
+        let passedCoordinates = coords;
+        for (let i = 0; i < passedCoordinates.length; i++) { 
+            let coordinate = passedCoordinates[i];
+            let row = coordinate[0];
+            let column = coordinate[1];
+            let cell = document.querySelector(`[data-row="${row}"][data-column="${column}"]`)
+            cell.classList.toggle('battleship-hover-class'); 
+        }
+    }   
 }
 
+ 
 
 // gameboard grid
 for (let i = 0; i < 10; i++) { 
@@ -140,7 +180,6 @@ for (let i = 0; i < 10; i++) {
     gameboardCell.addEventListener('click', (e) => { 
         // click on cell, grab current ship, length and position, 
         // send to function which places that current ship on the board, 
-
 
         const clickedCell = gameboard[i][j]; 
         // console.log(clickedCell);
