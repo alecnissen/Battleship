@@ -21,20 +21,16 @@ export default function gameboardFactory() {
         if (x + i > 9) { 
           return false 
         }     
-
         if (gameboard[x + i][y] !== '') {
           return false;
         } 
       }
     }
-
     if (position === 'horizontal') {
       for (let i = 1; i <= length - 1; i++) { 
-
         if (y + i > 9) { 
           return false;
         }
-
         if (gameboard[x][y + i] !== '') {
           return false;
         }

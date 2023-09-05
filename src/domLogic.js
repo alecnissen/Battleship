@@ -97,9 +97,6 @@ function useCoords(coords) {
     } 
 } 
 
-
-
-
 function placeCurrentShip(x, y, currentShip, currentShipLength, currentShipDirection) { 
     let selectedXCoordinate = x;
     let selectedYCoordinate = y; 
@@ -113,10 +110,18 @@ function placeCurrentShip(x, y, currentShip, currentShipLength, currentShipDirec
 
     console.log(selectedShip);
     console.log(selectedShipLength);
-    console.log(selectedShipDirection);
+    console.log(selectedShipDirection); 
     
     gameboard.placeShip(selectedShip, selectedXCoordinate, selectedYCoordinate, selectedShipLength, selectedShipDirection);
 
+    console.log(gameboard.getGameboard()); 
+
+    
+
+    // call another function to place ship styles, 
+    // is it just following the same process as the hover class, 
+    // we send the coordinates that were clicked on, 
+    // determine ships length and position, 
 }
 
 
@@ -147,9 +152,11 @@ for (let i = 0; i < 10; i++) {
         let yCoordinate
         xCoordinate = e.target.dataset.row; 
         yCoordinate =  e.target.dataset.column;
-        // console.log(xCoordinate);
-        // console.log(yCoordinate); 
-        placeCurrentShip(xCoordinate, yCoordinate, currentShip, currentShipLength, currentShipDirection);
+        let numberedXCoordinate = Number(xCoordinate);
+        let numberedYCoordinate = Number(yCoordinate);
+        console.log(typeof numberedXCoordinate);
+        console.log(typeof numberedYCoordinate); 
+        placeCurrentShip(numberedXCoordinate, numberedYCoordinate, currentShip, currentShipLength, currentShipDirection);
 
     }) 
 
