@@ -111,11 +111,11 @@ function placeCurrentShip(x, y, currentShip, currentShipLength, currentShipDirec
     let selectedShipLength = currentShipLength;
     let selectedShipDirection = currentShipDirection;
 
-    console.log(selectedShip.shipName);
+    console.log(selectedShip);
     console.log(selectedShipLength);
     console.log(selectedShipDirection);
     
-    gameboard.placeShip(selectedXCoordinate, selectedYCoordinate, selectedShip.shipName, selectedShipLength, selectedShipDirection);
+    gameboard.placeShip(selectedShip, selectedXCoordinate, selectedYCoordinate, selectedShipLength, selectedShipDirection);
 
 }
 
