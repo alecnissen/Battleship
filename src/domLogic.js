@@ -12,7 +12,7 @@ let gameboard = gameboardFactory();
 
 let playerGameboard = createPlayer('Alec', 'player');
 console.log(playerGameboard);
-let computerGameboard = createPlayer('Sonny', 'computer');
+let computerGameboard = createPlayer('IBM', 'computer');
 console.log(computerGameboard); 
 
 let currentShip 
@@ -25,100 +25,61 @@ let patrolBoat = ship('Patrol-boat', 2, 'vertical');
 let carrierBoat = ship('Carrier', 5, 'horizontal');
 let submarine = ship('Submarine', 3, 'vertical'); 
 
-let computerArray = [battleShip, destroyer, patrolBoat, carrierBoat, submarine]; 
+// let computerArray = [battleShip, destroyer, patrolBoat, carrierBoat, submarine]; 
 
-console.log(computerArray);
+// initiate an array named failedCoordinates
+// initate an array containing all the ships you need to eventually place
+// make a loop: while there are ships in the ships array, keep looping
+// inside the loop:
+// generate random coordinates
+// check if the coordinates are inside failCoordinates
+// if they are, return
+// if they aren't try to place the ship
+// if ship placement work, remove the ship from the ships array and repeat the loop
+// if ship placement failed, add to the failedCoordinates array and repeat the loop
 
-// begin by seeing if you can place them first, then work logic which can select random direction so it is not hardcoded in, and is truly random 
-// apply a random value when looping? 
+function placeComputerShips() { 
+    let failedCoordinates = [];
+    let computerArray = [battleShip, destroyer, patrolBoat, carrierBoat, submarine]; 
 
+    for(let i = 0; i < computerArray.length; i++) { 
+        let selectedShip = computerArray[i];
+        console.log(selectedShip);
+        let randomCoordinateX = Math.floor(Math.random() * 9) + 1;
+        let randomCoordinateY = Math.floor(Math.random() * 9) + 1; 
 
-// first put the ships into an array, use placeShip method on the computers own gameboard, consider also when u call this function, maybe after all ships are placed, 
-// or if it really does not make a difference? computers ships are already randomly placed on page load, 
-// you dont need to see the players ships, only players, not need to apply styles 
-
-// function randomly place computers ships, 
-// // an array of ship objects, 
-
-
-function placeComputerShips(computerArray) { 
-    let invalidShips = [];
-    console.log('invalid ships array before loop', invalidShips);
-    for (let i = 0; i < computerArray.length; i++) { 
-        let computersShip = computerArray[i];
-        console.log(computersShip.shipPosition);
-
-        let randomCoordinate1 = Math.floor(Math.random() * 9) + 1;
-        let randomCoordinate2 = Math.floor(Math.random() * 9) + 1;
-
-        let anotherRandomCoordinate1 = Math.floor(Math.random() * 9) + 1;
-        let anotherRandomCoordinate2 = Math.floor(Math.random() * 9) + 1;
-
-        let isValidShipPlacement = computerGameboard.gameboard.checkForShip(randomCoordinate1, randomCoordinate2, computersShip.shipLength, computersShip.shipPosition);
-        
-        console.log(isValidShipPlacement);
-
-        // and then everytime you generate random coordinates, you first check if they appear in the array, if not -> try them, if else -> regenerate
-
-        // when you find invalid coordinates you add them to the array and then return
-        // and then everytime you generate random coordinates, you first check if they appear in the array, if not -> try them, if else -> regenerate re-assign the variable 
-        // when we generate random coordinates wrap it in an if statement, 
-
-        // let invalidShips = [];
-        // valid ship placement
-        if (isValidShipPlacement) { 
-            console.log('true ship placement found');
-            computerGameboard.gameboard.placeShip(computersShip, randomCoordinate1, randomCoordinate2, computersShip.shipLength, computersShip.shipPosition);
-        } else if (!isValidShipPlacement) { 
-            // we found a false ship placement, try coordinates again? 
-            // return, exit, how to prevent invald ship placement for random computer coordinates, 
-            console.log('false ship placement found');
-            invalidShips.push([randomCoordinate1, randomCoordinate2]);
-            console.log('INVALID COORDINATES!', invalidShips);
-
-            if (invalidShips.includes([anotherRandomCoordinate1, anotherRandomCoordinate2])) { 
-                // return;
-                console.log('TRUE');
-            }
-
-            // try again with a different set of coordinates? 
-              computerGameboard.gameboard.placeShip(computersShip, anotherRandomCoordinate1, anotherRandomCoordinate2, computersShip.shipLength, computersShip.shipPosition);
-        } 
-        // console.log(checkForShipReturnValue);
-
-        // if the value is true, place it, if it fails we need to try again with a different set of coordinates? 
-
-        // if (checkForShipReturnValue) { 
-        //     computerGameboard.gameboard.placeShip(computersShip, randomCoordinate1, randomCoordinate2, computersShip.shipLength, computersShip.shipPosition);
-        // } else if (!checkForShipReturnValue) { 
-        //     // computerGameboard.gameboard.placeShip(computersShip, randomCoordinate1, randomCoordinate2, computersShip.shipLength, computersShip.shipPosition);
-        //     console.log('return value is false', 'error');
-        // } 
-        
-        console.log('THIS IS THE COMPUTERS GAMEBOARD W/RANDOM COORDINATES', computerGameboard.gameboard.getGameboard()); 
-    }
-    console.log('invalid ships array after loop', invalidShips);
+        // let isValidShipPlacement = computerGameboard.gameboard.checkForShip(randomCoordinateX, randomCoordinateY, selectedShip.shipLength, selectedShip.shipPosition);
+        // if place ship is called, the ship placement is checked before placement, calling checkForShip method
+        let isValidShipPlacement = computerGameboard.gameboard.placeShip(selectedShip, randomCoordinateX, randomCoordinateY, selectedShip.shipLength, selectedShip.shipPosition);
+        if (failedCoordinates.includes([randomCoordinateX, randomCoordinateY])) {
+            return; 
+        } if (isValidShipPlacement) {
+            // place the ship, if variable returns true
+            computerGameboard.gameboard.placeShip(selectedShip, randomCoordinateX, randomCoordinateY, selectedShip.shipLength, selectedShip.shipPosition);
+            // if ship is placed, remove from the array, loop and place the other ones
+            computerArray.splice(selectedShip, 1);
+        } else if (!isValidShipPlacement)  { 
+            failedCoordinates.push([randomCoordinateX, randomCoordinateY]);
+        }
+    } 
+     console.log(computerGameboard.gameboard.getGameboard());
 } 
 
-placeComputerShips(computerArray);
+placeComputerShips();
+
+// placeComputerShips(computerArray);
 
 // let chosenValue = Math.random() < 0.5 ? value1 : value2;
 
-
-
 const changeShipPositionBtn = document.getElementById('change-ship-direction-btn');
-console.log(changeShipPositionBtn);
 const changeShipPositionBtnHorizontal = document.getElementById('change-ship-direction-btn-h');
-console.log(changeShipPositionBtnHorizontal);
 
 changeShipPositionBtnHorizontal.addEventListener('click', (e) => { 
     currentShipDirection = 'horizontal';
 })
 
 changeShipPositionBtn.addEventListener('click', (e) => {  
-    // console.log('before changing', currentShipDirection);
     currentShipDirection = 'vertical';
-    // console.log('after changing', currentShipDirection);
 }) 
 // hover class
 function findCoords(currentCell, currentShipDirection, currentShipLength) { 
@@ -190,9 +151,6 @@ function placeCurrentShip(x, y, currentShip, currentShipLength, currentShipDirec
     console.log(selectedShip);
     console.log(selectedShipLength);
     console.log(selectedShipDirection); 
-
-    // this was the original, that did place all ships
-    // gameboard.placeShip(selectedShip, selectedXCoordinate, selectedYCoordinate, selectedShipLength, selectedShipDirection);
 
     playerGameboard.gameboard.placeShip(selectedShip, selectedXCoordinate, selectedYCoordinate, selectedShipLength, selectedShipDirection);
     console.log(playerGameboard.gameboard.getGameboard());
