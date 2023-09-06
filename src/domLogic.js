@@ -60,6 +60,8 @@ function placeComputerShips() {
             computerArray.splice(selectedShip, 1);
         } else if (!isValidShipPlacement)  { 
             failedCoordinates.push([randomCoordinateX, randomCoordinateY]);
+            // call function to finish checking all ships and placing. 
+            placeComputerShips();
         }
     } 
      console.log(computerGameboard.gameboard.getGameboard());
