@@ -42,23 +42,62 @@ console.log(computerArray);
 
 
 function placeComputerShips(computerArray) { 
+    let invalidShips = [];
+    console.log('invalid ships array before loop', invalidShips);
     for (let i = 0; i < computerArray.length; i++) { 
         let computersShip = computerArray[i];
         console.log(computersShip.shipPosition);
-        // randomly change ship position 
-        // place them next
-        // randomly get x coordinate and y coordinate
-        // how to prevent random coordinates from going off the board, 
+
         let randomCoordinate1 = Math.floor(Math.random() * 9) + 1;
         let randomCoordinate2 = Math.floor(Math.random() * 9) + 1;
-        console.log(typeof randomCoordinate1); 
-        console.log(typeof randomCoordinate2);
-        // it will place some of the ships, but eventually it will throw an error that ship goes out of bounds or overlaps with another ship, 
-        // place ship already has a checkForShip 
-        // instead of throwing error, should be returning a boolean to make sure placement is legal, this will affect a few of my unit tests. 
-        computerGameboard.gameboard.placeShip(computersShip, randomCoordinate1, randomCoordinate2, computersShip.shipLength, computersShip.shipPosition);
+
+        let anotherRandomCoordinate1 = Math.floor(Math.random() * 9) + 1;
+        let anotherRandomCoordinate2 = Math.floor(Math.random() * 9) + 1;
+
+        let isValidShipPlacement = computerGameboard.gameboard.checkForShip(randomCoordinate1, randomCoordinate2, computersShip.shipLength, computersShip.shipPosition);
+        
+        console.log(isValidShipPlacement);
+
+        // and then everytime you generate random coordinates, you first check if they appear in the array, if not -> try them, if else -> regenerate
+
+        // when you find invalid coordinates you add them to the array and then return
+        // and then everytime you generate random coordinates, you first check if they appear in the array, if not -> try them, if else -> regenerate re-assign the variable 
+        // when we generate random coordinates wrap it in an if statement, 
+
+        // let invalidShips = [];
+        // valid ship placement
+        if (isValidShipPlacement) { 
+            console.log('true ship placement found');
+            computerGameboard.gameboard.placeShip(computersShip, randomCoordinate1, randomCoordinate2, computersShip.shipLength, computersShip.shipPosition);
+        } else if (!isValidShipPlacement) { 
+            // we found a false ship placement, try coordinates again? 
+            // return, exit, how to prevent invald ship placement for random computer coordinates, 
+            console.log('false ship placement found');
+            invalidShips.push([randomCoordinate1, randomCoordinate2]);
+            console.log('INVALID COORDINATES!', invalidShips);
+
+            if (invalidShips.includes([anotherRandomCoordinate1, anotherRandomCoordinate2])) { 
+                // return;
+                console.log('TRUE');
+            }
+
+            // try again with a different set of coordinates? 
+              computerGameboard.gameboard.placeShip(computersShip, anotherRandomCoordinate1, anotherRandomCoordinate2, computersShip.shipLength, computersShip.shipPosition);
+        } 
+        // console.log(checkForShipReturnValue);
+
+        // if the value is true, place it, if it fails we need to try again with a different set of coordinates? 
+
+        // if (checkForShipReturnValue) { 
+        //     computerGameboard.gameboard.placeShip(computersShip, randomCoordinate1, randomCoordinate2, computersShip.shipLength, computersShip.shipPosition);
+        // } else if (!checkForShipReturnValue) { 
+        //     // computerGameboard.gameboard.placeShip(computersShip, randomCoordinate1, randomCoordinate2, computersShip.shipLength, computersShip.shipPosition);
+        //     console.log('return value is false', 'error');
+        // } 
+        
         console.log('THIS IS THE COMPUTERS GAMEBOARD W/RANDOM COORDINATES', computerGameboard.gameboard.getGameboard()); 
     }
+    console.log('invalid ships array after loop', invalidShips);
 } 
 
 placeComputerShips(computerArray);
@@ -360,8 +399,24 @@ createSubmarineDOMObj();
 
 
 
+// computer placement and random coordinates 
+ // another set of random coordinates for the else,
+        // it will place some of the ships, but eventually it will throw an error that ship goes out of bounds or overlaps with another ship, 
+        // place ship already has a checkForShip 
+        // instead of throwing error, should be returning a boolean to make sure placement is legal, this will affect a few of my unit tests. 
+        // capture value 
+         
+        
+        // computerGameboard.gameboard.placeShip(computersShip, randomCoordinate1, randomCoordinate2, computersShip.shipLength, computersShip.shipPosition);
 
-
+        // if false, it needs to try again, no ships can be placed 
+        // we found a false ship, all the true ones place ok, if a coordinate is false, 
+        // how can I make the ship try to place it again? something within the conditional
+        // right now it will only place true ships, once a ship is false, how can we get it to become true? 
+        // how to make an invalid ship placement valid again, it will place ships that are legal to place (true)
+        // but the ones that return false, what can we do about those? can we try again with different coordinates
+        // keep track of false coordinates and make sure not to use them again? 
+        // use another if inside the else and return and exit if failed coordinates are trying to be used again. 
 
 
 

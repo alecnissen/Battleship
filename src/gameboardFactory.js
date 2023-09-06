@@ -41,10 +41,10 @@ export default function gameboardFactory() {
 
   function placeShip(shipObj, x, y, length, position) {
     if (!checkForShip(x, y, length, position)) {
-      throw new Error('ship is already there or ship is placed off the gameboard, please place ship somewhere else, and on the gameboard'
-      );
-     //  return false;
-    }
+      // throw new Error('ship is already there or ship is placed off the gameboard, please place ship somewhere else, and on the gameboard'
+      // );
+     return false;
+    } else if (checkForShip(x, y, length, position)) { // recently added the else if 
     gameboard[x][y] = shipObj;
 
     if (position === 'vertical') {
@@ -60,6 +60,7 @@ export default function gameboardFactory() {
     }
     return gameboard;
   } 
+} 
 
 function checkForHits(x, y) { 
     for (let i = 0; i < hitShots.length; i++) { 

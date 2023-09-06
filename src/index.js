@@ -41,6 +41,35 @@ import './domLogic.js';
 // get the return value, if the return value is true, place the ship, else try again with another pair of random coordinates, 
 // keep track of repeated failed shots, so the coordinates do not repeat themselves 
 
+// I Will have to go back to the help channels tonight, this is not really making sense, 
+// I feel like I am doing the same thing, already checking what the function call returns, 
+
+// I am trying to randomly place computer ships on its board, the problem is eventually the ship will collide with another ship, or go out of bounds, I am using random coordinates 
+
+// I am already checking if the move is legal, placeShip calls a checkForShip function which checks if move is legal, 
+
+// well I tried returning false if the checkForShip returns false, instead of throwing an error, but there is still no way to stop it from placing, 
+
+// I tried returning false if illegal, but there is still no way to prevent the ship from still being placed. 
+
+// is there a way I can fix this? IS there some other type of check or conditional I can use to prevent ship from being placed illegally? 
+
+
+
+// Logging the error is just for yourself to see
+// The important part is returning false if the placing failed and true if the placing succeeded
+// And then you can use that return value
+// const isPlacingSucceeded = gameboard.placeship()
+// And then if(isPlacingSucceeded) try next ship
+// Else try to place the same ship again with different coordinates
+// And then, you have another issue to deal with, because with this logic it can get into a loop
+// And potentially repeat failed coordinates over and over, how can you solve this?
+
+// allow the computer to generate random coordinates and make sure each coordinate is legal, 
+// 
+
+
+
 
 
 
