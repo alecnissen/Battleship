@@ -78,7 +78,7 @@ function checkForHits(x, y) {
     if (typeof shipOnBoard === 'object') { 
       if (checkForHits(x, y)) {
          throw new Error('Hit was already placed at that cell, pick a different cell');
-      }
+      } 
       shipOnBoard.hitIncrementor();
       hitShots.push([x, y])
 
