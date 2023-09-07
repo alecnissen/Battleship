@@ -36,15 +36,19 @@ let submarine = ship('Submarine', 3, 'vertical');
 // if they are, return
 // if they aren't try to place the ship
 // if ship placement work, remove the ship from the ships array and repeat the loop
-// if ship placement failed, add to the failedCoordinates array and repeat the loop
+// if ship placement failed, add to the failedCoordinates array and repeat the loop 
+
+// why are only two ships being logged back, 
+// why are all ships not being logged back, 
+
 
 function placeComputerShips() { 
     let failedCoordinates = [];
     let computerArray = [battleShip, destroyer, patrolBoat, carrierBoat, submarine]; 
+    console.log(computerArray);
 
-    // while (computerArray.length <= 0) {
-        // no base case to prevent the function from ending?  
-        // return;
+    // while (computerArray.length === 0) {
+    //     return;
     // } 
     for(let i = 0; i < computerArray.length; i++) { 
         let selectedShip = computerArray[i];
@@ -54,7 +58,7 @@ function placeComputerShips() {
 
          // let isValidShipPlacement = computerGameboard.gameboard.checkForShip(randomCoordinateX, randomCoordinateY, selectedShip.shipLength, selectedShip.shipPosition);
         // if place ship is called, the ship placement is checked before placement, calling checkForShip method
-         let isValidShipPlacement = computerGameboard.gameboard.placeShip(selectedShip, randomCoordinateX, randomCoordinateY, selectedShip.shipLength, selectedShip.shipPosition);
+        let isValidShipPlacement = computerGameboard.gameboard.placeShip(selectedShip, randomCoordinateX, randomCoordinateY, selectedShip.shipLength, selectedShip.shipPosition);
         console.log(isValidShipPlacement);
         // this is continously returning false?  
         if (failedCoordinates.includes([randomCoordinateX, randomCoordinateY])) {
@@ -68,7 +72,7 @@ function placeComputerShips() {
         } else if (!isValidShipPlacement)  { 
             failedCoordinates.push([randomCoordinateX, randomCoordinateY]);
             // call function to finish checking all ships and placing. 
-            placeComputerShips();
+            // placeComputerShips();
         }
     } 
         console.log(computerGameboard.gameboard.getGameboard());
