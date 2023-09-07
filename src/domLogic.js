@@ -41,11 +41,11 @@ let submarine = ship('Submarine', 3, 'vertical');
 // why are only two ships being logged back, 
 // why are all ships not being logged back, 
 
+let computerArray = [battleShip, destroyer, patrolBoat, carrierBoat, submarine]; 
 
 function placeComputerShips() { 
     let failedCoordinates = [];
-    let computerArray = [battleShip, destroyer, patrolBoat, carrierBoat, submarine]; 
-    console.log(computerArray);
+    // console.log(computerArray);
 
     // while (computerArray.length === 0) {
     //     return;
@@ -59,7 +59,7 @@ function placeComputerShips() {
          // let isValidShipPlacement = computerGameboard.gameboard.checkForShip(randomCoordinateX, randomCoordinateY, selectedShip.shipLength, selectedShip.shipPosition);
         // if place ship is called, the ship placement is checked before placement, calling checkForShip method
         let isValidShipPlacement = computerGameboard.gameboard.placeShip(selectedShip, randomCoordinateX, randomCoordinateY, selectedShip.shipLength, selectedShip.shipPosition);
-        console.log(isValidShipPlacement);
+        // console.log(isValidShipPlacement);
         // this is continously returning false?  
         if (failedCoordinates.includes([randomCoordinateX, randomCoordinateY])) {
             //  return; 
@@ -72,7 +72,7 @@ function placeComputerShips() {
         } else if (!isValidShipPlacement)  { 
             failedCoordinates.push([randomCoordinateX, randomCoordinateY]);
             // call function to finish checking all ships and placing. 
-            // placeComputerShips();
+            placeComputerShips();
         }
     } 
         console.log(computerGameboard.gameboard.getGameboard());
