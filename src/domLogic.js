@@ -52,12 +52,13 @@ function placeComputerShips() {
         let randomCoordinateX = Math.floor(Math.random() * 9) + 1;
         let randomCoordinateY = Math.floor(Math.random() * 9) + 1; 
 
-        // let isValidShipPlacement = computerGameboard.gameboard.checkForShip(randomCoordinateX, randomCoordinateY, selectedShip.shipLength, selectedShip.shipPosition);
+         // let isValidShipPlacement = computerGameboard.gameboard.checkForShip(randomCoordinateX, randomCoordinateY, selectedShip.shipLength, selectedShip.shipPosition);
         // if place ship is called, the ship placement is checked before placement, calling checkForShip method
-        let isValidShipPlacement = computerGameboard.gameboard.placeShip(selectedShip, randomCoordinateX, randomCoordinateY, selectedShip.shipLength, selectedShip.shipPosition);
-        // console.log(isValidShipPlacement);
+         let isValidShipPlacement = computerGameboard.gameboard.placeShip(selectedShip, randomCoordinateX, randomCoordinateY, selectedShip.shipLength, selectedShip.shipPosition);
+        console.log(isValidShipPlacement);
+        // this is continously returning false?  
         if (failedCoordinates.includes([randomCoordinateX, randomCoordinateY])) {
-            // return; 
+            //  return; 
              placeComputerShips();
         } if (isValidShipPlacement) {
             // place the ship, if variable returns true
