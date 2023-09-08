@@ -20,9 +20,9 @@ let currentCell
 let currentShipLength
 let currentShipDirection
 let battleShip = ship('Battleship', 4, 'vertical');
-let destroyer = ship('Destroyer', 4, 'horizontal' );
+let destroyer = ship('Destroyer', 4, 'vertical' );
 let patrolBoat = ship('Patrol-boat', 2, 'vertical');
-let carrierBoat = ship('Carrier', 5, 'horizontal');
+let carrierBoat = ship('Carrier', 5, 'vertical');
 let submarine = ship('Submarine', 3, 'vertical'); 
 
 // let computerArray = [battleShip, destroyer, patrolBoat, carrierBoat, submarine]; 
@@ -41,43 +41,60 @@ let submarine = ship('Submarine', 3, 'vertical');
 // why are only two ships being logged back, 
 // why are all ships not being logged back, 
 
-let computerArray = [battleShip, destroyer, patrolBoat, carrierBoat, submarine]; 
 
-function placeComputerShips() { 
-    let failedCoordinates = [];
-    // console.log(computerArray);
+// let currentShip = computerShipArray[0];
 
-    // while (computerArray.length === 0) {
-    //     return;
-    // } 
-    for(let i = 0; i < computerArray.length; i++) { 
-        let selectedShip = computerArray[i];
-        console.log(selectedShip);
+// console.log(currentShip);
+
+// currentComputerShip 
+
+// how to keep the loop and cycle going. 
+// without the loop, 
+// 
+
+// using recursion, 
+// what am I removing from, removing one from the array each time, 
+// 
+// (currentComputerShip = computerShipArray[0]) - 1 
+
+// trying to think of how to use recursion here, 
+// what are we removing from? 
+// removing one from the array each time, 
+// computerShipArray = computerShipArray[0] - 1
+
+// while there are still ships in the array, keep recursing until the array length is 0 
+
+// if (computerShipArray.length === 0) { 
+    // return;
+    // }
+    let computerShipArray = [battleShip, destroyer, patrolBoat, carrierBoat, submarine];
+    
+    function placeComputerShips(currentComputerShip = computerShipArray[0]) { 
+        if (computerShipArray.length === 0) { 
+            return;
+        } 
+
+        let verticalDirection = 'vertical';
+        let horizontalDirection = 'horizontal'; 
+        let randomShipDirection = Math.random() < 0.5 ? verticalDirection : horizontalDirection;
+        console.log(randomShipDirection);
+
+        let failedCoordinates = [];
         let randomCoordinateX = Math.floor(Math.random() * 9) + 1;
         let randomCoordinateY = Math.floor(Math.random() * 9) + 1; 
-
-         // let isValidShipPlacement = computerGameboard.gameboard.checkForShip(randomCoordinateX, randomCoordinateY, selectedShip.shipLength, selectedShip.shipPosition);
-        // if place ship is called, the ship placement is checked before placement, calling checkForShip method
-        let isValidShipPlacement = computerGameboard.gameboard.placeShip(selectedShip, randomCoordinateX, randomCoordinateY, selectedShip.shipLength, selectedShip.shipPosition);
-        // console.log(isValidShipPlacement);
-        // this is continously returning false?  
-        if (failedCoordinates.includes([randomCoordinateX, randomCoordinateY])) {
-            //  return; 
+        let isValidShipPlacement = computerGameboard.gameboard.placeShip(currentComputerShip, randomCoordinateX, randomCoordinateY, currentComputerShip.shipLength, currentComputerShip.shipPosition);
+        if (failedCoordinates.includes([randomCoordinateX, randomCoordinateY])) { 
              placeComputerShips();
         } if (isValidShipPlacement) {
-            // place the ship, if variable returns true
-            computerGameboard.gameboard.placeShip(selectedShip, randomCoordinateX, randomCoordinateY, selectedShip.shipLength, selectedShip.shipPosition);
-            // if ship is placed, remove from the array, loop and place the other ones
-            computerArray.splice(selectedShip, 1);
+            computerGameboard.gameboard.placeShip(currentComputerShip, randomCoordinateX, randomCoordinateY, currentComputerShip.shipLength, currentComputerShip.shipPosition);
+            computerShipArray.splice(currentComputerShip, 1);
+            placeComputerShips();
         } else if (!isValidShipPlacement)  { 
             failedCoordinates.push([randomCoordinateX, randomCoordinateY]);
-            // call function to finish checking all ships and placing. 
             placeComputerShips();
         }
-    } 
         console.log(computerGameboard.gameboard.getGameboard());
     } 
-
 
 placeComputerShips();
 
