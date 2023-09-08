@@ -11,15 +11,10 @@ import './domLogic.js';
 
 
 
-
-// today will be about placing the computers ships randomly on the board, 
-// player is able to place their ships, now is the time for the computer 
-// also consider using your player factory, remeber each player needs their own gameboard
-// where would the player factory be called? 
-// once they place there ship? 
-// before moving on lets consider how we can tie the player board to the ship placement, 
-// we can place ships, but we need to make sure the board is connected to a player, 
-// same process for the computer 
+// we got the computers ship randomly placing. 
+// next I will refactor my unit tests. 
+// the unit tests must pass before moving forward, remember its returning false instead of throwing an error \
+// so expect the function or function call to have returned false. 
 
 
 // now randomly place computers ships, 
@@ -67,81 +62,6 @@ import './domLogic.js';
 
 // allow the computer to generate random coordinates and make sure each coordinate is legal, 
 // 
-
-
-
-
-
-
-// import './style.css';
-
-// import './main.scss';
-
-
-// work on adding hover class to ship object, 
-
-// read over rays posts and determine how to approach, 
-
-// throughly understand what to do before moving forward. 
-
-
-
-// currentShip variable 
-// length of the currentShip variable, 
-// currentDirection, which direction the ship wants to be placed, 
-
-// we can use this knowledge to find the cells that need to be highlighted, 
-
-// write a  function which can calculate the coordinates based on current cell and length of the ship 
-// should returns coordinates 
-
-// example 
-// current direction is vertical 
-// find the current cells coordinates based on length of the ship, 
-// and pass into function to see what cells need to be added 
-
-// consider vertical and horizontal 
-
-// once we found the new coordinates we can select them via data attritubes 
-
-// remove the classes and styling whenever the cell changes 
-
-// try to get the smallest example working, 
-
-// start with currentShip variable
-
-
-
-// function findCoords(currentCell, direction, shipLength) {
-//   // if the coordinate is vertical
-//     //  add onto the X of the currentCells data-x, but leave data-y
-//          // return lists of coordinates
-//   // if the direction is horiz
-//     //  add onto the Y of the currentCells data-y, but leave data-x
-//       //  return list of coordinates (probably an array of each Y cord.)
-// }
-
-// function useCoords() {
-//     // get cords from above
-//     // loop through the cords, selecting the cells by using the data-attributes
-//     // add the same highlight class.
-// }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

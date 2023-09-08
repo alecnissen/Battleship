@@ -82,11 +82,11 @@ let submarine = ship('Submarine', 3, 'vertical');
         let failedCoordinates = [];
         let randomCoordinateX = Math.floor(Math.random() * 9) + 1;
         let randomCoordinateY = Math.floor(Math.random() * 9) + 1; 
-        let isValidShipPlacement = computerGameboard.gameboard.placeShip(currentComputerShip, randomCoordinateX, randomCoordinateY, currentComputerShip.shipLength, currentComputerShip.shipPosition);
+        let isValidShipPlacement = computerGameboard.gameboard.placeShip(currentComputerShip, randomCoordinateX, randomCoordinateY, currentComputerShip.shipLength, randomShipDirection);
         if (failedCoordinates.includes([randomCoordinateX, randomCoordinateY])) { 
              placeComputerShips();
         } if (isValidShipPlacement) {
-            computerGameboard.gameboard.placeShip(currentComputerShip, randomCoordinateX, randomCoordinateY, currentComputerShip.shipLength, currentComputerShip.shipPosition);
+            computerGameboard.gameboard.placeShip(currentComputerShip, randomCoordinateX, randomCoordinateY, currentComputerShip.shipLength, randomShipDirection);
             computerShipArray.splice(currentComputerShip, 1);
             placeComputerShips();
         } else if (!isValidShipPlacement)  { 
