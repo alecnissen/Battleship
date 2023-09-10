@@ -14,10 +14,13 @@ export default function gameboardFactory() {
   function getGameboard() {
     return gameboard;
   }
+// previously for (let i = 1; i <= length - 1; i++) 
+// changed to 0, i < length, 
+// this works too for (let i = 0; i <= length - 1; i++)
 
   function checkForShip(x, y, length, position) { 
     if (position === 'vertical') { 
-      for (let i = 1; i <= length - 1; i++) { 
+      for (let i = 0; i < length; i++) { 
         if (x + i > 9) { 
           return false 
         }     
@@ -27,7 +30,7 @@ export default function gameboardFactory() {
       }
     }
     if (position === 'horizontal') {
-      for (let i = 1; i <= length - 1; i++) { 
+      for (let i = 0; i < length; i++) { 
         if (y + i > 9) { 
           return false;
         }
@@ -41,25 +44,27 @@ export default function gameboardFactory() {
 
   function placeShip(shipObj, x, y, length, position) {
     if (!checkForShip(x, y, length, position)) {
-      // throw new Error('ship is already there or ship is placed off the gameboard, please place ship somewhere else, and on the gameboard'
-      // );
+      // throw new Error('ship is already there or ship is placed off the gameboard, please place ship somewhere else, and on the gameboard');
+      console.log('ERROR SHIP OVERLAP! Current shipObj is', shipObj);
+      // alert('ERROR SHIP OVERLAP, PLEASE REFRESH AND PLACE SHIPS SO THEY DO NOT OVERLAP OR INTERSECT!');
      return false;
-    } else if (checkForShip(x, y, length, position)) { // recently added the else if 
+     } 
+     // else if (checkForShip(x, y, length, position)) { // recently added the else if 
     gameboard[x][y] = shipObj;
-
+     
     if (position === 'vertical') {
-      for (let i = 1; i <= length - 1; i++) {
+      for (let i = 0; i < length; i++) {
         gameboard[x + i][y] = shipObj;
       }
     }
 
     if (position === 'horizontal') {
-      for (let i = 1; i <= length - 1; i++) {
+      for (let i = 0; i < length; i++) {
         gameboard[x][y + i] = shipObj;
       }
     }
     return gameboard;
-  } 
+  // } 
 } 
 
 function checkForHits(x, y) { 
@@ -77,7 +82,9 @@ function checkForHits(x, y) {
     const shipOnBoard = gameboard[x][y]; 
     if (typeof shipOnBoard === 'object') { 
       if (checkForHits(x, y)) {
-         throw new Error('Hit was already placed at that cell, pick a different cell');
+        // if there is already a hit there, 
+         // throw new Error('Hit was already placed at that cell, pick a different cell');
+         return true;
       } 
       shipOnBoard.hitIncrementor();
       hitShots.push([x, y])

@@ -9,12 +9,34 @@ import './gameModule.js';
 
 import './domLogic.js'; 
 
+// figure out the last jest error, 
+// in the meantime we need to figure out how to start the game 
+/// and what would need to happen for the game to start? 
+// all player ships are placed 
+// comps ships are randomly placed on the board 
+
+// we need a way to determine if all five player ships have been placed
+// look over and see what we can find 
+
+// place player ship function 
+// access the gameboard for player
+// loop thru it and init an array, 
+// if the arr is empty all ships have been placed, start the game. 
+
 
 
 // we got the computers ship randomly placing. 
 // next I will refactor my unit tests. 
 // the unit tests must pass before moving forward, remember its returning false instead of throwing an error \
-// so expect the function or function call to have returned false. 
+// so expect the function or function call to have returned false.
+
+// FUCK JEST 
+
+// problem is now unit tests are not passing after changing a function to return false instead of throwing an error. 
+// wrote tests and expected to receive false, after making ships overlap but test still does not pass, 
+// removed the coee from the anonymous function, and tried again, same thing not passsing, 
+// the only way it would pass. is if I change it to the same direction, 
+// but why when I give same coordinates but different directions it still fails, when ships should clearly be overlapping? 
 
 
 // now randomly place computers ships, 

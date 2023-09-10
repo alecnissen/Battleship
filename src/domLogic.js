@@ -229,9 +229,7 @@ function getShipCoordinates(x, y, length, position) {
             cell.classList.toggle('battleship-hover-class'); 
         }
     }   
-}
-
- 
+} 
 
 // gameboard grid
 for (let i = 0; i < 10; i++) { 

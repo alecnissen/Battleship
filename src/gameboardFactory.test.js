@@ -22,45 +22,91 @@ test('testing to see if ship was placed at specific coordinates, 2nd instance', 
 }); 
 
 // overlap test #1
+// .toThrow('ship is already there or ship is placed off the gameboard, please place ship somewhere else, and on the gameboard');
+// test('testing to see if ship is already taken in that spot and if ships intersect or overlap', () => {
+//     let battleShip = ship('Battleship', 4, 'vertical'); 
+//     let destroyer = ship('Destroyer', 4, 'vertical');
+//     let gameboardFactoryCall = gameboardFactory();
+//     let placeBattleship = gameboardFactoryCall.placeShip(battleShip, 1, 3, 4, 'vertical');
+//     expect(() => {
+//         (gameboardFactoryCall.placeShip(battleShip, 1, 3, 4, 'vertical'));
+//     }).toThrow('ship is already there or ship is placed off the gameboard, please place ship somewhere else, and on the gameboard');
+// }) 
+// overlap test 1 refactor, testing same directions, vertical
 test('testing to see if ship is already taken in that spot and if ships intersect or overlap', () => {
     let battleShip = ship('Battleship', 4, 'vertical'); 
     let destroyer = ship('Destroyer', 4, 'vertical');
     let gameboardFactoryCall = gameboardFactory();
     let placeBattleship = gameboardFactoryCall.placeShip(battleShip, 1, 3, 4, 'vertical');
-    expect(() => {
-        (gameboardFactoryCall.placeShip(battleShip, 1, 3, 4, 'vertical'));
-    }).toThrow('ship is already there or ship is placed off the gameboard, please place ship somewhere else, and on the gameboard');
+    expect(gameboardFactoryCall.placeShip(battleShip, 1, 3, 4, 'vertical')).toBe(false);
 }) 
 
 // overlap test #2 
+// test('testing to see if ship is already taken in that spot and if ships intersect or overlap, 2nd instance', () => {
+//     let battleShip = ship('Battleship', 4, 'vertical'); 
+//     let destroyer = ship('Destroyer', 4, 'vertical');
+//     let gameboardFactoryCall = gameboardFactory();
+//     // let placeBattleship = gameboardFactoryCall.placeShip(battleShip, 0, 0, 4, 'vertical');
+//    //  console.log(gameboardFactoryCall.getGameboard());
+//     expect(() => {
+//         gameboardFactoryCall.placeShip(battleShip, 0, 0, 4, 'vertical');
+//         gameboardFactoryCall.placeShip(battleShip, 0, 0, 4, 'horizontal');
+//     }).toHaveReturnedWith(false);
+// }) 
+
+// test('testing to see if ship is already taken in that spot and if ships intersect or overlap, 2nd instance', () => {
+//     let battleShip = ship('Battleship', 4, 'vertical'); 
+//     let gameboardFactoryCall = gameboardFactory();
+    
+//     // Place the battleship once
+//     let placeBattleship = gameboardFactoryCall.placeShip(battleShip, 0, 0, 4, 'horizontal');
+    
+//     // Attempt to place the battleship again
+//     let result = gameboardFactoryCall.placeShip(battleShip, 0, 0, 4, 'vertical');
+    
+//     expect(result).toBe(false);
+// });
+
+// overlap test 2 refactor, testing with horizontal and vertical 
 test('testing to see if ship is already taken in that spot and if ships intersect or overlap, 2nd instance', () => {
     let battleShip = ship('Battleship', 4, 'vertical'); 
     let destroyer = ship('Destroyer', 4, 'vertical');
     let gameboardFactoryCall = gameboardFactory();
     let placeBattleship = gameboardFactoryCall.placeShip(battleShip, 0, 0, 4, 'vertical');
    //  console.log(gameboardFactoryCall.getGameboard());
-    expect(() => {
-         let placeBattleship = gameboardFactoryCall.placeShip(battleShip, 0, 0, 4, 'vertical');
-        (gameboardFactoryCall.placeShip(battleShip, 0, 0, 4, 'horizontal'));
-    }).toThrow('ship is already there or ship is placed off the gameboard, please place ship somewhere else, and on the gameboard');
-})
+//  let placeBattleship = gameboardFactoryCall.placeShip(battleShip, 0, 0, 4, 'vertical');
+    
+    //   let result = gameboardFactoryCall.placeShip(battleShip, 0, 0, 4, 'horizontal');
+    expect(gameboardFactoryCall.placeShip(destroyer, 0, 0, 4, 'horizontal')).toBe(false);
+    // expect(result).toBe(false);
+}) 
 
 // out of bounds test, original 
+// test('testing to see if ship is placed out of bounds', () => {
+//     let battleShip = ship('Battleship', 4, 'vertical'); 
+//     let gameboardFactoryCall = gameboardFactory();
+//     expect(() => { 
+//         gameboardFactoryCall.placeShip(battleShip, 7, 3, 4, 'vertical')  
+//     }).toThrow('ship is already there or ship is placed off the gameboard, please place ship somewhere else, and on the gameboard');
+// }) 
+
+// out of bounds test 1, refactor 
 test('testing to see if ship is placed out of bounds', () => {
     let battleShip = ship('Battleship', 4, 'vertical'); 
     let gameboardFactoryCall = gameboardFactory();
-    expect(() => { 
-        gameboardFactoryCall.placeShip(battleShip, 7, 3, 4, 'vertical')  
-    }).toThrow('ship is already there or ship is placed off the gameboard, please place ship somewhere else, and on the gameboard');
+    // expect(() => { 
+        expect(gameboardFactoryCall.placeShip(battleShip, 7, 3, 4, 'vertical')).toBe(false);  
+    // }).toThrow('ship is already there or ship is placed off the gameboard, please place ship somewhere else, and on the gameboard');
 }) 
+
 
 // out of bounds test 2nd instance 
 test('testing to see if ship is placed out of bounds, 2nd instance', () => {
     let battleShip = ship('Battleship', 4, 'horizontal'); 
     let gameboardFactoryCall = gameboardFactory();
-    expect(() => { 
-        gameboardFactoryCall.placeShip(battleShip, 1, 7, 4, 'horizontal')     // if it hits the end return undefined? 
-    }).toThrow('ship is already there or ship is placed off the gameboard, please place ship somewhere else, and on the gameboard');
+    // expect(() => { 
+        expect(gameboardFactoryCall.placeShip(battleShip, 1, 7, 4, 'horizontal')).toBe(false);     // if it hits the end return undefined? 
+    // }).toThrow('ship is already there or ship is placed off the gameboard, please place ship somewhere else, and on the gameboard');
 }) 
 
 // full length test #1 
@@ -250,9 +296,9 @@ test('making sure test throws error, when user attempts to hit the same cell twi
     gameboard.receiveAttack(4, 2);
     gameboard.receiveAttack(5, 2);
     gameboard.receiveAttack(6, 2);
-    expect(() => { 
-        gameboard.receiveAttack(3, 2);
-    }).toThrow('Hit was already placed at that cell, pick a different cell');
+    // expect(() => { 
+        expect(gameboard.receiveAttack(3, 2)).toBe(true);
+    // }).toThrow('Hit was already placed at that cell, pick a different cell');
 }) 
 
 test('making sure test throws error, when user attempts to hit the same cell twice, 2nd instance', () => { 
@@ -263,9 +309,9 @@ test('making sure test throws error, when user attempts to hit the same cell twi
     gameboard.receiveAttack(6, 3);
     gameboard.receiveAttack(6, 4);
     gameboard.receiveAttack(6, 5);
-    expect(() => { 
-        gameboard.receiveAttack(6, 5);
-    }).toThrow('Hit was already placed at that cell, pick a different cell');
+    // expect(() => { 
+        expect(gameboard.receiveAttack(6, 5)).toBe(true);
+    // }).toThrow('Hit was already placed at that cell, pick a different cell');
 })
 
 //   expect(() => { 
