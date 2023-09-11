@@ -31,7 +31,21 @@ import './domLogic.js';
 // because the user will have to click a ship object to place it 
 // within the place ship function, update a variable, that returns a boolean 
 
+// work on correctly displaying the grids next to eachother, 
+// with appriproate styling, 
+// two grids next to eachother, once the start game btn is pressed, 
+// follow the sequence again and get familiar, 
 
+// I want the board to be displayed in the center to start, 
+// once the other ship is added to makes space for the new one, 
+// make sure the boards are properly displayed, once the start game btn is pressed
+// btn is pressed, removes the btns, the ship objects, displays the computer board 
+// and the players board, then the game can start,
+
+// commit and save work before moving forward, 
+// next game will start, 
+// but before then, make sure you connect the new gameboard to the computer/PC user
+// connect the gameboards.  
 
 
 

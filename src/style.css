@@ -17,12 +17,27 @@ body {
 
 #main-title-container > h1 { 
     font-size: 5rem;
+} 
+
+.start-game-btn-hidden-class { 
+    display: none;
+} 
+
+#start-game-btn-container { 
+    display: flex;
+    justify-content: center;
 }
+
+/* #start-game-btn-visable-class { 
+    display: block;
+    text-align: center;
+} */
 
 #wrapping-container { 
     display: flex;
     justify-content: center;
     align-items: center;
+    /* gap: 10em;  */
 }
 
 #gameboard-grid-container { 
@@ -32,6 +47,19 @@ body {
     max-width: 250px;
     justify-content: center;
 } 
+
+#gameboard-grid-container-computer { 
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-rows: repeat(10, 1fr);
+    max-width: 250px;
+    justify-content: center;
+}
+
+/* #computer-board-container { 
+    display: grid;
+    justify-content: space-between; 
+} */
 
 /* ship objects for DOM and container styles below */
 

@@ -92,7 +92,7 @@ export default function createPlayer(name, type) {
       // attack(computer, 3, 3); // can test for multiple attacks, apply attack method x amount of times, 
       console.log('checking if statement!')
       // sinking battleshit
-      attack(computer, 0, 0); 
+      // attack(computer, 0, 0); 
 
 
       if (checkForWinner(computer)) { 

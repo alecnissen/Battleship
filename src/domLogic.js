@@ -2,11 +2,15 @@ import ship from './shipFactory.js';
 import gameboardFactory from './gameboardFactory.js'; 
 import playerFactory from './playerFactory.js';
 import './gameModule.js';
-import createPlayer from './gameModule.js';
+import createPlayer, { playGame } from './gameModule.js';
 // import { placeShipsOnPlayersBoard, playGame } from './gameModule.js';
 // import gameboardFactory from './gameboardFactory.js';
 
 const gridContainer = document.getElementById('gameboard-grid-container');
+const wrappingContainer = document.getElementById('wrapping-container');
+// console.log(wrappingContainer);
+const computerGridContainer = document.getElementById('gameboard-grid-container-computer');
+console.log(computerGridContainer);
 
 let gameboard = gameboardFactory();
 
@@ -195,10 +199,16 @@ function allPlayerShipsPlaced() {
     console.log(shipCount);
     if (shipCount === 18) { 
         console.log('ALL SHIPS HAVE BEEN PLACED');
-        let createStartGameBtn = document.createElement('button');
-        createStartGameBtn.textContent = 'START GAME';
+        // let createStartGameBtn = document.createElement('button');
+        // createStartGameBtn.id = 'start-game-btn';
+        // createStartGameBtn.textContent = 'START GAME';
         let mainTitleContainer = document.getElementById('main-title-container');
-        mainTitleContainer.append(createStartGameBtn);
+        // mainTitleContainer.append(createStartGameBtn);
+        let startGameBtnVisible = document.getElementById('start-game-btn');
+        startGameBtnVisible.style.display = 'flex';
+        // startGameBtnVisible.classList.add('start-game-btn-visable-class');
+        // startGameBtnVisible.style.display = 'flex';
+        // startGameBtnVisible.style.justifyContent = 'center';
     }
 } 
 
@@ -290,8 +300,9 @@ for (let i = 0; i < 10; i++) {
     gameboardCell.addEventListener('click', (e) => { 
         // click on cell, grab current ship, length and position, 
         // send to function which places that current ship on the board, 
+        console.log('LOGGING THE PLAYERS BOARD WHEN CELL IS CLICKED!', playerGameboard.gameboard.getGameboard());
 
-        const clickedCell = gameboard[i][j]; 
+        // const clickedCell = gameboard[i][j]; 
         // console.log(clickedCell);
         console.log(e.target);
         console.log('IN THE EVENT LISTENER, THIS IS CURRENT SHIP', currentShip);
@@ -320,6 +331,67 @@ for (let i = 0; i < 10; i++) {
     }) 
     } 
 }  
+
+let startGameBtn = document.getElementById('start-game-btn');
+console.log('logging start game btn', startGameBtn);
+// what would happen when the user clicks, the start game btn? 
+// it would hide all the ship objects, the change direction btn 
+// also hide the start game btn, 
+// it would also display the computers board with ship object hidden, 
+// two gameboards displayed next to each other, 
+// THEN THE GAME WOULD START, 
+// PLAYER WOULD MAKE HIS MARK FIRST, 
+// THE GAME STARTS ONCE BTN IS PRESSED, 
+// IT REMOVES SHIPS, BTNS, AND DISPLAYS TWO GAMEBOARDS, 
+
+// WHERE WOULD WE ADD THE LOGIC TO APPEND AND DISPLAY THE COMPUTERS BOARD? 
+
+function createComputerBoardDOM() { 
+    // when it creates the computers board. 
+    // use the DOM to move the container for players grid, 
+    // access the wrapping container, move it to make space for the board, 
+    // when the function is accessed/called it will apply the gap when the start game btn is pressed 
+
+    for (let i = 0; i < 10; i++) { 
+        for (let j = 0; j < 10; j++) { 
+        // wrappingContainer.style.justifyContent = 'flex-start';
+        wrappingContainer.style.gap = '15em';
+        let gameboardCell = document.createElement('div');
+        const gameboard = gameboardFactory().getGameboard();
+
+        // div.style.backgroundColor = 'blue';
+        gameboardCell.style.border = '1px solid black';
+        gameboardCell.style.height = '35px';
+        gameboardCell.style.width = '35px';
+        gameboardCell.dataset.row = i;
+        gameboardCell.dataset.column = j;
+        computerGridContainer.append(gameboardCell);
+} 
+    } 
+} 
+
+startGameBtn.addEventListener('click', (e) => { 
+    console.log('clicked the start game btn');
+    // hide the ship obj container, and the btns to change directions
+    // disable the hover class too? 
+    // create computer gameboard in the DOM, write a function that makes it 
+    // then call that function within the listener, then the game can be started 
+    // at that point we remove all the btns, and create the comps board 
+    // then the game starts
+    let containerForShipObj = document.getElementById('container-for-ship-objects');
+    console.log(containerForShipObj);
+    containerForShipObj.style.display = 'none';
+    let containerForChangingShipDirection = document.getElementById('change-ship-direction-btn-container');
+    containerForChangingShipDirection.style.display = 'none';
+    let containerForStartGameBtn = document.getElementById('start-game-btn-container');
+    containerForStartGameBtn.style.display = 'none';
+    // btns are removed, hover class remains, but I think that can be removed 
+    // once the playGame module is called, 
+    // now create computers gameboard in the DOM and make sure both boards are next to eachother
+    // then after that the game can be played 
+    createComputerBoardDOM();
+    // playGame();
+})
 
 
     function createBattleShipDOMObj() { 
