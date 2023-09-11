@@ -1,6 +1,28 @@
 import ship from './shipFactory.js';
 import gameboardFactory from './gameboardFactory.js'; 
 import playerFactory from './playerFactory.js';
+import { allPlayerShipsPlaced, placeComputerShips }  from './domLogic.js';
+import { playerGameboard, computerGameboard } from './domLogic.js';
+// access the players updated boards within here, 
+// can we just export the playerGameboard and computerGameboard variables, 
+// instead of a function
+// console.log(allPlayerShipsPlaced());
+// console.log(placeComputerShips());
+// we now have access to the boards within this module 
+// trying to think if we need any other information, 
+// I think we just need to boards, apply the attacks on the board, 
+
+// console.log(playerGameboard);
+// console.log(computerGameboard);
+
+let currentPlayerGameboard = playerGameboard; 
+let currentComputerGameboard = computerGameboard;
+
+console.log('THIS IS THE CURRENT PLAYER GAMEBOARD FROM DOMLOGIC', currentPlayerGameboard);
+console.log('THIS IS THE CURRENT COMPUTER GAMEBOARD FROM DOMLOGIC', currentComputerGameboard);
+
+
+
 
 // create players here
 export default function createPlayer(name, type) { 
@@ -12,7 +34,81 @@ export default function createPlayer(name, type) {
       return playerName;
     }
   } 
-  
+
+  export function checkForWinner(userObj) { 
+    console.log('CHECKING FOR WINNER!');
+    const selectedUser = userObj;
+    if (selectedUser.gameboard.areAllShipsSunk()) { 
+      // access another helper function to print a victory message/modal pop-up
+      return true;
+    } 
+    return false;
+  }
+
+
+  export function attack(userObj, x, y) { 
+    const selectedUser = userObj;
+    selectedUser.gameboard.receiveAttack(x, y);
+  }
+
+
+
+  export function playGame() { 
+    let playerTurn = 1;
+    const computer = createPlayer('PC', 'computer') // added turn var
+    const player = createPlayer('player', 'player') // add turn var
+
+    // console.log(computer);
+    // console.log(player); 
+
+    console.log('LOGGING PLAYERS BOARD WITHIN PLAYGAME FUNCTION', currentPlayerGameboard);
+    console.log('LOGGING COMPUTERS BOARD WITHIN PLAYGAME FUNCTION',currentComputerGameboard);
+    // place ships on players board
+
+    // placeShipsOnPlayersBoard(player);
+    // // place ships on computers board 
+    // placeShipsOnComputersBoard(computer); 
+    // console.log('before game loop')
+
+    
+    while (!computer.gameboard.areAllShipsSunk() && !player.gameboard.areAllShipsSunk()) { 
+      
+    if (playerTurn === 1) { // player is === 1, attack comps board
+      // attack(computer, 3, 3); // can test for multiple attacks, apply attack method x amount of times, 
+      console.log('checking if statement!')
+      // sinking battleshit
+      // attack(computer, 0, 0); 
+
+
+      if (checkForWinner(computer)) { 
+        console.log('PLAYER WINS');
+        return; // print/access winner modal
+      }
+      playerTurn = 2;
+      // console.log('if statement is running')
+
+    } else { 
+      console.log('ELSE STATEMENT CHECK!')
+      const randomCoordinate1 = Math.floor(Math.random() * 9) + 1;
+      const randomCoordinate2 = Math.floor(Math.random() * 9) + 1;
+      attack(player, randomCoordinate1, randomCoordinate2); // this should be random attack, 
+      if (checkForWinner(player)) { 
+        console.log('COMP WINS');
+        return; 
+      } 
+      playerTurn = 1;
+    } 
+  } 
+} 
+
+  // playGame();
+
+
+
+
+
+
+
   // export function placeShipsOnPlayersBoard(user) { 
   //   const player = user; 
   //   const battleShip = ship('Battleship', 4, 'vertical');
@@ -52,76 +148,13 @@ export default function createPlayer(name, type) {
   // }
 
 
-  export function checkForWinner(userObj) { 
-    console.log('CHECKING FOR WINNER!');
-    const selectedUser = userObj;
-    if (selectedUser.gameboard.areAllShipsSunk()) { 
-      // access another helper function to print a victory message/modal pop-up
-      return true;
-    } 
-    return false;
-  }
-
-
-  export function attack(userObj, x, y) { 
-    const selectedUser = userObj;
-    selectedUser.gameboard.receiveAttack(x, y);
-  }
-
-
-
-  export function playGame() { 
-    let playerTurn = 1;
-    const computer = createPlayer('PC', 'computer') // added turn var
-    const player = createPlayer('player', 'player') // add turn var
-
-    console.log(computer);
-    console.log(player); 
-
-    // place ships on players board
-
-    placeShipsOnPlayersBoard(player);
-    // place ships on computers board 
-    placeShipsOnComputersBoard(computer); 
-    // console.log('before game loop')
-
-    
-    while (!computer.gameboard.areAllShipsSunk() && !player.gameboard.areAllShipsSunk()) { 
-      
-    if (playerTurn === 1) { // player is === 1, attack comps board
-      // attack(computer, 3, 3); // can test for multiple attacks, apply attack method x amount of times, 
-      console.log('checking if statement!')
-      // sinking battleshit
-      // attack(computer, 0, 0); 
-
-
-      if (checkForWinner(computer)) { 
-        console.log('PLAYER WINS');
-        return; // print/access winner modal
-      }
-      playerTurn = 2;
-      // console.log('if statement is running')
-
-    } else { 
-      console.log('ELSE STATEMENT CHECK!')
-      const randomCoordinate1 = Math.floor(Math.random() * 9) + 1;
-      const randomCoordinate2 = Math.floor(Math.random() * 9) + 1;
-      attack(player, randomCoordinate1, randomCoordinate2); // this should be random attack, 
-      if (checkForWinner(player)) { 
-        console.log('COMP WINS');
-        return; 
-      } 
-      playerTurn = 1;
-    } 
-  } 
-} 
-
-  // playGame();
 
 
 
 
-// 
+
+
+
 
 
 

@@ -1,7 +1,7 @@
 import ship from './shipFactory.js';
 import gameboardFactory from './gameboardFactory.js'; 
 import playerFactory from './playerFactory.js';
-import './gameModule.js';
+// import './gameModule.js';
 import createPlayer, { playGame } from './gameModule.js';
 // import { placeShipsOnPlayersBoard, playGame } from './gameModule.js';
 // import gameboardFactory from './gameboardFactory.js';
@@ -14,9 +14,9 @@ console.log(computerGridContainer);
 
 let gameboard = gameboardFactory();
 
-let playerGameboard = createPlayer('Alec', 'player');
+export let playerGameboard = createPlayer('Alec', 'player');
 console.log(playerGameboard);
-let computerGameboard = createPlayer('IBM', 'computer');
+export let computerGameboard = createPlayer('IBM', 'computer');
 console.log(computerGameboard); 
 
 let currentShip 
@@ -73,7 +73,7 @@ let submarine = ship('Submarine', 3, 'vertical');
     // }
     let computerShipArray = [battleShip, destroyer, patrolBoat, carrierBoat, submarine];
     
-    function placeComputerShips(currentComputerShip = computerShipArray[0]) { 
+    export function placeComputerShips(currentComputerShip = computerShipArray[0]) { 
         if (computerShipArray.length === 0) { 
             return;
         } 
@@ -98,6 +98,8 @@ let submarine = ship('Submarine', 3, 'vertical');
             placeComputerShips();
         }
         console.log(computerGameboard.gameboard.getGameboard());
+        // let updatedComputerBoard = computerGameboard.gameboard.getGameboard();
+        // return computerGameboard.gameboard.getGameboard();
     } 
 
 placeComputerShips();
@@ -172,7 +174,7 @@ function useCoords(coords) {
     } 
 } 
 
-function allPlayerShipsPlaced() { 
+export function allPlayerShipsPlaced() { 
     let shipCount = 0;
     let currentPlayerBoard = playerGameboard.gameboard.getGameboard();
     console.log('CB FUNCTION, CURRENT PLAYERS GAMEBOARD', currentPlayerBoard);
@@ -210,6 +212,7 @@ function allPlayerShipsPlaced() {
         // startGameBtnVisible.style.display = 'flex';
         // startGameBtnVisible.style.justifyContent = 'center';
     }
+    // return playerGameboard.gameboard.getGameboard();
 } 
 
 function placeCurrentShip(x, y, currentShip, currentShipLength, currentShipDirection) { 
@@ -300,8 +303,9 @@ for (let i = 0; i < 10; i++) {
     gameboardCell.addEventListener('click', (e) => { 
         // click on cell, grab current ship, length and position, 
         // send to function which places that current ship on the board, 
-        console.log('LOGGING THE PLAYERS BOARD WHEN CELL IS CLICKED!', playerGameboard.gameboard.getGameboard());
-
+        // console.log('LOGGING THE PLAYERS BOARD WHEN CELL IS CLICKED!', playerGameboard.gameboard.getGameboard());
+        let currentPlayerBoard = playerGameboard.gameboard.getGameboard();
+        // console.log('LOGGING CURRENT PLAYERS BOARD, CONNECTING THE BOARDS', currentPlayerBoard);
         // const clickedCell = gameboard[i][j]; 
         // console.log(clickedCell);
         console.log(e.target);
@@ -390,6 +394,7 @@ startGameBtn.addEventListener('click', (e) => {
     // now create computers gameboard in the DOM and make sure both boards are next to eachother
     // then after that the game can be played 
     createComputerBoardDOM();
+    // play game is called here, 
     // playGame();
 })
 
@@ -499,6 +504,7 @@ function createSubmarineDOMObj() {
 
 createSubmarineDOMObj();
 
+// console.log(playerGameboard.gameboard.getGameboard()); 
 
 
 

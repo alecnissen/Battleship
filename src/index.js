@@ -47,8 +47,29 @@ import './domLogic.js';
 // but before then, make sure you connect the new gameboard to the computer/PC user
 // connect the gameboards.  
 
+// it seems like the gameboards are connected, 
+// we can start the game, 
+// once start game btn is clicked, players have their boards. 
+// call playGame and get the boards with ships on them 
 
+// should I totally refactor game module? 
+// it has all the info we need, 
+// checking if all ships are sunk 
+// attack methods, 
+// game loop that keeps playing under a certain condition 
+// first we need a way to access players and computers board within game module, 
+// the updated boards need to be accessed within that module, 
 
+// I can access the gameboard variables within gameModule 
+// how will I update my data within game module, 
+// to use these new variables. 
+// I think I need to look over the game module 
+// and determine how this can be used, 
+// I think variables will need to be updated within game module 
+// the gameboards are updated and completed within domLogic 
+// passed to game module 
+// and that board used within the game module 
+// save and commit work then begin
 
 
 
@@ -56,8 +77,6 @@ import './domLogic.js';
 // next I will refactor my unit tests. 
 // the unit tests must pass before moving forward, remember its returning false instead of throwing an error \
 // so expect the function or function call to have returned false.
-
-// FUCK JEST 
 
 // problem is now unit tests are not passing after changing a function to return false instead of throwing an error. 
 // wrote tests and expected to receive false, after making ships overlap but test still does not pass, 
