@@ -168,6 +168,40 @@ function useCoords(coords) {
     } 
 } 
 
+function allPlayerShipsPlaced() { 
+    let shipCount = 0;
+    let currentPlayerBoard = playerGameboard.gameboard.getGameboard();
+    console.log('CB FUNCTION, CURRENT PLAYERS GAMEBOARD', currentPlayerBoard);
+    for (let i = 0; i < currentPlayerBoard.length; i++) { 
+        let cell = currentPlayerBoard[i]; 
+        if(cell.includes(battleShip)) { 
+            console.log('battleship found');
+            shipCount++
+            console.log(shipCount);
+        } if (cell.includes(destroyer)) { 
+            console.log('destroyer found');
+            shipCount++
+        } if (cell.includes(carrierBoat)) { 
+            console.log('carrierBoat found');
+            shipCount++
+        } if (cell.includes(patrolBoat)) { 
+            console.log('patrol boat found');
+            shipCount++
+        } if (cell.includes(submarine)) { 
+            console.log('submarine found');
+            shipCount++
+        } 
+    } 
+    console.log(shipCount);
+    if (shipCount === 18) { 
+        console.log('ALL SHIPS HAVE BEEN PLACED');
+        let createStartGameBtn = document.createElement('button');
+        createStartGameBtn.textContent = 'START GAME';
+        let mainTitleContainer = document.getElementById('main-title-container');
+        mainTitleContainer.append(createStartGameBtn);
+    }
+} 
+
 function placeCurrentShip(x, y, currentShip, currentShipLength, currentShipDirection) { 
     let selectedXCoordinate = x;
     let selectedYCoordinate = y; 
@@ -184,8 +218,18 @@ function placeCurrentShip(x, y, currentShip, currentShipLength, currentShipDirec
     console.log(selectedShipDirection); 
 
     playerGameboard.gameboard.placeShip(selectedShip, selectedXCoordinate, selectedYCoordinate, selectedShipLength, selectedShipDirection);
-    console.log(playerGameboard.gameboard.getGameboard());
+    // console.log('here is the updated player gameboard', playerGameboard.gameboard.getGameboard());
     getShipCoordinates(selectedXCoordinate, selectedYCoordinate, selectedShipLength, selectedShipDirection);
+    // here I can use a conditional to see if all 5 ships have been placed. 
+    // conditional here to determine if all 5 ships have been placed, 
+    // set a variable with the gameboard, 
+    // loop to determine if the board includes the 5 ships objects. 
+    let currentGameboard = playerGameboard.gameboard.getGameboard();
+    console.log('CURRENT PLAYER GAMEBOARD', currentGameboard);
+    // if (currentGameboard.includes(battleShip) && currentGameboard.includes(destroyer) && currentGameboard.includes(carrierBoat) && currentGameboard.includes(patrolBoat) && currentGameboard.includes(submarine)) { 
+    //     console.log('ALL SHIPS HAVE BEEN PLACED ON THE BOARD!!!');
+    // } 
+    allPlayerShipsPlaced();
 } 
 
 function getShipCoordinates(x, y, length, position) { 

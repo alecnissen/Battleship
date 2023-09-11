@@ -24,6 +24,19 @@ import './domLogic.js';
 // if the arr is empty all ships have been placed, start the game. 
 
 
+// how can we start the game, once all players ships have been placed, 
+// first check the place ship functions, 
+// something that will determine if all 5 ships have been placed. 
+// maybe in the event listener, 
+// because the user will have to click a ship object to place it 
+// within the place ship function, update a variable, that returns a boolean 
+
+
+
+
+
+
+
 
 // we got the computers ship randomly placing. 
 // next I will refactor my unit tests. 
