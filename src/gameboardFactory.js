@@ -46,7 +46,6 @@ export default function gameboardFactory() {
     if (!checkForShip(x, y, length, position)) {
       // throw new Error('ship is already there or ship is placed off the gameboard, please place ship somewhere else, and on the gameboard');
       console.log('ERROR SHIP OVERLAP! Current shipObj is', shipObj);
-      // alert('ERROR SHIP OVERLAP, PLEASE REFRESH AND PLACE SHIPS SO THEY DO NOT OVERLAP OR INTERSECT!');
      return false;
      } 
      // else if (checkForShip(x, y, length, position)) { // recently added the else if 

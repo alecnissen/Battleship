@@ -72,17 +72,73 @@ import './domLogic.js';
 // save and commit work then begin
 
 
+// ok we need to follow this process, 
+// boards are displayed
+// time for players attack, player clicks on comps board
+// something will need to determine if the hit was successful,
+// once clicked on a cell on the comps board, those coordinates will be saved 
 
-// we got the computers ship randomly placing. 
-// next I will refactor my unit tests. 
-// the unit tests must pass before moving forward, remember its returning false instead of throwing an error \
-// so expect the function or function call to have returned false.
 
-// problem is now unit tests are not passing after changing a function to return false instead of throwing an error. 
-// wrote tests and expected to receive false, after making ships overlap but test still does not pass, 
-// removed the coee from the anonymous function, and tried again, same thing not passsing, 
-// the only way it would pass. is if I change it to the same direction, 
-// but why when I give same coordinates but different directions it still fails, when ships should clearly be overlapping? 
+// we are displaying the boards, 
+// player will click on computers board 
+// and those coordinates will need to get saved, 
+// if a hit apply styles to them, 
+// if a miss apply styles to them, 
+// we need to figure out what we will do with the coordinates 
+// coordinates that are clicked on are the players attack 
+// determine if the coordinates are a hit or miss, in the attack method, 
+// then call the dom file again to a function which applies styles to the coordinates 
+
+
+// CURRENT PLAN
+// working on playing the game, 
+// play game is actually called within the event listener 
+// once a cell is clicked on the computers board, that will be the players attack
+// right now I can only place attacks on the computers board, I can sink all the ships and it will determine that I won, 
+// but the problem seems to be the loop, 
+// test again but without the loop,  I can make the player win, only player turn is working, I can sink all the comps ship 
+// and print the winner which would be player 
+// why when I add the loop which simply keeps playing if there are still ships on players board and computers board, it will not work correctly
+// WHY CAN COMP HIT THE SAME CELL TWICE, I HAVE CHECKS AGAINST, WHY ARE THOSE NOT WORKING!!!!!!? 
+
+// problem 1 trying to get the game loop to properly work, 
+// problem 2 why are computer and user still able to hit the same cell twice? 
+// user clicks on comps gameboard, once clicked it will trigger the game, 
+// whatever cell user clicks is his attack, 
+// then the game keep playing as long as both player and computer have ships still on the board, 
+// currently with my loop only player, can make his mark, it won't switch turns, it will let me sink ships and print winner, 
+// but why will it not switch turns and why is it hitting the same cell twice? 
+
+
+
+// CURRENT PLAN 9/12 
+// first spend a little time understanding behavior again, 
+// then the plan seems to be getting the hover class working first, 
+// we need to think of the flow of the game, 
+// you should first be able to hover over the comps gameboard 
+// to determine where you want to place the hit
+// player clicks on a cell, that is his attack, so that triggers the game, 
+// playGame is called, is it a problem that playGame is called, within the listener, 
+// because I need someway to pass the coordinates, what cells did the player click, what is players attack? 
+// those coordinates get passed the playGame function, player makes mark, checks for winner, 
+// then switches turn, to comp, random coords are selected and comp makes their mark 
+// checks for winner, 
+// I dont think we need a loop either, i may possibly have to reconsider and refactor but the game will depend on player making his mark, 
+// coords are passed to play game, cell that was clicked on comps board will be players attack, then turn switches to comps, which is random attack, 
+// after each player makes attack, turn switches, 
+// game cycle depends on players click, checking for winner, switching turns, cycle repeats 
+// 
+// first lets do a hover class over the comps board, player should see where they are about to place their hit. 
+
+
+
+
+
+
+
+
+
+
 
 
 // now randomly place computers ships, 

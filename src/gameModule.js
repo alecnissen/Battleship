@@ -3,6 +3,13 @@ import gameboardFactory from './gameboardFactory.js';
 import playerFactory from './playerFactory.js';
 import { allPlayerShipsPlaced, placeComputerShips }  from './domLogic.js';
 import { playerGameboard, computerGameboard } from './domLogic.js';
+// import { coordinateFromComputerBoardX, coordinateFromComputerBoardY} from './domLogic';
+// import { coordinateFromComputerBoardX } from './domLogic.js';
+// import { coordinateFromComputerBoardY } from './domLogic.js';
+
+// console.log('COMPUTERS GAMEBOARD CELL THAT WAS CLICKED X', coordinateFromComputerBoardX);
+// console.log('COMPUTERS GAMEBOARD CELL THAT WAS CLICKED Y', coordinateFromComputerBoardY);
+
 // access the players updated boards within here, 
 // can we just export the playerGameboard and computerGameboard variables, 
 // instead of a function
@@ -12,16 +19,20 @@ import { playerGameboard, computerGameboard } from './domLogic.js';
 // trying to think if we need any other information, 
 // I think we just need to boards, apply the attacks on the board, 
 
+// we have the objects and we can key into the boards
+// how will we get the coordinates, so the user can attack the computers board? 
+// Once clicked on the computers board, 
+// those coordinates get saved to a variable here and then get sent to attack function, 
+// first try to get the coordinates when you click on computers gameboard
+
 // console.log(playerGameboard);
 // console.log(computerGameboard);
 
 let currentPlayerGameboard = playerGameboard; 
 let currentComputerGameboard = computerGameboard;
 
-console.log('THIS IS THE CURRENT PLAYER GAMEBOARD FROM DOMLOGIC', currentPlayerGameboard);
-console.log('THIS IS THE CURRENT COMPUTER GAMEBOARD FROM DOMLOGIC', currentComputerGameboard);
-
-
+// console.log('THIS IS THE CURRENT PLAYER GAMEBOARD FROM DOMLOGIC', currentPlayerGameboard);
+// console.log('THIS IS THE CURRENT COMPUTER GAMEBOARD FROM DOMLOGIC', currentComputerGameboard);
 
 
 // create players here
@@ -49,20 +60,31 @@ export default function createPlayer(name, type) {
   export function attack(userObj, x, y) { 
     const selectedUser = userObj;
     selectedUser.gameboard.receiveAttack(x, y);
+    // access the hit or missed shot here, 
+    // we need to key into the hit shots, 
+    // determine if coordinates passed into attack, 
+    // are a hit or a miss
+    // if passed coordinates are within hitShot
+    // style those coordinates 
+    // call another function which can do that in the DOM, 
+    //
+   //  console.log(selectedUser.gameboard.getGameboard());
   }
 
+// consider all the factors and items needed to play the game
 
-
-  export function playGame() { 
+  export function playGame(xCoordinate, yCoordinate) { 
     let playerTurn = 1;
-    const computer = createPlayer('PC', 'computer') // added turn var
-    const player = createPlayer('player', 'player') // add turn var
+    // const computer = createPlayer('PC', 'computer') // added turn var
+    // const player = createPlayer('player', 'player') // add turn var
 
     // console.log(computer);
     // console.log(player); 
 
-    console.log('LOGGING PLAYERS BOARD WITHIN PLAYGAME FUNCTION', currentPlayerGameboard);
-    console.log('LOGGING COMPUTERS BOARD WITHIN PLAYGAME FUNCTION',currentComputerGameboard);
+    console.log('LOGGING PLAYERS BOARD WITHIN PLAYGAME FUNCTION BEFORE THE LOOP', currentPlayerGameboard);
+    console.log('LOGGING COMPUTERS BOARD WITHIN PLAYGAME FUNCTION BEFORE THE LOOP',currentComputerGameboard);
+
+    console.log(!currentPlayerGameboard.gameboard.areAllShipsSunk());
     // place ships on players board
 
     // placeShipsOnPlayersBoard(player);
@@ -70,17 +92,32 @@ export default function createPlayer(name, type) {
     // placeShipsOnComputersBoard(computer); 
     // console.log('before game loop')
 
+    // have player make their mark on comps board
+    // use receiveAttack on computers board, 
+
     
-    while (!computer.gameboard.areAllShipsSunk() && !player.gameboard.areAllShipsSunk()) { 
+    // while (!computer.gameboard.areAllShipsSunk() && !player.gameboard.areAllShipsSunk()) { 
+
+    // while (!currentPlayerGameboard.gameboard.areAllShipsSunk() && currentPlayerGameboard.gameboard.areAllShipsSunk()) { 
       
     if (playerTurn === 1) { // player is === 1, attack comps board
       // attack(computer, 3, 3); // can test for multiple attacks, apply attack method x amount of times, 
-      console.log('checking if statement!')
-      // sinking battleshit
-      // attack(computer, 0, 0); 
+      // console.log('checking if statement!')
+      let playerMarkX = xCoordinate;
+      let playerMarkY = yCoordinate;
 
+      console.log('LOGGING PLAYER MARKX WITHIN PLAYGAME FUNCTION WITHIN THE LOOP, PLAYER TURN', playerMarkX);
+      console.log('LOGGING PLAYER MARKY WITHIN PLAYGAME FUNCTION WITHIN THE LOOP, PLAYER TURN', playerMarkY);
+      // 
+      // player makes their mark by clicking comps board, 
+      // grab the coordinates from when player clicks the board 
+      // update a variable and find a way to use them here. 
+      attack(currentComputerGameboard, playerMarkX, playerMarkY); 
+      // make the attack here, get the coordinates, 
 
-      if (checkForWinner(computer)) { 
+      console.log('COMPUTERS GAMEBOARD AFTER PLAYER ATTACK', currentComputerGameboard);
+
+      if (checkForWinner(currentComputerGameboard)) { 
         console.log('PLAYER WINS');
         return; // print/access winner modal
       }
@@ -91,14 +128,15 @@ export default function createPlayer(name, type) {
       console.log('ELSE STATEMENT CHECK!')
       const randomCoordinate1 = Math.floor(Math.random() * 9) + 1;
       const randomCoordinate2 = Math.floor(Math.random() * 9) + 1;
-      attack(player, randomCoordinate1, randomCoordinate2); // this should be random attack, 
-      if (checkForWinner(player)) { 
+      attack(currentPlayerGameboard, randomCoordinate1, randomCoordinate2);
+      console.log('PLAYERS GAMEBOARD AFTER COMPUTER ATTACK', currentPlayerGameboard);
+      if (checkForWinner(currentPlayerGameboard)) { 
         console.log('COMP WINS');
         return; 
       } 
       playerTurn = 1;
-    } 
-  } 
+    // } 
+ } 
 } 
 
   // playGame();
