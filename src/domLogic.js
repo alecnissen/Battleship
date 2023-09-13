@@ -8,7 +8,6 @@ import createPlayer, { playGame } from './gameModule.js';
 
 const gridContainer = document.getElementById('gameboard-grid-container');
 const wrappingContainer = document.getElementById('wrapping-container');
-// console.log(wrappingContainer);
 const computerGridContainer = document.getElementById('gameboard-grid-container-computer');
 console.log(computerGridContainer);
 
@@ -32,46 +31,6 @@ let coordinateFromComputerBoardX
 let coordinateFromComputerBoardY
 // let computerArray = [battleShip, destroyer, patrolBoat, carrierBoat, submarine]; 
 
-// initiate an array named failedCoordinates
-// initate an array containing all the ships you need to eventually place
-// make a loop: while there are ships in the ships array, keep looping
-// inside the loop:
-// generate random coordinates
-// check if the coordinates are inside failCoordinates
-// if they are, return
-// if they aren't try to place the ship
-// if ship placement work, remove the ship from the ships array and repeat the loop
-// if ship placement failed, add to the failedCoordinates array and repeat the loop 
-
-// why are only two ships being logged back, 
-// why are all ships not being logged back, 
-
-
-// let currentShip = computerShipArray[0];
-
-// console.log(currentShip);
-
-// currentComputerShip 
-
-// how to keep the loop and cycle going. 
-// without the loop, 
-// 
-
-// using recursion, 
-// what am I removing from, removing one from the array each time, 
-// 
-// (currentComputerShip = computerShipArray[0]) - 1 
-
-// trying to think of how to use recursion here, 
-// what are we removing from? 
-// removing one from the array each time, 
-// computerShipArray = computerShipArray[0] - 1
-
-// while there are still ships in the array, keep recursing until the array length is 0 
-
-// if (computerShipArray.length === 0) { 
-    // return;
-    // }
     let computerShipArray = [battleShip, destroyer, patrolBoat, carrierBoat, submarine];
     
     export function placeComputerShips(currentComputerShip = computerShipArray[0]) { 
@@ -92,10 +51,13 @@ let coordinateFromComputerBoardY
              placeComputerShips();
         } if (isValidShipPlacement) {
             computerGameboard.gameboard.placeShip(currentComputerShip, randomCoordinateX, randomCoordinateY, currentComputerShip.shipLength, randomShipDirection);
+            console.log('LOGGING THE COMPUTERSHIPARRAY AFTER VALID SHIP PLACEMENT, USING SPLICE BEFORE', computerShipArray);
             computerShipArray.splice(currentComputerShip, 1);
+            console.log('LOGGING THE COMPUTERSHIPARRAY AFTER VALID SHIP PLACEMENT, USING SPLICE AFTER', computerShipArray);
             placeComputerShips();
         } else if (!isValidShipPlacement)  { 
             failedCoordinates.push([randomCoordinateX, randomCoordinateY]);
+            console.log('LOGGING THE COMPUTERSHIPARRAY AFTER INVALID SHIP PLACEMENT', computerShipArray);
             placeComputerShips();
         }
         console.log(computerGameboard.gameboard.getGameboard());
@@ -105,9 +67,6 @@ let coordinateFromComputerBoardY
 
 placeComputerShips();
 
-// placeComputerShips(computerArray);
-
-// let chosenValue = Math.random() < 0.5 ? value1 : value2;
 
 const changeShipPositionBtn = document.getElementById('change-ship-direction-btn');
 const changeShipPositionBtnHorizontal = document.getElementById('change-ship-direction-btn-h');
@@ -137,7 +96,7 @@ function findCoords(currentCell, currentShipDirection, currentShipLength) {
             updatedXCoordinate = convertRowToNumber + i;
             updatedCoordinatesX.push([updatedXCoordinate, convertColumnToNumber]);
         } 
-        // console.log('these are updated coords for x', updatedCoordinatesX);
+
         useCoords(updatedCoordinatesX);
     } else if (selectedShipDirection === 'horizontal') { 
         let updatedCoordinatesY = [];
@@ -151,15 +110,9 @@ function findCoords(currentCell, currentShipDirection, currentShipLength) {
             updatedYCoordinate = convertColumnToNumber + i;
             updatedCoordinatesY.push([convertRowToNumber, updatedYCoordinate]);
         } 
-        // console.log('these are updated coords for y', updatedCoordinatesY);
         useCoords(updatedCoordinatesY);
     }
 } 
-
-// try this method too
-// <div data-cords='[0, 0]'></div>
-// document.querySelector('[data-cords="[0, 0]"]').classList.add(class)  
-
 
 
 // hover class, filling in the selected cells 
@@ -169,18 +122,35 @@ function useCoords(coords) {
         let coordinate = passedCoordinates[i];
         let row = coordinate[0];
         let column = coordinate[1];
-        let cell = document.querySelector(`[data-row="${row}"][data-column="${column}"]`); // find the DOM cells that correspond to the coordinates passed in,
+        let cell = document.querySelector(`[data-row="${row}"][data-column="${column}"]`);
        //  console.log(cell);
         cell.classList.toggle('battleship-hover-class');     
     } 
 } 
 // check if all players ships are placed
 export function allPlayerShipsPlaced() { 
+    // instead of ship count, add to an array and if the array contains all the 5 ships play the game, 
+    // testing with nested loop, left off here, I need a better system for checking if all ships are placed on the board, 
+    // wont account for horizontal and vertically currently. 
+    // think the problem is I am not using nested loop. 
+    // When placed vertically it expands its full length, when placed horizontall its one 
+    // so the problem seems to be how you are looping, you are only taking into account one direction, 
+    // test again using same format but with nested, loop, then if all ships are placed, the shipCount will be 18, 5 ships with their full length, 
+    // we have to use some sort of an array, if the ship is found, push into array, 
+    // then at the end loop thru them, and determine if each one is present or see if the array is === to a certain length,  
+    // we need a new approach for determining if all ships are placed, 
+    // a number count will not work, an array which will hold all ships, 
+    // we need to key into and access the gameboard and determine if a ship objects is there, 
+    // if its there add to the array, 
+    // then at the end check if the array length === 5 
+
     let shipCount = 0;
     let currentPlayerBoard = playerGameboard.gameboard.getGameboard();
    // console.log('CB FUNCTION, CURRENT PLAYERS GAMEBOARD', currentPlayerBoard);
     for (let i = 0; i < currentPlayerBoard.length; i++) { 
+        // for (let j = 0; j < currentPlayerBoard.length; j++) { 
         let cell = currentPlayerBoard[i]; 
+        console.log('LOGGING BACK CELL IN CHECK IF ALL SHIPS ARE PLACED FUNCTION', cell);
         if(cell.includes(battleShip)) { 
             console.log('battleship found');
             shipCount++
@@ -198,23 +168,45 @@ export function allPlayerShipsPlaced() {
             console.log('submarine found');
             shipCount++
         } 
-    } 
-    console.log(shipCount);
+    // } 
+    console.log('LOGGING THE SHIP COUNT', shipCount);
     if (shipCount === 18) { 
         console.log('ALL SHIPS HAVE BEEN PLACED');
-        // let createStartGameBtn = document.createElement('button');
-        // createStartGameBtn.id = 'start-game-btn';
-        // createStartGameBtn.textContent = 'START GAME';
         let mainTitleContainer = document.getElementById('main-title-container');
-        // mainTitleContainer.append(createStartGameBtn);
         let startGameBtnVisible = document.getElementById('start-game-btn');
         startGameBtnVisible.style.display = 'flex';
-        // startGameBtnVisible.classList.add('start-game-btn-visable-class');
-        // startGameBtnVisible.style.display = 'flex';
-        // startGameBtnVisible.style.justifyContent = 'center';
     }
-    // return playerGameboard.gameboard.getGameboard();
 } 
+} 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // places ship on the gameboard, calls another function that uses coordiantes, position and length to fill in the appropriate cells 
 function placeCurrentShip(x, y, currentShip, currentShipLength, currentShipDirection) { 
     let selectedXCoordinate = x;
@@ -234,15 +226,7 @@ function placeCurrentShip(x, y, currentShip, currentShipLength, currentShipDirec
     playerGameboard.gameboard.placeShip(selectedShip, selectedXCoordinate, selectedYCoordinate, selectedShipLength, selectedShipDirection);
     // console.log('here is the updated player gameboard', playerGameboard.gameboard.getGameboard());
     getShipCoordinates(selectedXCoordinate, selectedYCoordinate, selectedShipLength, selectedShipDirection);
-    // here I can use a conditional to see if all 5 ships have been placed. 
-    // conditional here to determine if all 5 ships have been placed, 
-    // set a variable with the gameboard, 
-    // loop to determine if the board includes the 5 ships objects. 
     let currentGameboard = playerGameboard.gameboard.getGameboard();
-    // console.log('CURRENT PLAYER GAMEBOARD', currentGameboard);
-    // if (currentGameboard.includes(battleShip) && currentGameboard.includes(destroyer) && currentGameboard.includes(carrierBoat) && currentGameboard.includes(patrolBoat) && currentGameboard.includes(submarine)) { 
-    //     console.log('ALL SHIPS HAVE BEEN PLACED ON THE BOARD!!!');
-    // } 
     allPlayerShipsPlaced();
 } 
 // determines how many cells will be filled, when ship is placed 
@@ -302,17 +286,11 @@ for (let i = 0; i < 10; i++) {
     gameboardCell.dataset.column = j;
     gridContainer.append(gameboardCell);
     gameboardCell.addEventListener('click', (e) => { 
-        // click on cell, grab current ship, length and position, 
-        // send to function which places that current ship on the board, 
-        // console.log('LOGGING THE PLAYERS BOARD WHEN CELL IS CLICKED!', playerGameboard.gameboard.getGameboard());
         let currentPlayerBoard = playerGameboard.gameboard.getGameboard();
-        // console.log('LOGGING CURRENT PLAYERS BOARD, CONNECTING THE BOARDS', currentPlayerBoard);
-        // const clickedCell = gameboard[i][j]; 
-        // console.log(clickedCell);
-        console.log(e.target);
-        console.log('IN THE EVENT LISTENER, THIS IS CURRENT SHIP', currentShip);
-        console.log('IN THE EVENT LISTENER, THIS IS CURRENT SHIP LENGTH', currentShipLength);
-        console.log('IN THE EVENT LISTENER, THIS IS CURRENT SHIP DIRECTION', currentShipDirection);
+        // console.log(e.target);
+        // console.log('IN THE EVENT LISTENER, THIS IS CURRENT SHIP', currentShip);
+        // console.log('IN THE EVENT LISTENER, THIS IS CURRENT SHIP LENGTH', currentShipLength);
+        // console.log('IN THE EVENT LISTENER, THIS IS CURRENT SHIP DIRECTION', currentShipDirection);
         let xCoordinate 
         let yCoordinate
         xCoordinate = e.target.dataset.row; 
@@ -341,33 +319,16 @@ for (let i = 0; i < 10; i++) {
 
 let startGameBtn = document.getElementById('start-game-btn');
 console.log('logging start game btn', startGameBtn);
-// what would happen when the user clicks, the start game btn? 
-// it would hide all the ship objects, the change direction btn 
-// also hide the start game btn, 
-// it would also display the computers board with ship object hidden, 
-// two gameboards displayed next to each other, 
-// THEN THE GAME WOULD START, 
-// PLAYER WOULD MAKE HIS MARK FIRST, 
-// THE GAME STARTS ONCE BTN IS PRESSED, 
-// IT REMOVES SHIPS, BTNS, AND DISPLAYS TWO GAMEBOARDS, 
-
-// WHERE WOULD WE ADD THE LOGIC TO APPEND AND DISPLAY THE COMPUTERS BOARD? 
  
 // creates the computers gameboard grid
 function createComputerBoardDOM() { 
-    // when it creates the computers board. 
-    // use the DOM to move the container for players grid, 
-    // access the wrapping container, move it to make space for the board, 
-    // when the function is accessed/called it will apply the gap when the start game btn is pressed 
 
     for (let i = 0; i < 10; i++) { 
         for (let j = 0; j < 10; j++) { 
-        // wrappingContainer.style.justifyContent = 'flex-start';
         wrappingContainer.style.gap = '15em';
         let gameboardCell = document.createElement('div');
         const gameboard = gameboardFactory().getGameboard();
 
-        // div.style.backgroundColor = 'blue';
         gameboardCell.style.border = '1px solid black';
         gameboardCell.style.height = '35px';
         gameboardCell.style.width = '35px';
@@ -383,18 +344,10 @@ function createComputerBoardDOM() {
             let numberedYCoordinate = Number(yCoordinate);
 
             
-            console.log('LOGGING BACK THE COMPUTERS GAMEBOARD X COORDINATE',  numberedXCoordinate);
-            console.log('LOGGING BACK THE COMPUTERS GAMEBOARD Y COORDINATE',  numberedYCoordinate); 
-            // coordinateFromComputerBoardX = numberedXCoordinate;
-            // coordinateFromComputerBoardY = numberedYCoordinate;
-            // pass these variables to the playGame function, 
-            // pass variables or export them
-            // 
+            // console.log('LOGGING BACK THE COMPUTERS GAMEBOARD X COORDINATE',  numberedXCoordinate);
+            // console.log('LOGGING BACK THE COMPUTERS GAMEBOARD Y COORDINATE',  numberedYCoordinate); 
              playGame(numberedXCoordinate, numberedYCoordinate);
         })
-        // mouseover the cell, and just style it, 
-        // once you click a cell, that gets passed to game module, player attack
-        // attack will determine if hit or not, if hit pass to function to style vise versa 
 
         gameboardCell.addEventListener('mouseenter', (e) => {
         e.target.classList.toggle('battleship-hover-class');
@@ -411,12 +364,6 @@ function createComputerBoardDOM() {
 // generates start game btn, and when clicked removes btns, and ship objects in the DOM
 startGameBtn.addEventListener('click', (e) => { 
     console.log('clicked the start game btn');
-    // hide the ship obj container, and the btns to change directions
-    // disable the hover class too? 
-    // create computer gameboard in the DOM, write a function that makes it 
-    // then call that function within the listener, then the game can be started 
-    // at that point we remove all the btns, and create the comps board 
-    // then the game starts
     let containerForShipObj = document.getElementById('container-for-ship-objects');
     console.log(containerForShipObj);
     containerForShipObj.style.display = 'none';
@@ -424,35 +371,49 @@ startGameBtn.addEventListener('click', (e) => {
     containerForChangingShipDirection.style.display = 'none';
     let containerForStartGameBtn = document.getElementById('start-game-btn-container');
     containerForStartGameBtn.style.display = 'none';
-    // btns are removed, hover class remains, but I think that can be removed 
-    // once the playGame module is called, 
-    // now create computers gameboard in the DOM and make sure both boards are next to eachother
-    // then after that the game can be played 
     createComputerBoardDOM();
-    // play game is called here, 
     // playGame();
 }) 
 
-// et cell = document.querySelector(`[data-row="${row}"][data-column="${column}"]`)
 export function determineIfHitOrMiss(selectedUser, x, y) { 
     console.log('DETERMINE IF COORDS ARE A HIT OR MISS, CB FUNCTION FROM ATTACK FUNCTION IN GAME MODULE', x, y, selectedUser);
-    // will use conditional to check if these coords that are passed in are within hitShot array. We have a system already to determine if something hit or not
-    // console.log(selectedUser.gameboard.hitShots);
     let coordinateX = x;
     let coordinateY = y;
     let coordinateCheck = [coordinateX, coordinateY];
     console.log('COORDINATE CHECK VARIABLE, WILL CHECK IF INCLUDED IN HIT SHOTS ARRAY', coordinateCheck);
     let selectedCellOnGameboard = document.querySelector(`[data-comprow="${coordinateX}"][data-compcolumn="${coordinateY}"]`);
     console.log('SELECTED CELL, THAT COORESPONDS TO COMPS GAMEBOARD', selectedCellOnGameboard);
-    // console.log('CONDITIONAL CHECK WITHIN DETERMINE IF HIT OR NOT FUNCTION', selectedUser.gameboard.hitShots.includes(coordinateCheck));
-    // if (selectedUser.gameboard.hitShots.includes(coordinateCheck)) { 
-    //     selectedCellOnGameboard.style.backgroundColor = 'red';
-    // } 
+    let hitShotsArray = selectedUser.gameboard.hitShots; 
+    let missedShotsArray = selectedUser.gameboard.missedShots;
+    console.log(missedShotsArray);
+    console.log(hitShotsArray); 
+    for (let i = 0; i < hitShotsArray.length; i++) { 
+        let selectedCoordinate = hitShotsArray[i];
+        console.log(JSON.stringify(selectedCoordinate).includes(JSON.stringify(coordinateCheck)));
+        if (JSON.stringify(selectedCoordinate).includes(JSON.stringify(coordinateCheck))) { 
+            selectedCellOnGameboard.style.backgroundColor = 'red';
+        } 
+    } 
+    for (let i = 0; i < missedShotsArray.length; i++) { 
+        let selectedCoordinateMissedShot = missedShotsArray[i];
+        console.log(selectedCoordinateMissedShot);
+        if (JSON.stringify(selectedCoordinateMissedShot).includes(JSON.stringify(coordinateCheck))) { 
+            selectedCellOnGameboard.style.backgroundColor = 'blue';
+        } 
+    }
+} 
+
+export function determineIfHitOrMissComputer(selectedUser, x, y) { 
+    let coordinateX = x;
+    let coordinateY = y;
+    let coordinateCheck = [coordinateX, coordinateY];
+    console.log('COORDINATE CHECK VARIABLE, WILL CHECK IF INCLUDED IN HIT SHOTS ARRAY', coordinateCheck);
+    let selectedCellOnGameboard = document.querySelector(`[data-row="${coordinateX}"][data-column="${coordinateY}"]`);
+    console.log('SELECTED CELL, THAT COORESPONDS TO COMPS GAMEBOARD', selectedCellOnGameboard);
     let hitShotsArray = selectedUser.gameboard.hitShots; 
     let missedShotsArray = selectedUser.gameboard.missedShots;
     console.log(missedShotsArray);
     console.log(hitShotsArray);
-    // loop thru hit shots and determine if coordinate within the hit shots array === coordinate that was clicked on comps board, using stringify methods 
     for (let i = 0; i < hitShotsArray.length; i++) { 
         let selectedCoordinate = hitShotsArray[i];
         console.log(selectedCoordinate);
@@ -461,12 +422,6 @@ export function determineIfHitOrMiss(selectedUser, x, y) {
             selectedCellOnGameboard.style.backgroundColor = 'red';
         } 
     } 
-    // selectedCellOnGameboard.style.backgroundColor = 'blue';
-    // if (JSON.stringify(hitShotsArray) === JSON.stringify(coordinateCheck)) { 
-    //     selectedCellOnGameboard.style.backgroundColor = 'red';
-    // }
-    //  selectedCellOnGameboard.style.backgroundColor = 'blue';
-    // use the same logic for missed shot, loop thru array and determine if coordinate includes it, 
     for (let i = 0; i < missedShotsArray.length; i++) { 
         let selectedCoordinateMissedShot = missedShotsArray[i];
         console.log(selectedCoordinateMissedShot);
@@ -489,16 +444,6 @@ export function determineIfHitOrMiss(selectedUser, x, y) {
             console.log('the current ship clicked on is..', currentShip)
             currentShipLength = battleShip.shipLength;
             currentShipDirection = battleShip.shipPosition;
-            // console.log(currentShip);
-            // console.log(currentShipLength);
-            // console.log(currentShipDirection);
-            // console.log(battleshipContainer);
-            // findCoords(currentShipDirection, currentShipLength);
-            // should not add the class after clicking ship obj, 
-            // battleshipContainer.classList.add('battleship-hover-class');
-            // console.log(e.target);
-            // console.log(battleshipContainer.dataset.shipID);
-            // console.log(battleShip.shipLength);
         })
     } 
 } 
@@ -512,7 +457,6 @@ function createDestroyerDOMObj() {
         const destroyerContainer = document.getElementById('container-for-destroyer');
         destroyerContainer.append(div);
         destroyerContainer.dataset.shipID = JSON.stringify(destroyer);
-        // console.log(destroyerContainer);
         destroyerContainer.addEventListener('click', (e) => { 
             currentShip = destroyer;
             console.log('the current ship clicked on is..', currentShip)
@@ -531,7 +475,6 @@ function createPatrolBoatDOMObj() {
         const patrolBoatContainer = document.getElementById('container-for-patrol-boat');
         patrolBoatContainer.append(div);
         patrolBoatContainer.dataset.shipID = JSON.stringify(patrolBoat);
-        // console.log(patrolBoatContainer);
         patrolBoatContainer.addEventListener('click', (e) => { 
             currentShip = patrolBoat;
             console.log('the current ship clicked on is..', currentShip)
@@ -551,7 +494,6 @@ function createCarrierBoatDOMObj() {
         const carrierBoatContainer = document.getElementById('container-for-carrier-boat');
         carrierBoatContainer.append(div);
         carrierBoatContainer.dataset.shipID = JSON.stringify(carrierBoat);
-        // console.log(carrierBoatContainer);
         carrierBoatContainer.addEventListener('click', (e) => { 
             currentShip = carrierBoat;
             console.log('the current ship clicked on is..', currentShip)
@@ -570,7 +512,6 @@ function createSubmarineDOMObj() {
         const submarineContainer = document.getElementById('container-for-submarine');
         submarineContainer.append(div);
         submarineContainer.dataset.shipID = JSON.stringify(submarine);
-        // console.log(submarineContainer);
         submarineContainer.addEventListener('click', (e) => { 
             currentShip = submarine;
             console.log('the current ship clicked on is..', currentShip)

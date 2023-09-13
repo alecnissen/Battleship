@@ -179,11 +179,29 @@ import './domLogic.js';
 // make logic for comps selection, styling 
 // hit coordinates do not get counted again, cannot hit same cell twice, but missed Coordinates can be saved twice, can hit the same missed cell twice, 
 
+// we need to figure out turn switching logic, player makes mark, determine if hit or miss, check for winner, switch players, 
+// comp makes mark, determine if hit or miss, check winner, switch players, 
+// where else could I switch players if I wanted to make this work, 
+// player will go first but once he makes his mark, comp should be able to make his mark, 
+
+// turn switching logic, 
+// seems like when you sink a ship it is sinking the same ship object twice, 
+// so when all ships are sunk 10 ships are inside the sunkenShipsArray 
+// double check, and maybe use/place different ship objects on computers board, 
+// when ships are placed, they could be placing twice, or overlapping over top of eachother, that is why some ships are being sunk twice, 
+// the target wil be to look over the placeComputerShips function in the domLogic 
+
+// some ships are being sunk twice? so that means player can win early if the sunkenShips array is 5, even though only 3 ships have been sunk. 
+// carrier being sunk twice??? 
 
 
 
-
-
+// 9/13 current plan, 
+// clean up the comments in the code, for domLogic and game module 
+// then figure out a better method for checking if all ships are sunk, this is a must, 
+// then determine why some ship objects are being sunk twice, 
+// I can first test with the nested loop and see if that makes a difference, it that fails, then I need to think of a better system 
+// place it vertically and it will be 4, horizontally will be one, so seems like it is not accounting for its full length 
 
 
 // now randomly place computers ships, 
