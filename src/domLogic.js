@@ -371,14 +371,14 @@ function createComputerBoardDOM() {
         gameboardCell.style.border = '1px solid black';
         gameboardCell.style.height = '35px';
         gameboardCell.style.width = '35px';
-        gameboardCell.dataset.row = i;
-        gameboardCell.dataset.column = j;
+        gameboardCell.dataset.comprow = i;
+        gameboardCell.dataset.compcolumn = j;
         computerGridContainer.append(gameboardCell);
         gameboardCell.addEventListener('click', (e) => { 
             let xCoordinate
             let yCoordinate
-            xCoordinate = e.target.dataset.row;
-            yCoordinate =  e.target.dataset.column;
+            xCoordinate = e.target.dataset.comprow;
+            yCoordinate =  e.target.dataset.compcolumn;
             let numberedXCoordinate = Number(xCoordinate);
             let numberedYCoordinate = Number(yCoordinate);
 
@@ -431,7 +431,50 @@ startGameBtn.addEventListener('click', (e) => {
     createComputerBoardDOM();
     // play game is called here, 
     // playGame();
-})
+}) 
+
+// et cell = document.querySelector(`[data-row="${row}"][data-column="${column}"]`)
+export function determineIfHitOrMiss(selectedUser, x, y) { 
+    console.log('DETERMINE IF COORDS ARE A HIT OR MISS, CB FUNCTION FROM ATTACK FUNCTION IN GAME MODULE', x, y, selectedUser);
+    // will use conditional to check if these coords that are passed in are within hitShot array. We have a system already to determine if something hit or not
+    // console.log(selectedUser.gameboard.hitShots);
+    let coordinateX = x;
+    let coordinateY = y;
+    let coordinateCheck = [coordinateX, coordinateY];
+    console.log('COORDINATE CHECK VARIABLE, WILL CHECK IF INCLUDED IN HIT SHOTS ARRAY', coordinateCheck);
+    let selectedCellOnGameboard = document.querySelector(`[data-comprow="${coordinateX}"][data-compcolumn="${coordinateY}"]`);
+    console.log('SELECTED CELL, THAT COORESPONDS TO COMPS GAMEBOARD', selectedCellOnGameboard);
+    // console.log('CONDITIONAL CHECK WITHIN DETERMINE IF HIT OR NOT FUNCTION', selectedUser.gameboard.hitShots.includes(coordinateCheck));
+    // if (selectedUser.gameboard.hitShots.includes(coordinateCheck)) { 
+    //     selectedCellOnGameboard.style.backgroundColor = 'red';
+    // } 
+    let hitShotsArray = selectedUser.gameboard.hitShots; 
+    let missedShotsArray = selectedUser.gameboard.missedShots;
+    console.log(missedShotsArray);
+    console.log(hitShotsArray);
+    // loop thru hit shots and determine if coordinate within the hit shots array === coordinate that was clicked on comps board, using stringify methods 
+    for (let i = 0; i < hitShotsArray.length; i++) { 
+        let selectedCoordinate = hitShotsArray[i];
+        console.log(selectedCoordinate);
+        console.log(JSON.stringify(selectedCoordinate).includes(JSON.stringify(coordinateCheck)));
+        if (JSON.stringify(selectedCoordinate).includes(JSON.stringify(coordinateCheck))) { 
+            selectedCellOnGameboard.style.backgroundColor = 'red';
+        } 
+    } 
+    // selectedCellOnGameboard.style.backgroundColor = 'blue';
+    // if (JSON.stringify(hitShotsArray) === JSON.stringify(coordinateCheck)) { 
+    //     selectedCellOnGameboard.style.backgroundColor = 'red';
+    // }
+    //  selectedCellOnGameboard.style.backgroundColor = 'blue';
+    // use the same logic for missed shot, loop thru array and determine if coordinate includes it, 
+    for (let i = 0; i < missedShotsArray.length; i++) { 
+        let selectedCoordinateMissedShot = missedShotsArray[i];
+        console.log(selectedCoordinateMissedShot);
+        if (JSON.stringify(selectedCoordinateMissedShot).includes(JSON.stringify(coordinateCheck))) { 
+            selectedCellOnGameboard.style.backgroundColor = 'blue';
+        } 
+    }
+}
 
 
     function createBattleShipDOMObj() { 

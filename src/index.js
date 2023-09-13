@@ -129,10 +129,55 @@ import './domLogic.js';
 // game cycle depends on players click, checking for winner, switching turns, cycle repeats 
 // 
 // first lets do a hover class over the comps board, player should see where they are about to place their hit. 
+// hover class taken care of, next lets style the players mark, 
+// attack method will determine if hit or not 
+// how can we determine if it was a hit or not? 
+// I think we also needto pass the enemy's gameboard to determine if hit or not function, 
+// takes the coords and enemy's gameboard. if it hit style the cell on the enemys board, 
+// let enemysCurrentBoard = enemysboard.gameboard.hitShits() 
 
+// highlighting the players gameboard, query select the computers gameboard cells ONLY! 
+// make sure you access the computers gameboard cell that was clicked on, you are accessing the players gameboard cell, 
+// change the data row and column attribute for computer gameboard function
+// I want to log back the computers DOM cell that was clicked using the correct data attributes 
+// should I change the variable that assigns the data-set, how can I properly set a data-set for comps DOM cells on the gameboard 
+// data set for comps board now working ok, 
+// now use conditional to determine if the clicked on coordinate is a hit, meaning it's already in the hit shots array
 
+// hit shots are working on comps board, but I think I need to make a new function, which does the same logic, but for computer attack
+// because within attack I am accessing two different boards using query selector, I find that difficult to do in one function, 
 
+// tonight, change attack currently to playerAttack, and make another function computerAttack, which uses the same process, 
 
+// just passing in a different board and coordinates, 
+
+// for player, it hit is good, highlight red, 
+// else highlight the cell blue or green, make sure the player knows that is is a miss, then apply the same logic for the computer, 
+
+// then turn switching logic/loop, 
+// making sure cells, cannot get hit twice, 
+// remove hover class on players board after start game 
+
+// continue to work on making sure if a miss happens on comps board, it will turn blue for miss, red for hit. 
+// then work on making sure the turns are switching, 
+// make sure cells cannot get hit twice for sure, 
+// first lets make sure misses on the comps board turn blue 
+
+// use a loop to check for hit shots or missed shots, try the same process as hits
+
+// OK looks like I have a system down for hit shots and missed shots on players board, 
+
+// now I will need to do the same for the computer, random attacks, if hit turn red, if miss turn blue, 
+
+// is this the time to determine turn switching logic? 
+
+// have the ability to switch turns now, 
+// or just make the logic for the computer to make their mark and apply styles, 
+// I'm leaning to just make the logic now, and flip the player turn to 2, to test if computer styles work, 
+// should just keep randomly generating coordinates, 
+
+// make logic for comps selection, styling 
+// hit coordinates do not get counted again, cannot hit same cell twice, but missed Coordinates can be saved twice, can hit the same missed cell twice, 
 
 
 

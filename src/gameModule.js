@@ -3,6 +3,7 @@ import gameboardFactory from './gameboardFactory.js';
 import playerFactory from './playerFactory.js';
 import { allPlayerShipsPlaced, placeComputerShips }  from './domLogic.js';
 import { playerGameboard, computerGameboard } from './domLogic.js';
+import { determineIfHitOrMiss } from './domLogic.js';
 // import { coordinateFromComputerBoardX, coordinateFromComputerBoardY} from './domLogic';
 // import { coordinateFromComputerBoardX } from './domLogic.js';
 // import { coordinateFromComputerBoardY } from './domLogic.js';
@@ -59,7 +60,10 @@ export default function createPlayer(name, type) {
 
   export function attack(userObj, x, y) { 
     const selectedUser = userObj;
-    selectedUser.gameboard.receiveAttack(x, y);
+    selectedUser.gameboard.receiveAttack(x, y); 
+    determineIfHitOrMiss(selectedUser, x, y);
+    // send coords to a function which determine if hit or not
+    // test passing coords to another function, 
     // access the hit or missed shot here, 
     // we need to key into the hit shots, 
     // determine if coordinates passed into attack, 
@@ -128,6 +132,7 @@ export default function createPlayer(name, type) {
       console.log('ELSE STATEMENT CHECK!')
       const randomCoordinate1 = Math.floor(Math.random() * 9) + 1;
       const randomCoordinate2 = Math.floor(Math.random() * 9) + 1;
+      // make a seperate function for computer attack, determine if mark was a hit then style red, else blue 
       attack(currentPlayerGameboard, randomCoordinate1, randomCoordinate2);
       console.log('PLAYERS GAMEBOARD AFTER COMPUTER ATTACK', currentPlayerGameboard);
       if (checkForWinner(currentPlayerGameboard)) { 
