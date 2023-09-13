@@ -1,7 +1,7 @@
 import ship from './shipFactory.js';
 import gameboardFactory from './gameboardFactory.js'; 
 import playerFactory from './playerFactory.js';
-import { allPlayerShipsPlaced, placeComputerShips }  from './domLogic.js';
+// import { allPlayerShipsPlaced, placeComputerShips }  from './domLogic.js';
 import { playerGameboard, computerGameboard } from './domLogic.js';
 import { determineIfHitOrMiss } from './domLogic.js';
 import { determineIfHitOrMissComputer } from './domLogic.js';

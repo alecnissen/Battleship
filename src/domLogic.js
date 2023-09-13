@@ -29,6 +29,7 @@ let carrierBoat = ship('Carrier', 5, 'vertical');
 let submarine = ship('Submarine', 3, 'vertical'); 
 let coordinateFromComputerBoardX
 let coordinateFromComputerBoardY
+let shipCounter = 0; 
 // let computerArray = [battleShip, destroyer, patrolBoat, carrierBoat, submarine]; 
 
     let computerShipArray = [battleShip, destroyer, patrolBoat, carrierBoat, submarine];
@@ -128,59 +129,70 @@ function useCoords(coords) {
     } 
 } 
 // check if all players ships are placed
-export function allPlayerShipsPlaced() { 
-    // instead of ship count, add to an array and if the array contains all the 5 ships play the game, 
-    // testing with nested loop, left off here, I need a better system for checking if all ships are placed on the board, 
-    // wont account for horizontal and vertically currently. 
-    // think the problem is I am not using nested loop. 
-    // When placed vertically it expands its full length, when placed horizontall its one 
-    // so the problem seems to be how you are looping, you are only taking into account one direction, 
-    // test again using same format but with nested, loop, then if all ships are placed, the shipCount will be 18, 5 ships with their full length, 
-    // we have to use some sort of an array, if the ship is found, push into array, 
-    // then at the end loop thru them, and determine if each one is present or see if the array is === to a certain length,  
-    // we need a new approach for determining if all ships are placed, 
-    // a number count will not work, an array which will hold all ships, 
-    // we need to key into and access the gameboard and determine if a ship objects is there, 
-    // if its there add to the array, 
-    // then at the end check if the array length === 5 
 
-    let shipCount = 0;
-    let currentPlayerBoard = playerGameboard.gameboard.getGameboard();
-   // console.log('CB FUNCTION, CURRENT PLAYERS GAMEBOARD', currentPlayerBoard);
-    for (let i = 0; i < currentPlayerBoard.length; i++) { 
-        // for (let j = 0; j < currentPlayerBoard.length; j++) { 
-        let cell = currentPlayerBoard[i]; 
-        console.log('LOGGING BACK CELL IN CHECK IF ALL SHIPS ARE PLACED FUNCTION', cell);
-        if(cell.includes(battleShip)) { 
-            console.log('battleship found');
-            shipCount++
-            console.log(shipCount);
-        } if (cell.includes(destroyer)) { 
-            console.log('destroyer found');
-            shipCount++
-        } if (cell.includes(carrierBoat)) { 
-            console.log('carrierBoat found');
-            shipCount++
-        } if (cell.includes(patrolBoat)) { 
-            console.log('patrol boat found');
-            shipCount++
-        } if (cell.includes(submarine)) { 
-            console.log('submarine found');
-            shipCount++
-        } 
-    // } 
-    console.log('LOGGING THE SHIP COUNT', shipCount);
-    if (shipCount === 18) { 
-        console.log('ALL SHIPS HAVE BEEN PLACED');
+// export function allPlayerShipsPlaced() { 
+//     // instead of ship count, add to an array and if the array contains all the 5 ships play the game, 
+//     // testing with nested loop, left off here, I need a better system for checking if all ships are placed on the board, 
+//     // wont account for horizontal and vertically currently. 
+//     // think the problem is I am not using nested loop. 
+//     // When placed vertically it expands its full length, when placed horizontall its one 
+//     // so the problem seems to be how you are looping, you are only taking into account one direction, 
+//     // test again using same format but with nested, loop, then if all ships are placed, the shipCount will be 18, 5 ships with their full length, 
+//     // we have to use some sort of an array, if the ship is found, push into array, 
+//     // then at the end loop thru them, and determine if each one is present or see if the array is === to a certain length,  
+//     // we need a new approach for determining if all ships are placed, 
+//     // a number count will not work, an array which will hold all ships, 
+//     // we need to key into and access the gameboard and determine if a ship objects is there, 
+//     // if its there add to the array, 
+//     // then at the end check if the array length === 5 
+
+//     let shipCount = 0;
+//     let currentPlayerBoard = playerGameboard.gameboard.getGameboard();
+//    // console.log('CB FUNCTION, CURRENT PLAYERS GAMEBOARD', currentPlayerBoard);
+//     for (let i = 0; i < currentPlayerBoard.length; i++) { 
+//         // for (let j = 0; j < currentPlayerBoard.length; j++) { 
+//         let cell = currentPlayerBoard[i]; 
+//         console.log('LOGGING BACK CELL IN CHECK IF ALL SHIPS ARE PLACED FUNCTION', cell);
+//         if(cell.includes(battleShip)) { 
+//             console.log('battleship found');
+//             shipCount++
+//             console.log(shipCount);
+//         } if (cell.includes(destroyer)) { 
+//             console.log('destroyer found');
+//             shipCount++
+//         } if (cell.includes(carrierBoat)) { 
+//             console.log('carrierBoat found');
+//             shipCount++
+//         } if (cell.includes(patrolBoat)) { 
+//             console.log('patrol boat found');
+//             shipCount++
+//         } if (cell.includes(submarine)) { 
+//             console.log('submarine found');
+//             shipCount++
+//         } 
+//     // } 
+//     console.log('LOGGING THE SHIP COUNT', shipCount);
+//     if (shipCount === 18) { 
+//         console.log('ALL SHIPS HAVE BEEN PLACED');
+//         let mainTitleContainer = document.getElementById('main-title-container');
+//         let startGameBtnVisible = document.getElementById('start-game-btn');
+//         startGameBtnVisible.style.display = 'flex';
+//     }
+// } 
+// } 
+
+
+function allPlayerShipsPlaced() {  
+
+    console.log('LOGGING THE SHIP COUNTER, WITHIN ALL PLAYER SHIPS PLACED', shipCounter);
+ 
+    if (shipCounter === 5) { 
         let mainTitleContainer = document.getElementById('main-title-container');
         let startGameBtnVisible = document.getElementById('start-game-btn');
         startGameBtnVisible.style.display = 'flex';
     }
-} 
-} 
 
-
-
+}
 
 
 
@@ -227,6 +239,7 @@ function placeCurrentShip(x, y, currentShip, currentShipLength, currentShipDirec
     // console.log('here is the updated player gameboard', playerGameboard.gameboard.getGameboard());
     getShipCoordinates(selectedXCoordinate, selectedYCoordinate, selectedShipLength, selectedShipDirection);
     let currentGameboard = playerGameboard.gameboard.getGameboard();
+    shipCounter++
     allPlayerShipsPlaced();
 } 
 // determines how many cells will be filled, when ship is placed 

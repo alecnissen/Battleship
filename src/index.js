@@ -203,6 +203,13 @@ import './domLogic.js';
 // I can first test with the nested loop and see if that makes a difference, it that fails, then I need to think of a better system 
 // place it vertically and it will be 4, horizontally will be one, so seems like it is not accounting for its full length 
 
+// trying to figure out a system to check if all player ships are sunk, before I was making a loop then determining if that cell included a ship object, if it did 
+
+// I Would keep a counter, and if all ships placed and equaled 18 (the length of all ships when placed) the game could start, that only works for one direction, 
+// 
+
+
+
 
 // now randomly place computers ships, 
 
