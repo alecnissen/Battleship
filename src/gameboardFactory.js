@@ -89,8 +89,10 @@ function checkForHits(x, y) {
       hitShots.push([x, y])
 
       if (shipOnBoard.getShipStatus()) { 
-        // console.log('CURRENT SHIP ON BOARD WITHIN RECEIVEATTACK FUNCTION', shipOnBoard);
+        console.log(sunkenShipsArray);
+       //  if (!sunkenShipsArray.includes(shipOnBoard)) { 
         sunkenShipsArray.push(shipOnBoard);
+        // } 
       }
 
     } else { 
@@ -103,7 +105,7 @@ function checkForHits(x, y) {
 }   
 
 function areAllShipsSunk() { 
-  console.log(sunkenShipsArray);
+  console.log('all ships sunk function, logging current sunkenShipsArray', sunkenShipsArray);
   if (sunkenShipsArray.length === 5) { 
     return true;
   } 

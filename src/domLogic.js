@@ -32,7 +32,13 @@ let coordinateFromComputerBoardY
 let shipCounter = 0; 
 // let computerArray = [battleShip, destroyer, patrolBoat, carrierBoat, submarine]; 
 
-    let computerShipArray = [battleShip, destroyer, patrolBoat, carrierBoat, submarine];
+let computerBattleShip = ship('Battleship', 4, 'vertical');
+let computerDestroyer = ship('Destroyer', 4, 'vertical' );
+let computerPatrolBoat = ship('Patrol-boat', 2, 'vertical');
+let computerCarrierBoat = ship('Carrier', 5, 'vertical');
+let computerSubmarine = ship('Submarine', 3, 'vertical'); 
+
+    let computerShipArray = [computerBattleShip, computerDestroyer, computerPatrolBoat, computerCarrierBoat , computerSubmarine];
     
     export function placeComputerShips(currentComputerShip = computerShipArray[0]) { 
         if (computerShipArray.length === 0) { 
