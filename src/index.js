@@ -208,7 +208,20 @@ import './domLogic.js';
 // I Would keep a counter, and if all ships placed and equaled 18 (the length of all ships when placed) the game could start, that only works for one direction, 
 // 
 
+// so now the problem is why are certain ships being sunk twice? 
+// that interfers with the determing if all ships are sunk function, 
+// I would go back and determine how ships are being placed, 
+// but yet the placement of the ships are fine, 
+// it does not seem like ships are overlapping 
+// Follow the code execution, the sunken ships array and when things are being pushed to it. 
 
+// getting some odd behavior, 
+// some ships are being placed fine, others It seems like are getting placed too early,
+// so ships get added to the sunkenShips array more than once, 
+// however following the code execution and looking over the functiosn I have created, I am not sure why this would be occuring
+// I think I found the issue, I think once a ship is sunk, the isSUnk status turns to true, and it also sinks the corresponding player ship, 
+// compare boards to see if you sink one ship, it will automatically sink the players ships, 
+// that isnt the issue, patrol boat on comps board was sunk but yet you check players board, the sunken ship array was still empty. 
 
 
 // now randomly place computers ships, 

@@ -89,6 +89,7 @@ function checkForHits(x, y) {
       hitShots.push([x, y])
 
       if (shipOnBoard.getShipStatus()) { 
+        // console.log('CURRENT SHIP ON BOARD WITHIN RECEIVEATTACK FUNCTION', shipOnBoard);
         sunkenShipsArray.push(shipOnBoard);
       }
 
@@ -102,6 +103,7 @@ function checkForHits(x, y) {
 }   
 
 function areAllShipsSunk() { 
+  console.log(sunkenShipsArray);
   if (sunkenShipsArray.length === 5) { 
     return true;
   } 

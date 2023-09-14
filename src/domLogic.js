@@ -195,30 +195,6 @@ function allPlayerShipsPlaced() {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // places ship on the gameboard, calls another function that uses coordiantes, position and length to fill in the appropriate cells 
 function placeCurrentShip(x, y, currentShip, currentShipLength, currentShipDirection) { 
     let selectedXCoordinate = x;
@@ -420,24 +396,24 @@ export function determineIfHitOrMissComputer(selectedUser, x, y) {
     let coordinateX = x;
     let coordinateY = y;
     let coordinateCheck = [coordinateX, coordinateY];
-    console.log('COORDINATE CHECK VARIABLE, WILL CHECK IF INCLUDED IN HIT SHOTS ARRAY', coordinateCheck);
+    // console.log('COORDINATE CHECK VARIABLE, WILL CHECK IF INCLUDED IN HIT SHOTS ARRAY', coordinateCheck);
     let selectedCellOnGameboard = document.querySelector(`[data-row="${coordinateX}"][data-column="${coordinateY}"]`);
-    console.log('SELECTED CELL, THAT COORESPONDS TO COMPS GAMEBOARD', selectedCellOnGameboard);
+    // console.log('SELECTED CELL, THAT COORESPONDS TO COMPS GAMEBOARD', selectedCellOnGameboard);
     let hitShotsArray = selectedUser.gameboard.hitShots; 
     let missedShotsArray = selectedUser.gameboard.missedShots;
-    console.log(missedShotsArray);
-    console.log(hitShotsArray);
+    // console.log(missedShotsArray);
+    // console.log(hitShotsArray);
     for (let i = 0; i < hitShotsArray.length; i++) { 
         let selectedCoordinate = hitShotsArray[i];
-        console.log(selectedCoordinate);
-        console.log(JSON.stringify(selectedCoordinate).includes(JSON.stringify(coordinateCheck)));
+        // console.log(selectedCoordinate);
+        // console.log(JSON.stringify(selectedCoordinate).includes(JSON.stringify(coordinateCheck)));
         if (JSON.stringify(selectedCoordinate).includes(JSON.stringify(coordinateCheck))) { 
             selectedCellOnGameboard.style.backgroundColor = 'red';
         } 
     } 
     for (let i = 0; i < missedShotsArray.length; i++) { 
         let selectedCoordinateMissedShot = missedShotsArray[i];
-        console.log(selectedCoordinateMissedShot);
+        // console.log(selectedCoordinateMissedShot);
         if (JSON.stringify(selectedCoordinateMissedShot).includes(JSON.stringify(coordinateCheck))) { 
             selectedCellOnGameboard.style.backgroundColor = 'blue';
         } 
