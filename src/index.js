@@ -223,6 +223,74 @@ import './domLogic.js';
 // compare boards to see if you sink one ship, it will automatically sink the players ships, 
 // that isnt the issue, patrol boat on comps board was sunk but yet you check players board, the sunken ship array was still empty. 
 
+// figured out the problem there, I am no longer seeing ships being added more than once to the sunken ships array, 
+// now I need to figure out, how to prevent player from hitting the same missed coordinate cell twice. 
+
+
+
+// 9/14 current plan, 
+
+// get familar with the game again, 
+// make sure a winner modal is printed with an option to restart the game, 
+// make sure that each time playGame is called with the passed coordinates, that player must make a unique hit each time, 
+// right now from what I remember, you can hit the same cell twice, and it will switch turns, 
+// it switches turns after you click a button, switch turns only when the player has hit a unqiue square, 
+// I would first try to work on that, so the goal is to make sure the turns only switch when the player has hit a unique square, 
+
+// OK I would ask later about not allowing the player to hit the same cell twice, 
+// if you hit the same cell twice, it wont add onto the missed or hits 
+// but it will allow the turn switching  to happen, 
+
+// move on, come back to it, and see if you can trace the execution of it 
+// if not ask for the help, 
+// lets make the winner modal first and print the winner, and have an opton to start the game again from the beginnging 
+
+// these are the two issues that remain, 
+
+
+
+
+// 9/16 current plan, 
+// right now user can double click a square, and that will count as there move, 
+// even tho the user already hit or had a miss in that cell already, 
+// I want user to hit the board in unique spots only,
+// my goal for going about this, was to check if the attack coordininates were already 
+// in the hit shots and missed shots array, 
+
+// User can only make unqiue hits, 
+// our focus needs to go to receiveAttack function, 
+// before the user makes their attack 
+
+
+
+
+// Hello everyone, trying to figure out one problem here on battleship, then the game is complete. I do need some help with this, 
+
+// What I want: I want the user to hit only open spaces on the board, user cannot make their mark on the same cell twice. 
+
+// The problem: Turns switch when user makes a hit on enemy's gameboard, currently they can hit the same cell twice, however those hits or missed shots do not get stored again (which is good),, just that the turns will switch even though the player already hit that cell. It should switch turns when player has made a hit on an open/unoccupied cell in the board. I am really stuck on where the logic should go to prevent this. 
+
+// What I've tried: Checking if player hit is inside the missed shot or hit shot array already. The function would not work as indetended and would always return false. I tried using that same logic throughout different points in the code execution but nothing seems be going through and the conditionals are not working. 
+
+// I am attacking my codepen which traces the code execution. Player makes mark on comps gameboard, those coordinates are passed to playGame, the attack method is called which uses receiveAttack inside it to store hit shots and missed shots. I've attached some comments to explain the process. 
+
+// Would appreciate any help with this. This is the final step and final bug I must get past. 
+
+
+// 9/17 
+
+// try to figure out why conditional is not working 
+
+// if the coordinates that the player clicked on is NOT inside the hit shot or missed shot array 
+// then go ahead and let player make their attack. 
+// the problem is that player can still make their mark twice on the same cell, instead of hitting unique cells each time, 
+// turns should only switch when a player has a hit a unique cell.  
+
+
+
+
+
+
 
 // now randomly place computers ships, 
 

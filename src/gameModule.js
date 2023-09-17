@@ -5,21 +5,16 @@ import playerFactory from './playerFactory.js';
 import { playerGameboard, computerGameboard } from './domLogic.js';
 import { determineIfHitOrMiss } from './domLogic.js';
 import { determineIfHitOrMissComputer } from './domLogic.js';
-// import { coordinateFromComputerBoardX, coordinateFromComputerBoardY} from './domLogic';
-// import { coordinateFromComputerBoardX } from './domLogic.js';
-// import { coordinateFromComputerBoardY } from './domLogic.js';
-
-// console.log('COMPUTERS GAMEBOARD CELL THAT WAS CLICKED X', coordinateFromComputerBoardX);
-// console.log('COMPUTERS GAMEBOARD CELL THAT WAS CLICKED Y', coordinateFromComputerBoardY);
 
 let currentPlayerGameboard = playerGameboard; 
 let currentComputerGameboard = computerGameboard;
+const modal = document.querySelector(".modal");
+const overlay = document.querySelector(".overlay");
+const openModalBtn = document.querySelector(".btn-open");
+const closeModalBtn = document.querySelector(".btn-close");
+let currentHitShotsArray = currentComputerGameboard.gameboard.hitShots;
+let currentMissedShotsArray = currentComputerGameboard.gameboard.missedShots;
 
-// console.log('THIS IS THE CURRENT PLAYER GAMEBOARD FROM DOMLOGIC', currentPlayerGameboard);
-// console.log('THIS IS THE CURRENT COMPUTER GAMEBOARD FROM DOMLOGIC', currentComputerGameboard);
-
-
-// create players here
 export default function createPlayer(name, type) { 
     if(type === 'computer') {
       const computerName = playerFactory(name); // add turn var
@@ -38,24 +33,13 @@ export default function createPlayer(name, type) {
       return true;
     } 
     return false;
-  }
+  } 
 
 
   export function attack(userObj, x, y) { 
     const selectedUser = userObj;
     selectedUser.gameboard.receiveAttack(x, y); 
     determineIfHitOrMiss(selectedUser, x, y);
-    // send coords to a function which determine if hit or not
-    // test passing coords to another function, 
-    // access the hit or missed shot here, 
-    // we need to key into the hit shots, 
-    // determine if coordinates passed into attack, 
-    // are a hit or a miss
-    // if passed coordinates are within hitShot
-    // style those coordinates 
-    // call another function which can do that in the DOM, 
-    //
-   //  console.log(selectedUser.gameboard.getGameboard());
   } 
 
   export function computerAttack(userObj, x, y) { 
@@ -63,35 +47,73 @@ export default function createPlayer(name, type) {
     selectedUser.gameboard.receiveAttack(x, y); 
     determineIfHitOrMissComputer(selectedUser, x, y);
 
+  } 
+
+  // const openModal = function() {
+  //   modal.classList.remove("hidden");
+  //   overlay.classList.remove("hidden");
+  // };
+
+function openModal(user) { 
+  let currentUser = user;
+  console.log(currentUser);
+  let winnerName = currentUser.name;
+  console.log(winnerName);
+  let winnerTitleInModal = document.getElementById('winner-display-title');
+  winnerTitleInModal.textContent = `${winnerName} WINS!`;
+  modal.classList.remove("hidden");
+  overlay.classList.remove("hidden");
+}
+
+
+
+  function determineIfInsideHitShotArray(x, y) { 
+    for (let i = 0; i < currentHitShotsArray.length; i++) { 
+      let currentHit = currentHitShotsArray[i];
+      console.log('currentHit variable', currentHit);
+      console.log(JSON.stringify(currentHit))
+      console.log(JSON.stringify([x, y]));
+      if (JSON.stringify(currentHit) === JSON.stringify([x, y])) { 
+        return true; 
+      }
+    }
+    return false;
+  } 
+
+  function determineIfInsideMissedShotArray(x, y) { 
+    for (let i = 0; i < currentMissedShotsArray.length; i++) { 
+      let currentMiss = currentMissedShotsArray[i];
+      if (JSON.stringify(currentMiss) === JSON.stringify([x, y])) { 
+        return true; 
+      }
+    }
+    return false;
   }
+
 
   export function playGame(xCoordinate, yCoordinate) { 
     let playerTurn = 1; 
-
-    console.log('LOGGING PLAYERS BOARD WITHIN PLAYGAME FUNCTION BEFORE THE LOOP', currentPlayerGameboard);
-    console.log('LOGGING COMPUTERS BOARD WITHIN PLAYGAME FUNCTION BEFORE THE LOOP',currentComputerGameboard);
-    
-    // while (!computer.gameboard.areAllShipsSunk() && !player.gameboard.areAllShipsSunk()) { 
-
-   // while (!currentPlayerGameboard.gameboard.areAllShipsSunk() && currentPlayerGameboard.gameboard.areAllShipsSunk()) { 
       
     if (playerTurn === 1) {
       let playerMarkX = xCoordinate;
       let playerMarkY = yCoordinate;
 
-      console.log('LOGGING PLAYER MARKX WITHIN PLAYGAME FUNCTION WITHIN THE LOOP, PLAYER TURN', playerMarkX);
-      console.log('LOGGING PLAYER MARKY WITHIN PLAYGAME FUNCTION WITHIN THE LOOP, PLAYER TURN', playerMarkY);
-  
+      console.log(!determineIfInsideHitShotArray(playerMarkX, playerMarkY) && (!determineIfInsideMissedShotArray(playerMarkX, playerMarkY)));
+
+      if (!determineIfInsideHitShotArray(playerMarkX, playerMarkY) && (!determineIfInsideMissedShotArray(playerMarkX, playerMarkY))) { 
+
       attack(currentComputerGameboard, playerMarkX, playerMarkY); 
+      playerTurn = 2;
+      } 
 
       console.log('COMPUTERS GAMEBOARD AFTER PLAYER ATTACK', currentComputerGameboard);
 
       if (checkForWinner(currentComputerGameboard)) { 
         console.log('PLAYER WINS');
+        openModal(playerGameboard);
         return; // print/access winner modal
       }
-      playerTurn = 2;
-
+      // playerTurn = 2;
     } 
     // else { 
       console.log('ELSE STATEMENT CHECK!')
@@ -105,10 +127,7 @@ export default function createPlayer(name, type) {
       } 
       playerTurn = 1;
     } 
- // } 
-// } 
 
-  // playGame();
 
 
 

@@ -76,12 +76,27 @@ function checkForHits(x, y) {
     return false;
   } 
 
+  function checkForDuplicateMissedShots(x, y) { 
+    for (let i = 0; i < missedShots.length; i++) { 
+      const missedShotCoordinates = missedShots[i];
+      if (JSON.stringify(missedShotCoordinates) === JSON.stringify([x, y])) {
+        return true; 
+      } 
+    }
+    return false;
+    } 
+
+    // ok so we go thru the hit and missed shots but we need to go thru the gameboard and figure out if a cell is already occupied, 
+    // loop thru gameboard and determine if cell is free, then player can make their attack, 
+  
+
 // allows user to place hits on the board if the hit is valid, 
   function receiveAttack(x, y) { 
     const shipOnBoard = gameboard[x][y]; 
     if (typeof shipOnBoard === 'object') { 
       if (checkForHits(x, y)) {
         // if there is already a hit there, 
+        // check to make sure same cell is not being hit twice, 
          // throw new Error('Hit was already placed at that cell, pick a different cell');
          return true;
       } 
@@ -96,8 +111,12 @@ function checkForHits(x, y) {
       }
 
     } else { 
-      missedShots.push([x, y])
-    }
+      // check if these coordinates are in missedShot array, if they are not, push them into missedShot array, 
+      // if false, meaning coordinates are not inside the missed coords array then push unique coords in, 
+      if (!checkForDuplicateMissedShots(x, y)) { 
+      missedShots.push([x, y]) 
+      } 
+    } 
     return { 
       missedShots, 
       hitShots
