@@ -88,11 +88,36 @@ function openModal(user) {
       }
     }
     return false;
+  } 
+
+  function determineIfInsideHitShotArrayComputer(x, y) { 
+    for (let i = 0; i < currentHitShotsArray.length; i++) { 
+      let currentHit = currentHitShotsArray[i];
+      console.log('currentHit from hit shot array', currentHit);
+      // console.log(JSON.stringify(currentHit))
+      // console.log(JSON.stringify([x, y]));
+      if (JSON.stringify(currentHit) === JSON.stringify([x, y])) { 
+        return true; 
+      }
+    }
+    return false;
+  } 
+
+  function determineIfInsideMissedShotArrayComputer(x, y) { 
+    for (let i = 0; i < currentMissedShotsArray.length; i++) { 
+      let currentMiss = currentMissedShotsArray[i];
+      console.log('current miss coordinate from missed shot array', currentMiss)
+      if (JSON.stringify(currentMiss) === JSON.stringify([x, y])) { 
+        return true; 
+      }
+    }
+    return false;
   }
 
 
   export function playGame(xCoordinate, yCoordinate) { 
     let playerTurn = 1; 
+    console.log('logging player turn variable after init', playerTurn);
       
     if (playerTurn === 1) {
       let playerMarkX = xCoordinate;
@@ -103,8 +128,9 @@ function openModal(user) {
       if (!determineIfInsideHitShotArray(playerMarkX, playerMarkY) && (!determineIfInsideMissedShotArray(playerMarkX, playerMarkY))) { 
 
       attack(currentComputerGameboard, playerMarkX, playerMarkY); 
+      console.log('logging player turn variable before player attack', playerTurn);
       playerTurn = 2;
-      console.log(playerTurn);
+      console.log('logging player turn variable after player attack', playerTurn);
       } else { 
         return;
       }
@@ -122,15 +148,26 @@ function openModal(user) {
       console.log('ELSE STATEMENT CHECK!')
       const randomCoordinate1 = Math.floor(Math.random() * 9) + 1;
       const randomCoordinate2 = Math.floor(Math.random() * 9) + 1;
-      computerAttack(currentPlayerGameboard, randomCoordinate1, randomCoordinate2);
+      // computerAttack(currentPlayerGameboard, randomCoordinate1, randomCoordinate2);
       console.log('PLAYERS GAMEBOARD AFTER COMPUTER ATTACK', currentPlayerGameboard);
+      console.log('RANDOM COORDINATES SELECTED FROM COMPUTER', randomCoordinate1, randomCoordinate2);
+
+      if (!determineIfInsideHitShotArrayComputer(randomCoordinate1, randomCoordinate2) && (!determineIfInsideMissedShotArrayComputer(randomCoordinate1, randomCoordinate2))) { 
+        computerAttack(currentPlayerGameboard, randomCoordinate1, randomCoordinate2);
+        console.log('logging player turn variable before computer attack', playerTurn);
+        playerTurn = 1;
+        console.log('logging player turn variable after computer attack', playerTurn);
+      } else { 
+        return;
+      }
+
       if (checkForWinner(currentPlayerGameboard)) { 
         console.log('COMP WINS');
         return; 
       } 
-      playerTurn = 1;
+      // playerTurn = 1;
     } 
-
+  
 
 
 

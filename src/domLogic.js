@@ -291,11 +291,11 @@ function createComputerBoardDOM() {
 
              playGame(numberedXCoordinate, numberedYCoordinate);
 
-             let getPlayerGameboardCell = document.getElementById('player-gameboardCell');
-             // console.log(getPlayerGameboardCell);
-             let getAllPlayerGameboardCells = Array.from(document.querySelectorAll('#player-gameboardCell'));
-             console.log(getAllPlayerGameboardCells);
-             getAllPlayerGameboardCells.removeEventListener('mouseenter', getAllPlayerGameboardCells);
+            //  let getPlayerGameboardCell = document.getElementById('player-gameboardCell');
+            //  // console.log(getPlayerGameboardCell);
+            //  let getAllPlayerGameboardCells = Array.from(document.querySelectorAll('#player-gameboardCell'));
+            //  console.log(getAllPlayerGameboardCells);
+            //  getAllPlayerGameboardCells.removeEventListener('mouseenter', getAllPlayerGameboardCells);
              // getPlayerGameboardCell.classList.remove('battleship-hover-class');
 
         })
