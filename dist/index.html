@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css">
+  <script defer src="runtime.bundle.js"></script><script defer src="main.bundle.js"></script></head>
+  <body>
+   <div id="main-title-container"> 
+   <h1>Battleship</h1>
+   <div id="start-game-btn-container">
+   <button class="start-game-btn-hidden-class" id="start-game-btn">START GAME</button>
+  </div>
+  </div>
+
+<div id="wrapping-container"> 
+<div id="gameboard-grid-container"> 
+
+</div>
+
+<div id="gameboard-grid-container-computer"> 
+
+</div>
+</div> 
+
+<br>
+<div id="change-ship-direction-btn-container">
+<button id="change-ship-direction-btn">Vertical</button>
+<br>
+<button id="change-ship-direction-btn-h">Horizontal</button>
+</div>
+
+
+<div id="container-for-ship-objects"> 
+  <div id="container-for-battleship-description-text"> 
+    <h4>Battleship</h4>
+  <div id="container-for-battleship"> 
+  </div>
+  </div>
+
+  <div id="container-for-destroyer-description-text">
+    <h4>Destroyer</h4>
+  <div id="container-for-destroyer"> 
+  </div> 
+</div>
+
+  <div id="container-for-patrolboat-description-text">
+    <h4>Patrol-Boat</h4>
+  <div id="container-for-patrol-boat"> 
+  </div>
+</div>
+
+<div id="container-for-carrier-boat-description-text">
+  <h4>Carrier</h4>
+  <div id="container-for-carrier-boat"> 
+  </div>
+</div>
+
+  <div id="container-for-submarine-description-text">
+    <h4>Submarine</h4>
+  <div id="container-for-submarine"> 
+  </div>
+</div>
+
+</div> 
+
+
+<section class="modal hidden">
+  <div class="flex">
+    <!-- <img src="user.png" width="50px" height="50px" alt="user" /> -->
+  </div>
+  <div>
+    <h3 id="winner-display-title">Player Wins!!!</h3>
+    <p>
+      <!-- Click button to start another game. -->
+    </p>
+    <button>Play Again</button>
+  </div>
+
+  <!-- <input type="email" id="email" placeholder="brendaneich@js.com" /> -->
+</section>
+
+<div class="overlay hidden"></div>
+
+   
+   <script type="module" src="index.js">
+      
+    </script>
+  </body>
+</html>
