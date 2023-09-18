@@ -228,6 +228,7 @@ for (let i = 0; i < 10; i++) {
     gameboardCell.style.width = '35px';
     gameboardCell.dataset.row = i;
     gameboardCell.dataset.column = j;
+    gameboardCell.id = 'player-gameboardCell';
     gridContainer.append(gameboardCell);
     gameboardCell.addEventListener('click', (e) => { 
         let currentPlayerBoard = playerGameboard.gameboard.getGameboard();
@@ -278,6 +279,7 @@ function createComputerBoardDOM() {
         gameboardCell.style.width = '35px';
         gameboardCell.dataset.comprow = i;
         gameboardCell.dataset.compcolumn = j;
+        // gameboardCell.id = 'computer-gameboardCell';
         computerGridContainer.append(gameboardCell);
         gameboardCell.addEventListener('click', (e) => { 
             let xCoordinate
@@ -288,6 +290,14 @@ function createComputerBoardDOM() {
             let numberedYCoordinate = Number(yCoordinate);
 
              playGame(numberedXCoordinate, numberedYCoordinate);
+
+             let getPlayerGameboardCell = document.getElementById('player-gameboardCell');
+             // console.log(getPlayerGameboardCell);
+             let getAllPlayerGameboardCells = Array.from(document.querySelectorAll('#player-gameboardCell'));
+             console.log(getAllPlayerGameboardCells);
+             getAllPlayerGameboardCells.removeEventListener('mouseenter', getAllPlayerGameboardCells);
+             // getPlayerGameboardCell.classList.remove('battleship-hover-class');
+
         })
 
         gameboardCell.addEventListener('mouseenter', (e) => {

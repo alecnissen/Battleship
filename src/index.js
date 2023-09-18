@@ -286,6 +286,10 @@ import './domLogic.js';
 // the problem is that player can still make their mark twice on the same cell, instead of hitting unique cells each time, 
 // turns should only switch when a player has a hit a unique cell.  
 
+// removing the hover class. 
+// when playGame is called, access the gameboardCell via an ID, 
+// then try to remove the event listener when playGame is called, 
+// that means all the ships have been placed and game is ready to start, 
 
 
 

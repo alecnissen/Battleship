@@ -104,7 +104,10 @@ function openModal(user) {
 
       attack(currentComputerGameboard, playerMarkX, playerMarkY); 
       playerTurn = 2;
-      } 
+      console.log(playerTurn);
+      } else { 
+        return;
+      }
 
       console.log('COMPUTERS GAMEBOARD AFTER PLAYER ATTACK', currentComputerGameboard);
 
