@@ -1,4 +1,6 @@
 // import './shipFactory.js';
+import './style.css';
+
 import './shipFactory.js';
 
 import './gameboardFactory.js';
@@ -8,6 +10,21 @@ import './playerFactory.js';
 import './gameModule.js';
 
 import './domLogic.js'; 
+
+
+// import 'src/style.css';
+
+// import 'dist/style.css'; 
+
+
+// when I comment out styles import it will  work in src but not in dist 
+
+// when I uncomment the import it will work in dist, but gameboard will not show up in src, 
+
+// I still receive the same error. I need to address the mime type error. 
+
+
+
 
 // figure out the last jest error, 
 // in the meantime we need to figure out how to start the game 
@@ -292,6 +309,16 @@ import './domLogic.js';
 // that means all the ships have been placed and game is ready to start, 
 
 
+// 9/18 current plan, need to figure out why computer is hitting the same cell twice, 
+// also need to figure out, why styles file is getting deleted from dist every time I run webpack, 
+// also need to figure out how to remove the hover class on players board, once game starts and both boards are rendered 
+// first is figuring out why the computer board is either hitting the same cell twice, or just skipping turns all together, 
+// well now it looks like I Need to look at how to properly store webpack assets, and figure out what is going with styles being deleted from the folder, 
+// now I need to figure out this stupid fucking webpack bullshit, 
+// I'll read over the sections listed, I need to make this work so people can help. 
+
+// Move  the file back into src, and address the mime type error first, 
+// it should working fine, in dist and other users should be able to see it when they look at it, 
 
 
 

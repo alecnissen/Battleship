@@ -145,7 +145,7 @@ function openModal(user) {
       // playerTurn = 2;
     } 
     // else { 
-      console.log('ELSE STATEMENT CHECK!')
+      // console.log('ELSE STATEMENT CHECK!')
       const randomCoordinate1 = Math.floor(Math.random() * 9) + 1;
       const randomCoordinate2 = Math.floor(Math.random() * 9) + 1;
       // computerAttack(currentPlayerGameboard, randomCoordinate1, randomCoordinate2);
