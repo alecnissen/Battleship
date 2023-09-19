@@ -23,6 +23,17 @@ import './domLogic.js';
 
 // I still receive the same error. I need to address the mime type error. 
 
+// where do I start, webpack dev server throwing the same error as before, 
+// its the same out of bounds error, where it can not find the cells, 
+// its preventing me from testing anything, 
+// I cannot even play the game in dev server yet works fine in dist, 
+// what the fuck am I supposed to do? 
+// 
+// 
+
+
+
+
 
 
 

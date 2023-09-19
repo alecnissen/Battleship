@@ -125,15 +125,15 @@ function openModal(user) {
 
       console.log(!determineIfInsideHitShotArray(playerMarkX, playerMarkY) && (!determineIfInsideMissedShotArray(playerMarkX, playerMarkY)));
 
-      if (!determineIfInsideHitShotArray(playerMarkX, playerMarkY) && (!determineIfInsideMissedShotArray(playerMarkX, playerMarkY))) { 
+      // if (!determineIfInsideHitShotArray(playerMarkX, playerMarkY) && (!determineIfInsideMissedShotArray(playerMarkX, playerMarkY))) { 
 
       attack(currentComputerGameboard, playerMarkX, playerMarkY); 
       console.log('logging player turn variable before player attack', playerTurn);
       playerTurn = 2;
-      console.log('logging player turn variable after player attack', playerTurn);
-      } else { 
-        return;
-      }
+      // console.log('logging player turn variable after player attack', playerTurn);
+      // } else { 
+      //   return;
+      // }
 
       console.log('COMPUTERS GAMEBOARD AFTER PLAYER ATTACK', currentComputerGameboard);
 
@@ -152,17 +152,18 @@ function openModal(user) {
       console.log('PLAYERS GAMEBOARD AFTER COMPUTER ATTACK', currentPlayerGameboard);
       console.log('RANDOM COORDINATES SELECTED FROM COMPUTER', randomCoordinate1, randomCoordinate2);
 
-      if (!determineIfInsideHitShotArrayComputer(randomCoordinate1, randomCoordinate2) && (!determineIfInsideMissedShotArrayComputer(randomCoordinate1, randomCoordinate2))) { 
+      // if (!determineIfInsideHitShotArrayComputer(randomCoordinate1, randomCoordinate2) && (!determineIfInsideMissedShotArrayComputer(randomCoordinate1, randomCoordinate2))) { 
         computerAttack(currentPlayerGameboard, randomCoordinate1, randomCoordinate2);
         console.log('logging player turn variable before computer attack', playerTurn);
         playerTurn = 1;
         console.log('logging player turn variable after computer attack', playerTurn);
-      } else { 
-        return;
-      }
+      // } else { 
+      //   return;
+      // }
 
       if (checkForWinner(currentPlayerGameboard)) { 
         console.log('COMP WINS');
+        openModal(computerGameboard);
         return; 
       } 
       // playerTurn = 1;
