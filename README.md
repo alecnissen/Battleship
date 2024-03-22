@@ -1,19 +1,19 @@
 <h1>About This Project</h1> 
-This project was part of The Odin Project's course. It was the final JavaScript project before the ReactJS section. This project was extremtly challening and I developed a lot of grit and fortitude finishing this project. Biggest concepts on this project would be using modules, unit testing using Jest, OOP principles. 
+ Classic BattleShip game built with HTML, CSS, JavaScript, and webpack. Very challenging project and I developed a lot of grit and fortitude working through the project!
 
 <br> 
 
 <h1>What I learned</h1>
     <ul>
-    <li>How to write unit test with test and TDD best practices</li>
-    <li>Using Factory functions to create player objects</li>
-    <li>Using function methods such as attack function, determing if coordinates were a hit or miss, and determing if a ship was sunk</li>
-    <li>Drag and drop ship objects onto the gameboard</li>
-    <li>Allowing the computer to make random attacks, while also making sure it does not hit the same cell twice</li>
-    <li>Making sure that when user or computer places their ships that placement is valid, and not off the board</li>
-    <li>Organzing code into modules for good code structure and organization</li>
+   <li>Learning how to write unit tests and implementing TDD best practices</li>
+<li>Utilizing factory functions to efficiently create player objects</li>
+<li>Implementing function methods such as the attack function to determine hit or miss coordinates, and identifying sunk ships</li>
+<li>Enabling drag-and-drop functionality for placing ships on the gameboard</li>
+<li>Developing logic to ensure the computer makes random attacks without hitting the same cell twice</li>
+<li>Validating ship placements by users and the computer to ensure they remain within the board boundaries</li>
+<li>Organizing code into modules for improved code structure and organization</li>
     </ul>
-<br> 
+
 
  <h1>Build With</h1>
 
@@ -33,14 +33,21 @@ then ``` npm install ``` which will install all dependency's and packages.
 
 <h1>Features</h1>
 
--Users can drag the ship objects onto the board. 
+-Users can drag the ship objects onto the board. A hover class will be applied so user can see where the ship will be placed on the gameboard while ensuring that the ship placement is valid. Also user can change the direction to vertical or horizontal for ship placement
 
--Unit tests and TDD to ensure code works as intended and to minimize errors and unwanted behavior. 
+<img src="src/Images/RM-battleship-hover.png" style="width: 500px">
 
--When a hit is hit, color will change to red, and a miss will be colored blue 
+-Unit tests and TDD (Test Driven Development) to ensure code works as intended and to minimize errors and unwanted behavior
 
--Code organized into modules for organization and structure
+-When a hit is successful, color will change to red, and a miss will be colored blue 
 
+<img src="src/Images/RM-battleship-hit-mark.png" style="width: 500px">
+
+-Code organized into modules for better organization and code structure
+
+-When there is a winner, a modal will appear displaying the winner, with an option to restart the game
+
+<img src="src/Images/RM-battleship-winner-modal.png" style="width: 500px">
 
 
 
@@ -53,6 +60,6 @@ Creator: Alec J Nissen
 <br>
 E-Mail: alecnissen@yahoo.com
 <br>
-GitHub: https://github.com/alecnissen/Memory-Card
+GitHub: https://github.com/alecnissen/Battleship
 <br>
-Live Link: https://memory-card-game-top.netlify.app/
+Live Link: https://alecnissen.github.io/Battleship/
