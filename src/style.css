@@ -66,6 +66,14 @@ body {
 #change-ship-direction-btn-container { 
     display: flex;
     justify-content: center;
+    gap: 1em;
+}
+
+#change-ship-direction-btn,
+#change-ship-direction-btn-h { 
+    background-color: skyblue;
+    font-size: 1.2rem;
+    
 }
 
 #container-for-ship-objects { 
