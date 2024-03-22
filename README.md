@@ -1,5 +1,5 @@
 <h1>About This Project</h1> 
- Classic BattleShip game built with HTML, CSS, JavaScript, and webpack. Very challenging project and I developed a lot of grit and fortitude working through the project!
+ Classic BattleShip game built with HTML, CSS, JavaScript, and Webpack. Very challenging project and I developed a lot of grit and fortitude working through the project!
 
 <br> 
 
